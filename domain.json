@@ -1,0 +1,16 @@
+# 'https://name.ca.com:${RESTPORT}/ca/api/sso/services/policy/v1/SmDomains'
+{
+  "IsDLP": false,
+  "Mode": [
+    "GlobalPoliciesApply"
+  ],
+  "Name": "TestD",
+  "Desc": "Test Domain",
+  "UserDirectoriesLink": [
+    {
+      "path": "/SmUserDirectories/CA+Directory"
+    }
+  ],
+  "IsAffiliate": false,
+  "type": "SmDomain"
+}

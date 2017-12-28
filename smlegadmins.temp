@@ -1,0 +1,18 @@
+#!/bin/bash
+SMADMIN=$1
+SMADMINPWD=$2
+cat <<EOF
+{
+    "type": "SmAdmin",
+    "Name": "${SMADMIN}",
+    "Rights": [
+      "ManageAllDomains",
+      "ManageObjects",
+      "ManageUsers",
+      "ManageSecurity",
+      "RegisterTrustedHosts"
+    ],
+    "Password": "${SMADMINPWD}",
+    "DirectoryAuth": false
+}
+EOF

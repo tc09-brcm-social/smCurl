@@ -1,0 +1,28 @@
+#!/bin/bash
+SMAUTH=$1
+SMCERT=$2
+cat <<EOF
+{
+    "type": "SmAuthScheme",
+    "Name": "$SMAUTH",
+    "Library": "smjavaapi",
+    "IgnorePwCheck": true,
+    "AllowAuthLevelOverride": false,
+    "AllowSaveCreds": false,
+    "IsUsedbyAdmin": false,
+    "IsTemplate": false,
+    "Level": 5,
+    "PersistSessionVars": false,
+    "IsRadius": false,
+    "SupportsValidateIdentity": false,
+    "AuthSchemeType": "JWT",
+    "Param": "com.ca.sm.jwtauth.SmJWTAuthScheme alias=$SMCERT;SES=0;KID=0;SSL=0;claim=sub",
+    "IPCheck": false,
+    "SmSAMLv2IdPs": [],
+    "SmSAMLv1IdPs": [],
+    "SmWSFEDIdPs": [],
+    "SmXMLDSigIdPs": [],
+    "SmWSSecurityIdPs": [],
+    "SmXMLDCCIdPs": []
+}
+EOF

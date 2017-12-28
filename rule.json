@@ -1,0 +1,14 @@
+{
+    "type": "SmRule",
+    "Name": "AllowGetPost",
+    "IsEnabled": true,
+    "Desc": "Allow Get Post",
+    "TimeRestriction": "00000000-00000000-7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f",
+    "RegularExpression": false,
+    "Resource": "*",
+    "Actions": [
+      "Get",
+      "Post"
+    ],
+    "AllowAccess": true
+}

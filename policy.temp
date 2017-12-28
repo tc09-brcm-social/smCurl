@@ -1,0 +1,35 @@
+#!/bin/bash
+SMDOMAIN=$1
+SMREALM=$2
+SMRULE=$3
+SMDIR=$4
+cat <<EOF
+{
+    "type": "SmPolicy",
+    "Name": "AllUsers",
+    "TimeRestriction": "00000000-00000000-7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f",
+    "Desc": "All User Policy",
+    "IsEnabled": true,
+    "AllowAccess": true,
+    "SmPolicyLinks": [
+      {
+        "type": "SmPolicyLink",
+        "RuleLink": {
+          "path": "/SmDomains/$SMDOMAIN/SmRealms/$SMREALM/SmRules/$SMRULE"
+        }
+      }
+    ],
+    "SmUserPolicies": [
+      {
+        "type": "SmUserPolicy",
+        "FilterClass": "All",
+        "PolicyResolution": "All",
+        "FilterPath": "All",
+        "PolicyFlags": [],
+        "UserDirectory": {
+          "path": "/SmUserDirectories/$SMDIR"
+        }
+      }
+    ]
+}
+EOF

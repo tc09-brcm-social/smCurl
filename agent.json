@@ -1,0 +1,8 @@
+{
+    "type": "SmAgent",
+    "Name": "apache-01",
+    "RealmHintAttrId": 0,
+    "AgentTypeLink": {
+      "path": "/SmAgentTypes/Web+Agent"
+      }
+}

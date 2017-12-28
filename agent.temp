@@ -1,0 +1,12 @@
+#!/bin/bash
+SMAGENT=$1
+cat <<EOF
+{
+    "type": "SmAgent",
+    "Name": "$SMAGENT",
+    "RealmHintAttrId": 0,
+    "AgentTypeLink": {
+      "path": "/SmAgentTypes/Web+Agent"
+      }
+}
+EOF

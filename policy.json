@@ -1,0 +1,29 @@
+{
+    "type": "SmPolicy",
+    "Name": "AllUsers",
+    "TimeRestriction": "00000000-00000000-7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f",
+    "Desc": "All User Policy",
+    "IsEnabled": true,
+    "AllowAccess": true,
+    "SmPolicyLinks": [
+      {
+        "type": "SmPolicyLink",
+        "RuleLink": {
+          "path": "/SmDomains/TestD/SmRealms/REAM-TestD-private/SmRules/AllowGetPost"
+        }
+      }
+    ],
+    "SmUserPolicies": [
+      {
+        "type": "SmUserPolicy",
+        "FilterClass": "All",
+        "PolicyResolution": "All",
+        "FilterPath": "All",
+        "PolicyFlags": [],
+        "UserDirectory": {
+          "path": "/SmUserDirectories/CA+Directory"
+        }
+      }
+    ]
+}
+

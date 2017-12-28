@@ -1,0 +1,20 @@
+#!/bin/bash
+SMALIAS=$1
+SMPEM=$2
+cat <<EOF
+{
+    "type": "CdsCertificate",
+    "Alias": "${SMALIAS}",
+    "EnableCertValidFailover": false,
+    "Device": "Java",
+    "CertificateData": [
+"${SMPEM}"
+    ],
+"SubjectName": "CN=apem",
+"SerialNumber": "02",
+"IssuerDN": "CN=issuer",
+"CRLRevStatusValue": "Valid",
+"OCSPRevStatusValue": "Valid",
+    "CertificateType": "Certificate"
+}
+EOF

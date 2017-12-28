@@ -1,0 +1,26 @@
+#!/bin/bash
+APPVDIR=$1
+SMAGENT=$2
+SMAUTH=$3
+cat <<EOF
+{
+  "AgentLink": {
+    "path": "/SmAgents/$SMAGENT"
+  },
+  "AuthSchemeLink": {
+    "path": "/SmAuthSchemes/$SMAUTH"
+  },
+  "ProtectAll": true,
+  "Desc": "$APPVDIR realm",
+  "Name": "REALM$APPVDIR",
+  "ResourceFilter": "/$APPVDIR",
+  "ProcessAuthEvents": true,
+  "ProcessAzEvents": true,
+  "MaxTimeout": 7200,
+  "IdleTimeout": 0,
+  "SyncAudit": false,
+  "SessionType": "Peristent",
+  "SessionDrift": -1,
+  "type": "SmRealm"
+}
+EOF

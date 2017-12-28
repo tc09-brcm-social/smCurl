@@ -1,0 +1,23 @@
+{
+    "type": "SmAuthScheme",
+    "Name": "jwtapcert",
+    "Library": "smjavaapi",
+    "IgnorePwCheck": true,
+    "AllowAuthLevelOverride": false,
+    "AllowSaveCreds": false,
+    "IsUsedbyAdmin": false,
+    "IsTemplate": false,
+    "Level": 5,
+    "PersistSessionVars": false,
+    "IsRadius": false,
+    "SupportsValidateIdentity": false,
+    "AuthSchemeType": "JWT",
+    "Param": "com.ca.sm.jwtauth.SmJWTAuthScheme alias=apcert;SES=0;KID=0;SSL=0;claim=sub",
+    "IPCheck": false,
+    "SmSAMLv2IdPs": [],
+    "SmSAMLv1IdPs": [],
+    "SmWSFEDIdPs": [],
+    "SmXMLDSigIdPs": [],
+    "SmWSSecurityIdPs": [],
+    "SmXMLDCCIdPs": []
+}

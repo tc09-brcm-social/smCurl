@@ -1,0 +1,21 @@
+#!/bin/bash
+# 'https://name.ca.com:${RESTPORT}/ca/api/sso/services/policy/v1/SmDomains'
+APPVDIR=$1
+SMDIR=$2
+cat <<EOF
+{
+  "IsDLP": false,
+  "Mode": [
+    "GlobalPoliciesApply"
+  ],
+  "Name": "Domain$APPVDIR",
+  "Desc": "Domain for $APPVDIR",
+  "UserDirectoriesLink": [
+    {
+      "path": "/SmUserDirectories/$SMDIR"
+    }
+  ],
+  "IsAffiliate": false,
+  "type": "SmDomain"
+}
+EOF

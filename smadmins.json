@@ -1,0 +1,13 @@
+{
+    "type": "SmAdmin",
+    "Name": "siteminder",
+    "Rights": [
+      "ManageAllDomains",
+      "ManageObjects",
+      "ManageUsers",
+      "ManageSecurity",
+      "RegisterTrustedHosts"
+    ],
+    "Password": "{RC2}YOL0NicG7i3t+UHCA0ViT4OKTAulvitf",
+    "DirectoryAuth": false
+}
