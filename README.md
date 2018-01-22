@@ -12,3 +12,4 @@ Basic Auth base64 encoded id and password.
 ** can then be configured to use these base object.
 * apcert.key.temp is not usable as the impCert.sh does not support keyentry type
 * isOK.sh is added to verify ps and authentication has been set correctly
+* jq https://stedolan.github.io/jq/download/
