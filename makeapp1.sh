@@ -2,6 +2,7 @@
 # assumes apache-01 and BasicForm existed
 # assume DemoUser1 created on CA Directory
 APPVDIR=app1
+SMREALMTEMP=realm/realm.temp
 SMDIR=DemoUser1
 SMLDAPHOST=cheyi02-U176660.ca.com
 SMLDAPPORT=30389
@@ -12,6 +13,6 @@ SMREALM=REALM$APPVDIR
 SMRULE=AllowGetPost
 bash crDir.sh "$SMDIR" "$SMLDAPHOST" "$SMLDAPPORT"
 bash crDomain.sh "$APPVDIR" "$SMDIR"
-bash crRealm.sh "$APPVDIR" "$SMAGENT" "$SMAUTH" "$SMDOMAIN"
+bash crRealm.sh "$APPVDIR" "$SMREALMTEMP" "$SMAGENT" "$SMAUTH" "$SMDOMAIN"
 bash crRule.sh "$SMDOMAIN" "$SMREALM"
 bash crPolicy.sh "$SMDOMAIN" "$SMREALM" "$SMRULE" "$SMDIR"
