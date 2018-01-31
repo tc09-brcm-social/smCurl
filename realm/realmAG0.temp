@@ -6,7 +6,7 @@ SMAUTH=$4
 cat <<EOF
 {
   "AgentGroupLink": {
-    "path": "/SmGroups/$SMAGENTGROUP"
+    "path": "/SmAgentGroups/$SMAGENTGROUP"
   },
   "AuthSchemeLink": {
     "path": "/SmAuthSchemes/$SMAUTH"

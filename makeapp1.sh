@@ -13,6 +13,6 @@ SMREALM=REALM$APPVDIR
 SMRULE=AllowGetPost
 bash crDir.sh "$SMDIR" "$SMLDAPHOST" "$SMLDAPPORT"
 bash crDomain.sh "$APPVDIR" "$SMDIR"
-bash crRealm.sh "$APPVDIR" "$SMREALMTEMP" "$SMAGENT" "$SMAUTH" "$SMDOMAIN"
+bash crRealm.sh "$SMREALM" "SMREALMTEMP" "$APPVDIR" "$SMAGENT" "$SMAUTH" "$SMDOMAIN"
 bash crRule.sh "$SMDOMAIN" "$SMREALM"
 bash crPolicy.sh "$SMDOMAIN" "$SMREALM" "$SMRULE" "$SMDIR"
