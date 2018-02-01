@@ -1,5 +1,6 @@
 #!/bin/bash
 SMAUTH=$1
+SMAUTHSERVERBASE=$2
 cat <<EOF
 {
   "AllowAuthLevelOverride": false,
@@ -13,7 +14,7 @@ cat <<EOF
   "Level": 5,
   "Library": "smauthhtml",
   "Name": "$SMAUTH",
-  "Param": "/siteminderagent/forms/login.fcc;ACS=0;REL=1",
+  "Param": "$SMAUTHSERVERBASE/siteminderagent/forms/login.fcc;ACS=0;REL=0",
   "PersistSessionVars": false,
   "SmSAMLv1IdPs": [],
   "SmSAMLv2IdPs": [],
