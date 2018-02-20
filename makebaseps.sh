@@ -8,7 +8,7 @@ SMLDAPHOST=${RESTHOST}
 SMLDAPPORT=20589
 bash crDir.sh "$SMDIR" "$SMLDAPHOST" "$SMLDAPPORT"
 SMAUTH=BasicForm
-SMAUTHTEMP=formauth.temp
+SMAUTHTEMP=auth/formauth.temp
 bash crAuth.sh "${SMAUTH}" "${SMAUTHTEMP}"
 SMAGENT=secureproxy-01
 bash crAgent.sh "${SMAGENT}"
