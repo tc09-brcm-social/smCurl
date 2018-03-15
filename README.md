@@ -1,4 +1,14 @@
-# cassoRest
+# cassoCurl
+
+This is the starting of the version 1 for the original cassoRest and
+renamed as cassoCurl.
+
+Naming conventions and re-structure is to be applied religiously for this branch.
+
+* authn - is now a working copied and to be ignored by the git status.
+It is the first file to be created using the authn.sample to fit your running
+instance. See its content for details.
+* isOK.sh - is used to verify ps and authentication has been set correctly within the authn.
 
 When this kit is first deployed to a new machine where CA SSO API is 
 to be used as a DevOps command center, the bash isOK.sh should be run first.
@@ -11,5 +21,4 @@ Basic Auth base64 encoded id and password.
 ** after this is run, the SPS and apache web agent
 ** can then be configured to use these base object.
 * apcert.key.temp is not usable as the impCert.sh does not support keyentry type
-* isOK.sh is added to verify ps and authentication has been set correctly
-* jq https://stedolan.github.io/jq/download/
+* jq stuff has been moved to https://github-isl-01.ca.com/cheyi02-social/jqtutor
