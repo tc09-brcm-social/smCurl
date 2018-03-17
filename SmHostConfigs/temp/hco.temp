@@ -1,0 +1,17 @@
+#!/bin/bash
+SMHCO=$1
+SMPSHOST=$2
+cat <<EOF
+{
+    "type": "SmHostConfig",
+    "Name": "$SMHCO",
+    "PolicyServer": [
+      "$SMPSHOST,44441,44442,44443"
+    ],
+    "MaxSocketsPerPort": 20,
+    "EnableFailOver": false,
+    "NewSocketStep": 2,
+    "RequestTimeout": 60,
+    "MinSocketsPerPort": 2
+  }
+EOF
