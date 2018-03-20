@@ -2,12 +2,12 @@
 #addAgent2Group give an existing AgentGroup an additional Agent
 SMAGENTGROUP=$1
 SMAGENT=$2
-AGENT=`bash readAgent.sh "$SMAGENT" | ./jq '.responseType'`
+AGENT=`bash SmAgents/read.sh "$SMAGENT" | ./jq '.responseType'`
 if [ "$AGENT" == "\"error\"" ]; then
     echo "$SMAGENT does not exist."
     exit 1
 fi
-READGROUP=`bash readAgentGroup.sh "$SMAGENTGROUP"`
+READGROUP=`bash SmAgentGroups/read.sh "$SMAGENTGROUP"`
 GROUP=`echo "$READGROUP" | ./jq '.responseType'`
 if [ "$GROUP" == "\"error\"" ]; then
     echo "$SMAGENTGROUP does not exist."
@@ -22,4 +22,4 @@ done
 echo "adding $SMAGENT into $SMAGENTGROUP"
 JSON=$$.json
 echo "$READGROUP" | ./jq ".data | .AgentsLink += [ { path: \"/SmAgents/$SMAGENT\" }]" > $JSON
-bash updateAgentGroup.sh "$SMAGENTGROUP" "$JSON"
+bash SmAgentGroups/update.sh "$SMAGENTGROUP" "$JSON"
