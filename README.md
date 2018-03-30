@@ -8,6 +8,10 @@ Naming conventions and re-structure is to be applied religiously for this branch
 * authn - is now a working copied and to be ignored by the git status.
 It is the first file to be created using the authn.sample to fit your running
 instance. See its content for details.
+The base64-id:password can actually be calculated using the following shell script:
+
+echo -n "base64-id:password" | base64 
+
 * isOK.sh - is used to verify ps and authentication has been set correctly within the authn.
 
 When this kit is first deployed to a new machine where CA SSO API is 
