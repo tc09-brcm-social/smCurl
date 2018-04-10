@@ -1,0 +1,15 @@
+{
+    "type": "SmRule",
+    "Name": "GPO",
+    "IsEnabled": true,
+    "Desc": "Allow Get Post Options",
+    "TimeRestriction": "00000000-00000000-7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f",
+    "RegularExpression": false,
+    "Resource": "*",
+    "Actions": [
+      "Get",
+      "Post",
+      "Options",
+    ],
+    "AllowAccess": true
+}
