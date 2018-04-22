@@ -2,3 +2,4 @@ authn
 [0-9]*.json
 jq
 jq.exe
+jqtutor
