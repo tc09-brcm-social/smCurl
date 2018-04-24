@@ -1,0 +1,10 @@
+{
+  "type": "SmVariable",
+  "Name": "LastNameAdmin",
+  "Definition": "Admin",
+  "PreFetchFlag": false,
+  "ReturnType": "String",
+  "VariableTypeLink": {
+    "path": "/SmVariableTypes/Static"
+  }
+}
