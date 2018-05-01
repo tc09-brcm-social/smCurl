@@ -4,4 +4,5 @@ SMACO=$1
 ACO=`bash "${MYPATH}/read.sh" "$SMACO" | ./jq '.data'`
 SORTATTR=`echo "$ACO" | ./jq '.Attributes | sort'`
 ACONOATTR=`echo "$ACO" | ./jq 'del(.Attributes)'`
-echo "$ACONOATTR" | ./jq -S ". + {Attributes: ${SORTATTR}}"
+#echo "$ACONOATTR" | ./jq -S ". + {Attributes: ${SORTATTR}}"
+echo "$ACONOATTR" | ./jq -S --argjson a "$SORTATTR" '. + {Attributes: $a}'
