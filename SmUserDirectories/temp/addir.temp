@@ -1,0 +1,23 @@
+#!/bin/bash
+Name=$1
+cat <<EOF
+{
+  "EnableSecurityContext": false,
+  "Name": "${Name}",
+  "Namespace": "LDAP:",
+  "Password": "password",
+  "RequireCredentials": true,
+  "SearchResults": 0,
+  "SearchRoot": "dc=ca,dc=demo",
+  "SearchScope": "SubTree",
+  "SearchTimeout": 30,
+  "SecureConnection": false,
+  "Server": "172.17.17.213:389",
+  "UniversalIDAttribute": "sAMAccountName",
+  "UseAdvancedAuthStore": false,
+  "UserLookupEnd": ")",
+  "UserLookupStart": "(sAMAccountName=",
+  "Username": "cn=Administrator,cn=users,dc=ca,dc=demo",
+  "type": "SmUserDirectory"
+}
+EOF

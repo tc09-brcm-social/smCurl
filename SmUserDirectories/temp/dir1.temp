@@ -1,0 +1,27 @@
+#!/bin/bash
+Name=$1
+cat <<EOF
+{
+  "BlobAttribute": "jpegPhoto",
+  "ChallengeRespAttribute": "carLicense",
+  "DisabledAttribute": "audio",
+  "EnableSecurityContext": false,
+  "Name": "${Name}",
+  "Namespace": "LDAP:",
+  "Password": "password",
+  "PasswordAttribute": "userPassword",
+  "RequireCredentials": true,
+  "SearchResults": 0,
+  "SearchRoot": "ou=userstore,o=mydomain",
+  "SearchScope": "SubTree",
+  "SearchTimeout": 30,
+  "SecureConnection": false,
+  "Server": "cassowin2016:20589",
+  "UniversalIDAttribute": "uid",
+  "UseAdvancedAuthStore": false,
+  "UserLookupEnd": ")",
+  "UserLookupStart": "(uid=",
+  "Username": "uid=smadmin,ou=admins,ou=userstore,o=mydomain",
+  "type": "SmUserDirectory"
+}
+EOF
