@@ -2,7 +2,8 @@
 mypwd=`pwd`
 . ../../env.shlib
 cd ../../$cassoHome
-. ./authn
+DIRNAME=$(cd "${BASH_SOURCE[0]%/*}"; pwd)
+. "${DIRNAME}/../authn"
 ##
 ### Authe Scheme
 ##

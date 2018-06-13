@@ -1,5 +1,6 @@
 #!/bin/bash
-. ./authn
+DIRNAME=$(cd "${BASH_SOURCE[0]%/*}"; pwd)
+. "${DIRNAME}/authn"
 SMREALM=$1
 SMREALMTEMP=$2
 APPVDIR=$3

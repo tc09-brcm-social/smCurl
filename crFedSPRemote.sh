@@ -1,5 +1,6 @@
 #!/bin/bash
-. ./authn
+DIRNAME=$(cd "${BASH_SOURCE[0]%/*}"; pwd)
+. "${DIRNAME}/authn"
 SMRSPNAME=$1
 SMRSPTEMP=$2
 JSON=$$.json
