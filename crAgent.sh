@@ -1,5 +1,6 @@
 #!/bin/bash
-. ./authn
+DIRNAME=$(cd "${BASH_SOURCE[0]%/*}"; pwd)
+. "${DIRNAME}/authn"
 SMAGENT=$1
 JSON=$$.json
 AUTHN="Authorization: Bearer ${TOKEN}"

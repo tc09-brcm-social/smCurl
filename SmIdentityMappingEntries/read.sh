@@ -1,5 +1,6 @@
 #!/bin/bash
-. ./authn
+DIRNAME=$(cd "${BASH_SOURCE[0]%/*}"; pwd)
+. "${DIRNAME}/../authn"
 AUTHN="Authorization: Bearer ${TOKEN}"
 SMMAPPING=$1
 Name=$2
