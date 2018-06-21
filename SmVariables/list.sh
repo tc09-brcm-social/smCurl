@@ -1,3 +1,4 @@
 #!/bin/bash
 MYPATH=`dirname $0`
-bash "${MYPATH}/read.sh" | ./jq '.data | [.[]| .path]'
+SMDOMAIN=$1
+bash "${MYPATH}/read.sh" "$SMDOMAIN" | ./jq '.data | [.[]| .path]'
