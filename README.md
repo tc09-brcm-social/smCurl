@@ -19,6 +19,12 @@ to be used as a DevOps command center, the bash isOK.sh should be run first.
 You will need to modify the authn for the Admin UI hostname and
 Basic Auth base64 encoded id and password.
 
+* examples/makeapp1.sh, examples/delapp1.sh assumes iis-01, apache-01 and CA+Directory exists.
+
+cd examples
+bash makeapp1.sh \# to create domain and policies
+bash delapp1.sh \# to clean up
+
 * makebaseps.sh is used to deploy basic objects for a standalone policy server
 ** it assumes CA Directory and Policy Server components are colocated.
 ** makebaseps.sh should be run only once.
