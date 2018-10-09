@@ -1,0 +1,43 @@
+{
+  "type": "SmResponse",
+  "Name": "fullname",
+  "AccessChallenge": true,
+  "AccessAccept": true,
+  "HidingMask": [],
+  "AccessReject": true,
+  "AgentTypeLink": {
+    "path": "/SmAgentTypes/Web+Agent"
+  },
+  "SmResponseAttrs": [
+    {
+      "type": "SmResponseAttr",
+      "Value": "fullname=<$expr=\"#SORTNAME\" $>",
+      "HidingMask": [],
+      "TTL": 0,
+      "Flags": 0,
+      "AgentTypeAttrLink": {
+        "id": "CA.SM::AgentTypeAttr@11-8d78bb90-ae15-11d1-9cdd-006008aac24b"
+      }
+    },
+    {
+      "type": "SmResponseAttr",
+      "Value": "firstname=<%userattr=\"givenName\" %>",
+      "HidingMask": [],
+      "TTL": 0,
+      "Flags": 0,
+      "AgentTypeAttrLink": {
+        "id": "CA.SM::AgentTypeAttr@11-8d78bb90-ae15-11d1-9cdd-006008aac24b"
+      }
+    },
+    {
+      "type": "SmResponseAttr",
+      "Value": "lastname=<%userattr=\"sn\" %>",
+      "HidingMask": [],
+      "TTL": 0,
+      "Flags": 0,
+      "AgentTypeAttrLink": {
+        "id": "CA.SM::AgentTypeAttr@11-8d78bb90-ae15-11d1-9cdd-006008aac24b"
+      }
+    }
+  ]
+}

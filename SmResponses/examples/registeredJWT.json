@@ -1,0 +1,83 @@
+{
+  "type": "SmResponse",
+  "Name": "registeredJWT",
+  "AccessReject": true,
+  "AccessAccept": true,
+  "AccessChallenge": true,
+  "HidingMask": [],
+  "AgentTypeLink": {
+    "path": "/SmAgentTypes/Web+Agent"
+  },
+  "SmResponseAttrs": [
+    {
+      "type": "SmResponseAttr",
+      "Value": "jwt_iat=<%userattr=\"SM_SESSIONCTXVAR:iat\" %>",
+      "Flags": 0,
+      "HidingMask": [],
+      "TTL": 0,
+      "AgentTypeAttrLink": {
+        "id": "CA.SM::AgentTypeAttr@11-8d78bb90-ae15-11d1-9cdd-006008aac24b"
+      }
+    },
+    {
+      "type": "SmResponseAttr",
+      "Value": "jwt_sub=<%userattr=\"SM_SESSIONCTXVAR:sub\" %>",
+      "Flags": 0,
+      "HidingMask": [],
+      "TTL": 0,
+      "AgentTypeAttrLink": {
+        "id": "CA.SM::AgentTypeAttr@11-8d78bb90-ae15-11d1-9cdd-006008aac24b"
+      }
+    },
+    {
+      "type": "SmResponseAttr",
+      "Value": "jwt_exp=<%userattr=\"SM_SESSIONCTXVAR:exp\" %>",
+      "Flags": 0,
+      "HidingMask": [],
+      "TTL": 0,
+      "AgentTypeAttrLink": {
+        "id": "CA.SM::AgentTypeAttr@11-8d78bb90-ae15-11d1-9cdd-006008aac24b"
+      }
+    },
+    {
+      "type": "SmResponseAttr",
+      "Value": "jwt_aud=<%userattr=\"SM_SESSIONCTXVAR:aud\" %>",
+      "Flags": 0,
+      "HidingMask": [],
+      "TTL": 0,
+      "AgentTypeAttrLink": {
+        "id": "CA.SM::AgentTypeAttr@11-8d78bb90-ae15-11d1-9cdd-006008aac24b"
+      }
+    },
+    {
+      "type": "SmResponseAttr",
+      "Value": "jwt_jti=<%userattr=\"SM_SESSIONCTXVAR:jti\" %>",
+      "Flags": 0,
+      "HidingMask": [],
+      "TTL": 0,
+      "AgentTypeAttrLink": {
+        "id": "CA.SM::AgentTypeAttr@11-8d78bb90-ae15-11d1-9cdd-006008aac24b"
+      }
+    },
+    {
+      "type": "SmResponseAttr",
+      "Value": "jwt_nbf=<%userattr=\"SM_SESSIONCTXVAR:nbf\" %>",
+      "Flags": 0,
+      "HidingMask": [],
+      "TTL": 0,
+      "AgentTypeAttrLink": {
+        "id": "CA.SM::AgentTypeAttr@11-8d78bb90-ae15-11d1-9cdd-006008aac24b"
+      }
+    },
+    {
+      "type": "SmResponseAttr",
+      "Value": "jwt_iss=<%userattr=\"SM_SESSIONCTXVAR:iss\" %>",
+      "Flags": 0,
+      "HidingMask": [],
+      "TTL": 0,
+      "AgentTypeAttrLink": {
+        "id": "CA.SM::AgentTypeAttr@11-8d78bb90-ae15-11d1-9cdd-006008aac24b"
+      }
+    }
+  ]
+}
