@@ -1,0 +1,163 @@
+{
+  "type": "SmResponse",
+  "Name": "msJWT",
+  "AccessReject": true,
+  "AccessAccept": true,
+  "AccessChallenge": true,
+  "HidingMask": [],
+  "AgentTypeLink": {
+    "path": "/SmAgentTypes/Web+Agent"
+  },
+  "SmResponseAttrs": [
+    {
+      "type": "SmResponseAttr",
+      "Value": "jwt_aio=<%userattr=\"SM_SESSIONCTXVAR:aio\" %>",
+      "Flags": 0,
+      "HidingMask": [],
+      "TTL": 0,
+      "AgentTypeAttrLink": {
+        "id": "CA.SM::AgentTypeAttr@11-8d78bb90-ae15-11d1-9cdd-006008aac24b"
+      }
+    },
+    {
+      "type": "SmResponseAttr",
+      "Value": "jwt_amr=<%userattr=\"SM_SESSIONCTXVAR:amr\" %>",
+      "Flags": 0,
+      "HidingMask": [],
+      "TTL": 0,
+      "AgentTypeAttrLink": {
+        "id": "CA.SM::AgentTypeAttr@11-8d78bb90-ae15-11d1-9cdd-006008aac24b"
+      }
+    },
+    {
+      "type": "SmResponseAttr",
+      "Value": "jwt_email=<%userattr=\"SM_SESSIONCTXVAR:email\" %>",
+      "Flags": 0,
+      "HidingMask": [],
+      "TTL": 0,
+      "AgentTypeAttrLink": {
+        "id": "CA.SM::AgentTypeAttr@11-8d78bb90-ae15-11d1-9cdd-006008aac24b"
+      }
+    },
+    {
+      "type": "SmResponseAttr",
+      "Value": "jwt_family_name=<%userattr=\"SM_SESSIONCTXVAR:family_name\" %>",
+      "Flags": 0,
+      "HidingMask": [],
+      "TTL": 0,
+      "AgentTypeAttrLink": {
+        "id": "CA.SM::AgentTypeAttr@11-8d78bb90-ae15-11d1-9cdd-006008aac24b"
+      }
+    },
+    {
+      "type": "SmResponseAttr",
+      "Value": "jwt_given_name=<%userattr=\"SM_SESSIONCTXVAR:given_name\" %>",
+      "Flags": 0,
+      "HidingMask": [],
+      "TTL": 0,
+      "AgentTypeAttrLink": {
+        "id": "CA.SM::AgentTypeAttr@11-8d78bb90-ae15-11d1-9cdd-006008aac24b"
+      }
+    },
+    {
+      "type": "SmResponseAttr",
+      "Value": "jwt_idp=<%userattr=\"SM_SESSIONCTXVAR:idp\" %>",
+      "Flags": 0,
+      "HidingMask": [],
+      "TTL": 0,
+      "AgentTypeAttrLink": {
+        "id": "CA.SM::AgentTypeAttr@11-8d78bb90-ae15-11d1-9cdd-006008aac24b"
+      }
+    },
+    {
+      "type": "SmResponseAttr",
+      "Value": "jwt_ipaddr=<%userattr=\"SM_SESSIONCTXVAR:ipaddr\" %>",
+      "Flags": 0,
+      "HidingMask": [],
+      "TTL": 0,
+      "AgentTypeAttrLink": {
+        "id": "CA.SM::AgentTypeAttr@11-8d78bb90-ae15-11d1-9cdd-006008aac24b"
+      }
+    },
+    {
+      "type": "SmResponseAttr",
+      "Value": "jwt_name=<%userattr=\"SM_SESSIONCTXVAR:name\" %>",
+      "Flags": 0,
+      "HidingMask": [],
+      "TTL": 0,
+      "AgentTypeAttrLink": {
+        "id": "CA.SM::AgentTypeAttr@11-8d78bb90-ae15-11d1-9cdd-006008aac24b"
+      }
+    },
+    {
+      "type": "SmResponseAttr",
+      "Value": "jwt_nonce=<%userattr=\"SM_SESSIONCTXVAR:nonce\" %>",
+      "Flags": 0,
+      "HidingMask": [],
+      "TTL": 0,
+      "AgentTypeAttrLink": {
+        "id": "CA.SM::AgentTypeAttr@11-8d78bb90-ae15-11d1-9cdd-006008aac24b"
+      }
+    },
+    {
+      "type": "SmResponseAttr",
+      "Value": "jwt_oid=<%userattr=\"SM_SESSIONCTXVAR:oid\" %>",
+      "Flags": 0,
+      "HidingMask": [],
+      "TTL": 0,
+      "AgentTypeAttrLink": {
+        "id": "CA.SM::AgentTypeAttr@11-8d78bb90-ae15-11d1-9cdd-006008aac24b"
+      }
+    },
+    {
+      "type": "SmResponseAttr",
+      "Value": "jwt_tid=<%userattr=\"SM_SESSIONCTXVAR:tid\" %>",
+      "Flags": 0,
+      "HidingMask": [],
+      "TTL": 0,
+      "AgentTypeAttrLink": {
+        "id": "CA.SM::AgentTypeAttr@11-8d78bb90-ae15-11d1-9cdd-006008aac24b"
+      }
+    },
+    {
+      "type": "SmResponseAttr",
+      "Value": "jwt_unique_name=<%userattr=\"SM_SESSIONCTXVAR:unique_name\" %>",
+      "Flags": 0,
+      "HidingMask": [],
+      "TTL": 0,
+      "AgentTypeAttrLink": {
+        "id": "CA.SM::AgentTypeAttr@11-8d78bb90-ae15-11d1-9cdd-006008aac24b"
+      }
+    },
+    {
+      "type": "SmResponseAttr",
+      "Value": "jwt_upn=<%userattr=\"SM_SESSIONCTXVAR:upn\" %>",
+      "Flags": 0,
+      "HidingMask": [],
+      "TTL": 0,
+      "AgentTypeAttrLink": {
+        "id": "CA.SM::AgentTypeAttr@11-8d78bb90-ae15-11d1-9cdd-006008aac24b"
+      }
+    },
+    {
+      "type": "SmResponseAttr",
+      "Value": "jwt_uti=<%userattr=\"SM_SESSIONCTXVAR:uti\" %>",
+      "Flags": 0,
+      "HidingMask": [],
+      "TTL": 0,
+      "AgentTypeAttrLink": {
+        "id": "CA.SM::AgentTypeAttr@11-8d78bb90-ae15-11d1-9cdd-006008aac24b"
+      }
+    },
+    {
+      "type": "SmResponseAttr",
+      "Value": "jwt_ver=<%userattr=\"SM_SESSIONCTXVAR:ver\" %>",
+      "Flags": 0,
+      "HidingMask": [],
+      "TTL": 0,
+      "AgentTypeAttrLink": {
+        "id": "CA.SM::AgentTypeAttr@11-8d78bb90-ae15-11d1-9cdd-006008aac24b"
+      }
+    }
+  ]
+}
