@@ -1,0 +1,12 @@
+#!/bin/bash
+Name=$1
+cat <<EOF
+{
+  "type": "SmResponseGroup",
+  "Name": "${Name}",
+  "Desc": "${Name} Response Group",
+  "AgentTypeLink": {
+    "path": "/SmAgentTypes/Web+Agent"
+  }
+}
+EOF
