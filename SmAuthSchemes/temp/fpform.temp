@@ -1,0 +1,28 @@
+#!/bin/bash
+Name=$1
+Path=$2
+cat <<EOF
+{
+  "AllowAuthLevelOverride": false,
+  "AllowSaveCreds": false,
+  "AuthSchemeType": "HTMLForm",
+  "IPCheck": false,
+  "IgnorePwCheck": false,
+  "IsRadius": false,
+  "IsTemplate": false,
+  "IsUsedbyAdmin": false,
+  "Level": 5,
+  "Library": "smauthhtml",
+  "Name": "${Name}",
+  "Param": "${Path};ACS=0;REL=0",
+  "PersistSessionVars": false,
+  "SmSAMLv1IdPs": [],
+  "SmSAMLv2IdPs": [],
+  "SmWSFEDIdPs": [],
+  "SmWSSecurityIdPs": [],
+  "SmXMLDCCIdPs": [],
+  "SmXMLDSigIdPs": [],
+  "SupportsValidateIdentity": false,
+  "type": "SmAuthScheme"
+}
+EOF
