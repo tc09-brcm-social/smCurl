@@ -2,7 +2,7 @@
 mypwd=`pwd`
 cd ../..
 index=0
-for i in `wget -qO- https://login.microsoftonline.com/common/discovery/keys | ./jq '.keys  | .[] | [.x5c, .kid]' | grep '"'`
+for i in `curl -s https://login.microsoftonline.com/common/discovery/keys | ./jq '.keys  | .[] | [.x5c, .kid]' | grep '"'`
 do
     index=$((index+1))
     if [ $((index%2)) -eq 0 ]; then
