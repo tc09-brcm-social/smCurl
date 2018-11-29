@@ -1,4 +1,11 @@
 #!/bin/bash
+#
+# makecert.sh - import certificates from https://login.microsoftonline.com/common/discovery/keys
+#
+# makecert.sh uses FedCertificates/create.sh and jq to import certificates
+# provided through https://login.microsoftonline.com/common/discovery/keys
+# It creates certificates using kid as the certificate alias.
+#
 mypwd=`pwd`
 cd ../..
 index=0
