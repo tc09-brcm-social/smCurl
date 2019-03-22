@@ -1,0 +1,29 @@
+#!/bin/bash
+Name=$1
+AUTHSERVER=$2
+cat <<EOF
+{
+  "AllowAuthLevelOverride": false,
+  "AllowSaveCreds": false,
+  "AuthSchemeType": "Custom",
+  "Desc": "{\"userClaim\":\"user.id\",\"signatureAlgorithm\":\"HS384\",\"disableSignatureVerification\":\"no\",\"hmacSecret\":\"THIS-IS-A-VERY-VERY-LONG-SECRET-WITH-MORE-THAN-384-BITS\"}",
+  "IgnorePwCheck": false,
+  "IsRadius": false,
+  "IsTemplate": false,
+  "IsUsedbyAdmin": false,
+  "Level": 5,
+  "Library": "smjavaapi",
+  "Name": "${Name}",
+  "Param": "com.ca.sm.jwtauth.SmJwtAuth https://${AUTHSERVER}/siteminderagent/forms/jwtlogin.fcc",
+  "PersistSessionVars": false,
+  "Secret": "{\"userClaim\":\"user.id\",\"signatureAlgorithm\":\"HS384\",\"disableSignatureVerification\":\"no\",\"hmacSecret\":\"THIS-IS-A-VERY-VERY-LONG-SECRET-WITH-MORE-THAN-384-BITS\"}",
+  "SmSAMLv1IdPs": [],
+  "SmSAMLv2IdPs": [],
+  "SmWSFEDIdPs": [],
+  "SmWSSecurityIdPs": [],
+  "SmXMLDCCIdPs": [],
+  "SmXMLDSigIdPs": [],
+  "SupportsValidateIdentity": false,
+  "type": "SmAuthScheme"
+}
+EOF

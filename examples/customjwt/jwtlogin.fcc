@@ -1,0 +1,84 @@
+<!-- SiteMinder Encoding=ISO-8859-1; -->
+@username=%USER%
+@smretries=0
+@smaltcreds=%JWT%
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=$$SMENC$$">
+  <title>SiteMinder Password Services</title>
+<meta name="google-signin-client_id" content="763192036760-5dv6dfg2ljnjbd5ito63lo6tkgfct8a5.apps.googleusercontent.com">
+
+<!-- Cross-frame scripting prevention: This code will prevent this page from being encapsulated within HTML frames. Remove, or comment out, this code if the functionality that is contained in this SiteMinder page is to be included within HTML frames. -->
+<SCRIPT>  
+if (top !=self) 
+top.location=self.location; 
+</SCRIPT>
+
+
+<SCRIPT LANGUAGE="JavaScript">
+function resetCredFields()
+{
+  document.Login.PASSWORD.value = "";
+}
+
+function submitForm()
+{
+     document.Login.submit();
+}
+
+</SCRIPT>
+
+</head>
+
+<body BGCOLOR="#ffffff" TEXT="#000000" onLoad = "resetCredFields();">
+
+<form NAME="Login" METHOD="POST">
+<INPUT TYPE=HIDDEN NAME="SMENC" VALUE="$$SMENC$$">
+<INPUT type=HIDDEN name="SMLOCALE" value="US-EN">
+
+
+<!-- outer table with border -->
+<table width="50%" height=200 border=1 cellpadding=0 cellspacing=0 >
+  <tr> 
+    <td>
+	  <!-- Login table -->
+      <table WIDTH="100%" HEIGHT=200 BGCOLOR="#FFEFD5" border=0 cellpadding=0 cellspacing=0 >
+
+	<tr>
+	  <td ALIGN="CENTER" VALIGN="CENTER" HEIGHT=40 COLSPAN=4 NOWRAP BGCOLOR="#FFDAB9">
+		<font size="+1" face="Arial,Helvetica">
+		<b>Please Login</b></font>
+	      </td>
+	</tr>
+
+	<tr> <td colspan=4 height=10> <font size=1> &nbsp; </font> </td> </tr>
+
+	<tr>
+			<td>
+			<input type="text" name="JWT" id="JWT" >
+		  </td>
+	  <td WIDTH=20 >&nbsp;</td>
+	</tr>
+
+	<tr>
+	  <td colspan=4 NOWRAP WIDTH="50%" HEIGHT="25" align="CENTER">
+	      <input type=hidden name=target value="$$target$$">
+	      <input type=hidden name=smquerydata value="$$smquerydata$$">
+	      <input type=hidden name=smauthreason value="$$smauthreason$$">
+	      <input type=hidden name=smagentname value="$$smagentname$$">
+	      <input type=hidden name=postpreservationdata value="$$postpreservationdata$$">
+	      <input type="button" value="Login" onClick="submitForm();">
+	  </td>
+	</tr>
+
+      </table>
+    </td>
+  </tr>
+</table>
+</form>
+
+
+</body>
+</html>
