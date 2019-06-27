@@ -1,0 +1,15 @@
+#!/bin/bash
+Name=$1
+SessionVar=$2
+cat <<EOF
+{
+  "type": "SmVariable",
+  "Name": "$Name",
+  "ReturnType": "String",
+  "PreFetchFlag": false,
+  "Definition": "<UserContextVariableDef><ItemName>UserProperty</ItemName><PropertyName>SM_SESSIONCTXVAR:${SessionVar}</PropertyName><BufferSize>255</BufferSize></UserContextVariableDef>",
+  "VariableTypeLink": {
+    "path": "/SmVariableTypes/UserContext"
+  }
+}
+EOF
