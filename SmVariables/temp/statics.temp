@@ -1,0 +1,15 @@
+#!/bin/bash
+Name=$1
+Attr=$2
+cat <<EOF
+{
+  "type": "SmVariable",
+  "Name": "$Name",
+  "Definition": "$Attr",
+  "PreFetchFlag": false,
+  "ReturnType": "String",
+  "VariableTypeLink": {
+    "path": "/SmVariableTypes/Static"
+  }
+}
+EOF
