@@ -1,9 +1,9 @@
 #!/bin/bash
 MYPATH=`dirname $0`
-SMACO=$1
+NAME=$1
 APP='.'`date +"%Y%m%d%N"`
 JSON=$$.json
-EXIST=`bash "${MYPATH}/exist.sh" "$SMACO"`
+EXIST=`bash "${MYPATH}/exist.sh" "$NAME"`
 if [[ "$?" != 0 ]]; then
     exit 1
 fi
