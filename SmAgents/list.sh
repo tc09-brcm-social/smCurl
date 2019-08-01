@@ -1,4 +1,15 @@
 #!/bin/bash
-Name=$1
+NAME=$1
 MYPATH=`dirname $0`
-bash "${MYPATH}/read.sh" "$Name" | ./jq '.data | [.[]| .path]'
+EXIST=`bash "${MYPATH}/exist.sh" "$NAME"`
+if [[ $? != 0 ]]; then
+    ./jq -n '. + []'
+    exit 1
+fi
+RESP=`echo "$EXIST" | ./jq -r '.responseType'`
+if [ "$RESP" == "object" ]; then
+    echo "$EXIST" | ./jq '[ .parent.path + "/" + .data.type + "s/" + .data.Name]'
+fi
+if [ "$RESP" == "links" ]; then
+    echo "$EXIST" | ./jq '.data | [.[]| .path]'
+fi
