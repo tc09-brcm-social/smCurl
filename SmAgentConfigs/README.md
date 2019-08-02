@@ -6,7 +6,7 @@
 * rename.sh old new, changes the name from old to new
 * save.sh name, saves the existing object using the original name plus timestamp.
 	Use rename.sh afterwards if you need a specific final name. 
-* maketemp.sh name, make a bash shell template from existing object
+* maketemp2.sh name, make a bash shell template from existing object
 * cleanse.sh take JSON data from stdin and remove the UUID values
 	that may potentially cause issues in the future.
 * copy.sh, save.sh, maketemp.sh all use cleanse.sh to address the UUID concerns
