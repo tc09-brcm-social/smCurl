@@ -1,10 +1,13 @@
 #!/bin/bash
 MYPATH=`dirname $0`
-SMDOMAIN=$1
-SMVAR=$2
+NAME=$1
+CHILD=$2
+EXIST=`bash ${MYPATH}/exist.sh "$NAME" "$CHILD"`
+if [[ "$?" != 0 ]]; then
+    exit 1
+fi
 echo '#!/bin/bash'
-echo 'Name=$1'
+echo 'NAME=$1'
 echo 'cat <<EOF'
-bash "${MYPATH}/read.sh" "$SMDOMAIN" "$SMVAR" | \
-	./jq '.data + {Name: "$Name" }' | ./jq -f jqlib/rmIHD.jq
+echo "$EXIST" | ./jq '.data' | bash "${MYPATH}/cleanse.sh" | ./jq '. + { Name: "${NAME}" }'
 echo EOF
