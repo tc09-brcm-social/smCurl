@@ -63,7 +63,7 @@ bash SmRules/read.sh "$SMDOMAIN" "$SMREALM" "$SMRULE" | ./jq '.data'
 SMPOLICY=subhs256All
 JSON=$$.json
 bash SmPolicies/temp/policy.temp "$SMPOLICY" "$SMDOMAIN" "$SMREALM" "$SMRULE" "$SMDIR" > "$JSON"
-bash SmPolicies/create.sh "$SMDOMAIN" "$SMREALM" "$SMRULE" "$JSON"
+bash SmPolicies/create.sh "$SMDOMAIN" "$JSON"
 bash SmPolicies/read.sh "$SMDOMAIN" "$SMPOLICY" | ./jq '.data'
 ##
 ### Authe Scheme useridhs256
@@ -95,7 +95,7 @@ bash SmRules/read.sh "$SMDOMAIN" "$SMREALM" "$SMRULE" | ./jq '.data'
 SMPOLICY=useridhs256All
 JSON=$$.json
 bash SmPolicies/temp/policy.temp "$SMPOLICY" "$SMDOMAIN" "$SMREALM" "$SMRULE" "$SMDIR" > "$JSON"
-bash SmPolicies/create.sh "$SMDOMAIN" "$SMREALM" "$SMRULE" "$JSON"
+bash SmPolicies/create.sh "$SMDOMAIN" "$JSON"
 bash SmPolicies/read.sh "$SMDOMAIN" "$SMPOLICY" | ./jq '.data'
 ##
 ### Authe Scheme subrs256
@@ -127,7 +127,7 @@ bash SmRules/read.sh "$SMDOMAIN" "$SMREALM" "$SMRULE" | ./jq '.data'
 SMPOLICY=subrs256All
 JSON=$$.json
 bash SmPolicies/temp/policy.temp "$SMPOLICY" "$SMDOMAIN" "$SMREALM" "$SMRULE" "$SMDIR" > "$JSON"
-bash SmPolicies/create.sh "$SMDOMAIN" "$SMREALM" "$SMRULE" "$JSON"
+bash SmPolicies/create.sh "$SMDOMAIN" "$JSON"
 bash SmPolicies/read.sh "$SMDOMAIN" "$SMPOLICY" | ./jq '.data'
 ##
 ### Authe Scheme useridrs256
@@ -159,5 +159,5 @@ bash SmRules/read.sh "$SMDOMAIN" "$SMREALM" "$SMRULE" | ./jq '.data'
 SMPOLICY=useridrs256All
 JSON=$$.json
 bash SmPolicies/temp/policy.temp "$SMPOLICY" "$SMDOMAIN" "$SMREALM" "$SMRULE" "$SMDIR" > "$JSON"
-bash SmPolicies/create.sh "$SMDOMAIN" "$SMREALM" "$SMRULE" "$JSON"
+bash SmPolicies/create.sh "$SMDOMAIN" "$JSON"
 bash SmPolicies/read.sh "$SMDOMAIN" "$SMPOLICY" | ./jq '.data'

@@ -62,7 +62,7 @@ makeUC() {
    SMPOLICY=${UC}All
    JSON=$$.json
    bash SmPolicies/temp/policy.temp "$SMPOLICY" "$SMDOMAIN" "$SMREALM" "$SMRULE" "$SMDIR" > "$JSON"
-   bash SmPolicies/create.sh "$SMDOMAIN" "$SMREALM" "$SMRULE" "$JSON"
+   bash SmPolicies/create.sh "$SMDOMAIN" "$JSON"
    bash SmPolicies/read.sh "$SMDOMAIN" "$SMPOLICY" | ./jq '.data'
    ##
    ### Deploy Sample Pages
