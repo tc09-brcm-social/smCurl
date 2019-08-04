@@ -10,7 +10,7 @@ fi
 RESP=`echo "$EXIST" | ./jq -r '.responseType'`
 if [ "$RESP" == "object" ]; then
     OBJPATH=`echo "$EXIST" | ./jq '"/" + "'"$TYPE"'/" + .data.Name'`
-    OBJPATH=`bash ${MYPATH}/escName.sh "$OBJPATH"`
+    OBJPATH=`bash ${MYPATH}/../utils/escName.sh "$OBJPATH"`
     echo "$OBJPATH" | ./jq " [ { path: . } ]"
 fi
 if [ "$RESP" == "links" ]; then
