@@ -1,11 +1,11 @@
 #!/bin/bash
-#add give an existing Agent Group an additional Agent
+#add give an existing Agent Group an additional Agent Group
 MYPATH=`dirname $0`
 SMCONTAINER=$1
 CONTAINERTYPE=SmAgentGroups
 SMOBJECT=$2
-OBJTYPE=SmAgents
-OBJLINK=AgentsLink
+OBJTYPE=SmAgentGroups
+OBJLINK=AgentGroupsLink
 SMOBJ=/${OBJTYPE}/$SMOBJECT
 EXIST=`bash "$OBJTYPE"/exist.sh "$SMOBJECT"`
 if [[ "$?" != 0 ]]; then
