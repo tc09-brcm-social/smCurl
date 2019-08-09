@@ -1,10 +1,10 @@
 #!/bin/bash
-MYPATH=`dirname $0`
+MYPATH=$(dirname "$0")
 SMDOMAIN=$1
 SMPOL=$2
 JSON=$$.json
 bash "${MYPATH}"/read.sh "$SMDOMAIN" "$SMPOL" | ./jq '.data' > "$JSON"
-UP=` ./jq '.SmUserPolicies[]|[. + {UserDirectory: { path: "/SmUserDirectories/$SMDIR"}}]' "$JSON"`
+UP=$(./jq '.SmUserPolicies[]|[. + {UserDirectory: { path: "/SmUserDirectories/$SMDIR"}}]' "$JSON")
 PL='[{ "type": "SmPolicyLink",
         "RuleLink": {
           "path": "/SmDomains/$SMDOMAIN/SmRealms/$SMREALM/SmRules/$SMRULE"

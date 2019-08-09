@@ -1,0 +1,14 @@
+#!/bin/bash
+SMDIR=$1
+cat <<EOF
+      {
+        "type": "SmUserPolicy",
+        "FilterClass": "All",
+        "PolicyResolution": "All",
+        "FilterPath": "All",
+        "PolicyFlags": [],
+        "UserDirectory": {
+          "path": "/SmUserDirectories/$SMDIR"
+        }
+      }
+EOF
