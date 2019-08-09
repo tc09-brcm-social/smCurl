@@ -4,4 +4,7 @@ DIRNAME=$(cd "${BASH_SOURCE[0]%/*}"; pwd)
 AUTHN="Authorization: Bearer ${TOKEN}"
 NAME=$1
 JSON=$2
-curl -s -k -X PUT --header 'Accept: application/json' --header "${AUTHN}" -d @$JSON "https://${RESTHOST}:${RESTPORT}/ca/api/sso/services/policy/v1/SmAgents/$NAME"
+curl -s -k -X PUT --header 'Accept: application/json' \
+    --header 'Content-Type: application/json' \
+    --header "${AUTHN}" -d @"$JSON" \
+    "https://${RESTHOST}:${RESTPORT}/ca/api/sso/services/policy/v1/SmAgents/$NAME"
