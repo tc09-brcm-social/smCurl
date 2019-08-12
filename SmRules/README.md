@@ -6,6 +6,9 @@
 ** using read.sh, emit same output, and exist 1 if responseType is error
 * id2path.sh objectID -- return path through a rule ID
 ** does not check whether the ID is actually a rule
+* jaddaction.sh Action -- add an action
+** use jrmaction.sh to remove first to avoid duplication
+* jrmaction.sh Action -- remove an action
 * jsave.sh DomainName RealmName RuleName -- produces JSON policy ready for create.sh to use
 * jsetdisabled.sh -- set JSON policy to be disabled
 * jsetenabled.sh -- set JSON policy to be enabled
