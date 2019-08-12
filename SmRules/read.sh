@@ -2,15 +2,21 @@
 DIRNAME=$(cd "${BASH_SOURCE[0]%/*}"; pwd)
 . "${DIRNAME}/../authn"
 AUTHN="Authorization: Bearer ${TOKEN}"
-SMDOMAIN=$1
-SMREALM=$2
-SMRULE=$3
-if [[ -z "${SMDOMAIN}" ]]; then
-    curl -s -k -X GET --header 'Accept: application/json' --header "${AUTHN}" "https://${RESTHOST}:${RESTPORT}/ca/api/sso/services/policy/v1/SmRules/"
+NAME=$1
+CHILD=$2
+GRANDCHILD=$3
+if [[ -z "${NAME}" ]]; then
+    curl -s -k -X GET --header 'Accept: application/json' \
+        --header "${AUTHN}" \
+        "https://${RESTHOST}:${RESTPORT}/ca/api/sso/services/policy/v1/SmRules/"
     else
-    if [[ -z "${SMREALM}" ]]; then
-        curl -s -k -X GET --header 'Accept: application/json' --header "${AUTHN}" "https://${RESTHOST}:${RESTPORT}/ca/api/sso/services/policy/v1/SmDomains/$SMDOMAIN/SmRules/"
+    if [[ -z "${CHILD}" ]]; then
+        curl -s -k -X GET --header 'Accept: application/json' \
+        --header "${AUTHN}" \
+        "https://${RESTHOST}:${RESTPORT}/ca/api/sso/services/policy/v1/SmDomains/$NAME/SmRules/"
     else
-        curl -s -k -X GET --header 'Accept: application/json' --header "${AUTHN}" "https://${RESTHOST}:${RESTPORT}/ca/api/sso/services/policy/v1/SmDomains/$SMDOMAIN/SmRealms/$SMREALM/SmRules/$SMRULE"
+        curl -s -k -X GET --header 'Accept: application/json' \
+        --header "${AUTHN}" \
+        "https://${RESTHOST}:${RESTPORT}/ca/api/sso/services/policy/v1/SmDomains/$NAME/SmRealms/$CHILD/SmRules/$GRANDCHILD"
     fi
 fi
