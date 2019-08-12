@@ -17,6 +17,9 @@
 * jsetdisabled.sh -- set JSON policy to be disabled
 * jsetenabled.sh -- set JSON policy to be enabled
 * jsetexp.sh Expression -- set the expression to the JSON policy
+* junsetexp.sh -- remove expression from the JSON policy
+* junsetrules.sh -- remove rules from the JSON policy
+* junsetvars.sh -- remove variables from the JSON policy
 * list.sh DomainNameSpec PolicyNameSpec -- list the existing policies in JSON array
 ** prints out empty array if exist.sh fails
 * maketemp1.sh -- a historical attempt, to be removed
