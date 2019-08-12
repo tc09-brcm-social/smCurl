@@ -9,7 +9,7 @@
     "Actions": [
       "Get",
       "Post",
-      "Options",
+      "Options"
     ],
     "AllowAccess": true
 }
