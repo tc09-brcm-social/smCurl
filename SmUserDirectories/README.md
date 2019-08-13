@@ -8,7 +8,7 @@
 * list.sh DirectoryNameSpec -- list the existing User Directories in JSON array
 ** prints out empty array if exist.sh fails
 * maketemp.sh ExistingUDName -- make a template script from an existing User Directory
-** only agent name is parameterized
+** only user directory name is parameterized
 * read.sh UDSpec  -- GET the User Directory
 * rename.sh UDName NewUDName -- change the User Directory from UDName to NewUDName
 ** this retains all existing relatioships
