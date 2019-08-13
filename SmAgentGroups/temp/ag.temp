@@ -1,11 +1,11 @@
 #!/bin/bash
-Name=$1
+NAME=$1
 cat <<EOF
 {
   "AgentTypeLink": {
     "path": "/SmAgentTypes/Web+Agent"
   },
-  "Name": "${Name}",
+  "Name": "${NAME}",
   "type": "SmAgentGroup"
 }
 EOF

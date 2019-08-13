@@ -1,17 +1,17 @@
 #!/bin/bash
-MYPATH=`dirname $0`
-SMOLD=$1
-SMNEW=$2
+MYPATH=$(dirname "$0")
+NAME=$1
+NEWNAME=$2
 JSON=$$.json
-EXIST=`bash "${MYPATH}/exist.sh" "$SMNEW"`
-if [[ $? == 0 ]]; then
-    >&2 echo "$SMNEW already exists."
+if EXIST=$(bash "${MYPATH}/exist.sh" "$NEWNAME"); then
+    >&2 echo "$NEWNAME already exists."
     exit 1
 fi
-EXIST=`bash "${MYPATH}/exist.sh" "$SMOLD"`
-if [[ $? != 0 ]]; then
-    exit 1
+if ! EXIST=$(bash "${MYPATH}/exist.sh" "$NAME"); then
+    STATUS=$?
+    echo "$EXIST"
+    exit "$STATUS"
 fi
-echo "$EXIST" | ./jq --arg new "$SMNEW" \
+echo "$EXIST" | ./jq --arg new "$NEWNAME" \
 	'.data | .Name = $new' >"$JSON"
-bash "${MYPATH}/update.sh" "$SMOLD" "$JSON"
+bash "${MYPATH}/update.sh" "$NAME" "$JSON"

@@ -1,9 +1,9 @@
 #!/bin/bash
-MYPATH=`dirname $0`
+MYPATH=$(dirname "$0")
 NAME=$1
-READ=`bash "${MYPATH}/read.sh" "$NAME"`
+READ=$(bash "${MYPATH}/read.sh" "$NAME")
 echo "$READ"
-RESP=`echo "$READ" | ./jq -r '.responseType'`
+RESP=$(echo "$READ" | ./jq -r '.responseType')
 if [ "$RESP" == "error" ]; then
     >&2 echo "$NAME does not exist."
     exit 1
