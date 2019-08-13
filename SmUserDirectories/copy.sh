@@ -1,18 +1,20 @@
 #!/bin/bash
-MYPATH=`dirname $0`
-SMOLD=$1
-SMNEW=$2
+MYPATH=$(dirname "$0")
+TONAME=$1
+FROMNAME=$2
 JSON=$$.json
-EXIST=`bash "${MYPATH}/exist.sh" "$SMOLD"`
-if [[ $? != 0 ]]; then
-    exit 1
+if ! TO=$(bash "${MYPATH}/exist.sh" "$TONAME"); then
+    STATUS=$?
+    echo "$TO"
+    exit "$STATUS"
 fi
-OLDID=`echo "$EXIST" | ./jq -r '.data.id'`
-EXIST=`bash "${MYPATH}/exist.sh" "$SMNEW"`
-if [[ $? != 0 ]]; then
-    exit 1
+if ! FROM=$(bash "${MYPATH}/exist.sh" "$FROMNAME"); then
+    STATUS=$?
+    echo "$FROM"
+    exit "$STATUS"
 fi
-echo "$EXIST" | ./jq '.data' | bash "$MYPATH/cleanse.sh" | \
-	./jq --arg oldid "$OLDID" --arg oldname "$SMOLD" \
-	'.id = $oldid | .Name = $oldname' >"$JSON"
-bash "${MYPATH}/update.sh" "$SMOLD" "$JSON"
+TOID=$(echo "$TO" | ./jq -r '.data.id')
+echo "$FROM" | ./jq '.data' | bash "$MYPATH/cleanse.sh" | \
+	./jq --arg toid "$TOID" --arg toname "$TONAME" \
+	'.id = $toid | .Name = $toname' >"$JSON"
+bash "${MYPATH}/update.sh" "$TONAME" "$JSON"
