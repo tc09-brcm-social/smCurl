@@ -6,7 +6,7 @@ cd ../..
 #
 SMAGENT=sps-01
 if ! EXIST=$(bash SmAgents/exist.sh "$SMAGENT"); then
-    2> echo Access Gateway agent name $SMAGENT may be incorrect.
+    >&2 echo Access Gateway agent name $SMAGENT may be incorrect.
     exit $?
 fi
 echo "Access Gateway agent ${SMAGENT} verified."
@@ -16,8 +16,8 @@ echo "$EXIST"
 #
 SMDOMAIN=DOMAIN-SPSADMINUI-${SMAGENT}
 if ! DOMAIN=$(bash SmDomains/exist.sh "$SMDOMAIN"); then
-    2> echo "$SMDOMAIN does not exist,"
-    2> echo "Access Gateway configuration may not have been run"
+    >&2 echo "$SMDOMAIN does not exist,"
+    >&2 echo "Access Gateway configuration may not have been run"
     exit 1
 fi
 echo "Access Gateway Policy Domain ${SMDOMAIN} verified."
@@ -29,7 +29,7 @@ SMPOLICY=POLICY-SPSADMINUI-${SMAGENT}
 JSON=$$.json
 if ! EXIST=$(bash SmPolicies/exist.sh "$SMDOMAIN" "$SMPOLICY"); then
     STATUS=$?
-    2> echo $SMPOLICY does not exist
+    >&2 echo $SMPOLICY does not exist
     echo "$EXIST"
     exit "$STATUS"
 fi
