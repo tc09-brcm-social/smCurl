@@ -23,5 +23,5 @@ if [ -z "$OBJPATH" ]; then
     echo "$READCONTAINER" | ./jq ".data | .${OBJLINK} += [ { path: \"${SMOBJ}\"} ]" > "$JSON"
     bash "${MYPATH}/update.sh" "$SMCONTAINER" "$JSON"
 else
-    2> echo "$SMOBJECT has been in $SMCONTAINER"
+    >&2 echo "$SMOBJECT has been in $SMCONTAINER"
 fi
