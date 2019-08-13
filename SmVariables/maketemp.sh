@@ -1,10 +1,11 @@
 #!/bin/bash
-MYPATH=`dirname $0`
+MYPATH=$(dirname $0)
 NAME=$1
 CHILD=$2
-EXIST=`bash ${MYPATH}/exist.sh "$NAME" "$CHILD"`
-if [[ "$?" != 0 ]]; then
-    exit 1
+if ! EXIST=$(bash ${MYPATH}/exist.sh "$NAME" "$CHILD"); then
+    STATUS=$?
+    echo "$EXIST"
+    exit "$STATUS"
 fi
 echo '#!/bin/bash'
 echo 'NAME=$1'
