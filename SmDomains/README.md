@@ -1,7 +1,7 @@
 * cleanse.sh -- clean up a JSON object for create.sh to use
 * copy.sh ToDomainName FromDomainName -- copy the definition from FromDomainName to ToDomainName
 ** User Directory associations are copied too
-* create.sh JSONFileName -- create a User Directory  using a JSON file
+* create.sh JSONFileName -- create a Domain  using a JSON file
 * delete.sh DomainName -- delete a Domain
 * exist.sh DomainName -- check if the Domain exists
 ** using read.sh, emit same output, and exist 1 if responseType is error
