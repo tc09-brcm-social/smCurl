@@ -18,7 +18,7 @@ SMREALM=Demoapp1Realm
 ### Rule
 ##
 SMRULE=AllowGetPost
-bash SmRules/delete.sh "$SMDOMAIN" "$SMREALM" "$SMRULE" | ./jq '.data'
+bash SmRules/delete.sh "$SMDOMAIN" "$SMREALM" "$SMRULE"
 ##
 ### Realm
 ##

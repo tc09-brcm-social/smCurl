@@ -1,6 +1,6 @@
 #!/bin/bash
 # assumes iis-01, apache-01 and CA+Directory existed
-mypwd=`pwd`
+mypwd=$(pwd)
 cd ..
 ##
 ### Authe Scheme
@@ -31,11 +31,11 @@ bash SmAgentGroups/create.sh "$JSON"
 bash SmAgentGroups/read.sh "$SMAGENTGROUP" | ./jq '.data'
 SMAGENT=iis-01
 bash SmAgents/read.sh "$SMAGENT" | ./jq '.data'
-bash SmAgentGroups/addAgent2Group.sh "$SMAGENTGROUP" "$SMAGENT"
+bash SmAgentGroups/addagent.sh "$SMAGENTGROUP" "$SMAGENT"
 bash SmAgentGroups/read.sh "$SMAGENTGROUP" | ./jq '.data'
 SMAGENT=apache-01
 bash SmAgents/read.sh "$SMAGENT" | ./jq '.data'
-bash SmAgentGroups/addAgent2Group.sh "$SMAGENTGROUP" "$SMAGENT"
+bash SmAgentGroups/addagent.sh "$SMAGENTGROUP" "$SMAGENT"
 bash SmAgentGroups/read.sh "$SMAGENTGROUP" | ./jq '.data'
 ##
 ### Realm
