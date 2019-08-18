@@ -1,0 +1,8 @@
+#!/bin/bash
+NAME=$1
+cat <<EOF
+{
+    "Alias": "$NAME",
+    "Format": "DER"
+}
+EOF
