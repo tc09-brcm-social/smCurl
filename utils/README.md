@@ -1,1 +1,2 @@
-* escName.sh - escape names - e.g. convert " " to "+"
+* escName.sh - escape name - e.g. currently convert " " to "+"
+* jdelattrs.sh -- set first level attributes to "" or []
