@@ -1,6 +1,11 @@
 #!/bin/bash
-MYPATH=`dirname $0`
-Name=$1
+MYPATH=$(dirname "$0")
+NAME=$1
 JSON=$$.json
-bash "${MYPATH}/read.sh" "$Name" | ./jq '.data | del(.RemoteIdPEntityName) | del(.LocalSPEntityName) | .Status = "Active"' > "$JSON"
-bash "${MYPATH}/update.sh" "$Name" "$JSON"
+if ! EXIST=$(bash "${MYPATH}/exist.sh" "$NAME"); then
+    STATUS=$?
+    echo "$EXIST"
+    exit "$STATUS"
+fi
+./jq -n '. + { Status: "Active" }' > "$JSON"
+bash "${MYPATH}/update.sh" "$NAME" "$JSON"

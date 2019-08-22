@@ -1,35 +1,13 @@
-* Notes
-** del(.id)
-#** .Name replace with parameter
-** del(.StatusRedirect.id)
-#** .UserDirectories[]
-#*** keep .path only or replace it with parameter
-#** .Policy.SmUserPolicies[]
-*** del(.id)
-#*** replace UserDirectory with path: /SmuserDirectories/name using id to search or parameter
-#** .RemoteIdPEntityName replace with parameter
-#** .LocalSPEntityName replace with parameter
-** del(.UserProvisioning.OpenFormatCookieConfiguration.id)
-#** .SignatureOptions.VerificationCertificate
-#*** keep .path only or parameter IDP
-#** .SignatureOptions.SigningPrivateKey
-#*** keep .path only or parameter SP
-** del(.NameID.AttributeSouce.id)
-** del(.NameIDManagement.Configuration.id)
-** .TargetApplication.AttributeMappings[]
-*** del(.id)
-** .SSO.RemoteSSOServices[]
-*** del(.id)
-** .SSO.RemoteArtifactResolutionServices[]
-*** del(.id)
-** del(.AttributeRequesterService.Configuration.id)
-** .Backchannel
-*** del(.Incoming.id)
-*** del(.Outgoing.id)
-** .SSO.SLOServices[]
-*** del(.id)
-#** .Encryptionptions
-*** del(.EncryptionConfiguration.id)
-#*** .DecryptionPrivateKey SP
-#**** keep .path only or replace it with parameter
-** del(.UserIdentification.UserMapping.id)
+* activate.sh SPIDPName -- activate the SAML2 SP->IDP Partnership
+* cleanse.sh -- clean up a JSON object for create.sh to use
+* create.sh JSONFileName -- create a SAML2 SP->IDP Partnership  using a JSON file
+* deactivate.sh SPIDPName -- deactivate the SAML2 SP->IDP Partnership
+* delete.sh SPIDPName -- delete a SAML2 SP->IDP Partnership
+* exist.sh SPIDPName -- check if the SAML2 SP->IDP Partnership exists
+** using read.sh, emit same output, and exist 1 if responseType is error
+* list.sh SPIDPNameSpec -- list the existing SAML2 SP->IDP Partnership in JSON array
+** prints out empty array if exist.sh fails
+* maketemp.sh ExistingSPIDPName -- make a template script from an existing SAML2 SP->IDP Partnership
+** only name is parameterized
+* read.sh SPIDPNameSpec  -- GET the SAML2 SP->IDP Partnership
+* update.sh SPIDPName JSONFileName -- update the SAML2 SP->IDP Partnership using a JSON file
