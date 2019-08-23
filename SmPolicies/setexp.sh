@@ -9,5 +9,5 @@ if ! EXIST=$(bash "${MYPATH}/exist.sh" "$NAME" "$CHILD"); then
    exit "$STATUS"
 fi
 JSON=$$.json
-echo "$EXIST" | ./jq '.data' | bash "${MYPATH}/jsetexp.sh" "$EXP"  > "$JSON"
+./jq -n '.' | bash "${MYPATH}/jsetexp.sh" "$EXP"  > "$JSON"
 bash "${MYPATH}/update.sh" "$NAME" "$CHILD" "$JSON"
