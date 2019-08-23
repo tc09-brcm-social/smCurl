@@ -1,0 +1,26 @@
+#!/bin/bash
+INSTANCE=$1
+CERT=$2
+NAME=Ldemo${INSTANCE}
+SPID=https://sp.demo/${INSTANCE}
+cat <<EOF
+{
+  "type": "FedSPLocal",
+  "Name": "${NAME}",
+  "Description": "demo Local SP instance ${INSTANCE}",
+  "SPID": "${SPID}",
+  "NameIDFormat": [
+    "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress",
+    "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified"
+  ],
+  "DefaultSLOConfirmURL": "https://www.sp.demo/spslo",
+  "SignAuthnRequests": true,
+  "BaseURL": "https://www.sp.demo:7443",
+  "SigningPrivateKey": {
+    "path": "/FedCertificates/${CERT}"
+  },
+  "DecryptionPrivateKey": {
+    "path": "/FedCertificates/${CERT}"
+  }
+}
+EOF

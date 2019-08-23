@@ -1,0 +1,56 @@
+#!/bin/bash
+INSTANCE=$1
+CERT=$2
+NAME=Rdemo${INSTANCE}
+SPID=https://sp.demo/${INSTANCE}
+cat <<EOF
+{
+  "type": "FedSPRemote",
+  "Name": "${NAME}",
+  "Description": "demo Remote SP instance ${INSTANCE}",
+  "SignAuthnRequests": true,
+  "SPID": "${SPID}",
+  "NameIDFormat": [
+    "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress",
+    "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified"
+  ],
+  "SLOServices": [
+    {
+      "type": "FedEndpoint",
+      "Index": 0,
+      "Binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect",
+      "IsDefault": false,
+      "LocationURL": "https://www.sp.demo:7443/affwebservices/public/saml2slo"
+    },
+    {
+      "type": "FedEndpoint",
+      "Index": 0,
+      "Binding": "urn:oasis:names:tc:SAML:2.0:bindings:SOAP",
+      "IsDefault": false,
+      "LocationURL": "https://www.sp.demo:7443/affwebservices/public/saml2slosoap"
+    }
+  ],
+  "EncryptionCertificate": {
+    "path": "/FedCertificates/${CERT}"
+  },
+  "VerificationCertificate": {
+    "path": "/FedCertificates/${CERT}"
+  },
+  "RemoteAssertionConsumerServices": [
+    {
+      "type": "FedEndpoint",
+      "Index": 0,
+      "Binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST",
+      "IsDefault": true,
+      "LocationURL": "https://www.sp.demo:7443/affwebservices/public/saml2assertionconsumer"
+    },
+    {
+      "type": "FedEndpoint",
+      "Index": 1,
+      "Binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact",
+      "IsDefault": false,
+      "LocationURL": "https://www.sp.demo:7443/affwebservices/public/saml2assertionconsumer"
+    }
+  ]
+}
+EOF

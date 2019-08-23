@@ -1,0 +1,78 @@
+#!/bin/bash
+INSTANCE=$1
+CERT=$2
+NAME=Rdemo${INSTANCE}
+IDPID=https://idp.demo/${INSTANCE}
+cat <<EOF
+{
+  "type": "FedIdPRemote",
+  "Name": "${NAME}",
+  "Description": "demo Remote IdP instance ${INSTANCE}",
+  "IdPID": "${IDPID}",
+  "NameIDFormat": [
+    "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress",
+    "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified"
+  ],
+  "RequireSignedAuthnRequests": true,
+  "RemoteSLOServices": [
+    {
+      "type": "FedEndpoint",
+      "LocationURL": "https://www.idp.demo:7443/affwebservices/public/saml2slo",
+      "IsDefault": false,
+      "Index": 0,
+      "Binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
+    },
+    {
+      "type": "FedEndpoint",
+      "LocationURL": "https://www.idp.demo:7443/affwebservices/public/saml2slosoap",
+      "IsDefault": false,
+      "Index": 0,
+      "Binding": "urn:oasis:names:tc:SAML:2.0:bindings:SOAP"
+    },
+    {
+      "type": "FedEndpoint",
+      "LocationURL": "https://www.idp.demo:7443/affwebservices/public/saml2slo",
+      "IsDefault": false,
+      "Index": 0,
+      "Binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
+    }
+  ],
+  "RemoteSSOServices": [
+    {
+      "type": "FedEndpoint",
+      "LocationURL": "https://www.idp.demo:7443/affwebservices/public/saml2sso",
+      "IsDefault": false,
+      "Index": 0,
+      "Binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
+    },
+    {
+      "type": "FedEndpoint",
+      "LocationURL": "https://www.idp.demo:7443/affwebservices/public/saml2sso",
+      "IsDefault": false,
+      "Index": 0,
+      "Binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
+    }
+  ],
+  "SupportedAssertionAttributes": [
+    {
+      "type": "FedSAML2Attribute",
+      "Name": "lastname",
+      "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified",
+      "EncryptFlag": false,
+      "RetrievalMethod": "SSO"
+    }
+  ],
+  "VerificationCertLink": {
+    "path": "/FedCertificates/${CERT}"
+  },
+  "RemoteSOAPArtifactResolutionServices": [
+    {
+      "type": "FedEndpoint",
+      "LocationURL": "https://www.idp.demo:7443/affwebservices/public/saml2ars",
+      "IsDefault": true,
+      "Index": 0,
+      "Binding": "urn:oasis:names:tc:SAML:2.0:bindings:SOAP"
+    }
+  ]
+}
+EOF

@@ -1,0 +1,32 @@
+#!/bin/bash
+INSTANCE=$1
+CERT=$2
+NAME=Ldemo${INSTANCE}
+IDPID=https://idp.demo/${INSTANCE}
+cat <<EOF
+{
+  "type": "FedIdPLocal",
+  "Name": "${NAME}",
+  "Description": "demo Local IdP instance ${INSTANCE}",
+  "RequireSignedAuthnRequests": true,
+  "DefaultSLOConfirmURL": "https://www.idp.demo:7443/slo",
+  "NameIDFormat": [
+    "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress",
+    "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified"
+  ],
+  "BaseURL": "https://www.idp.demo:7443",
+  "IdPID": "${IDPID}",
+  "SupportedAssertionAttributes": [
+    {
+      "type": "FedSAML2Attribute",
+      "Name": "lastname",
+      "EncryptFlag": false,
+      "RetrievalMethod": "SSO",
+      "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified"
+    }
+  ],
+  "DefaultSigningCertificate": {
+    "path": "/FedCertificates/${CERT}"
+  }
+}
+EOF
