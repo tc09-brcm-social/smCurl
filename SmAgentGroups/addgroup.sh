@@ -17,11 +17,15 @@ if ! READCONTAINER=$(bash "${MYPATH}/exist.sh" "$SMCONTAINER"); then
     echo "$READCONTAINER"
     exit "$STATUS"
 fi
-OBJPATH=$(echo "$READCONTAINER" | ./jq "select(.data.${OBJLINK} != null) | .data.${OBJLINK}[] | select(.path | contains(\"${SMOBJ}\"))")
+OBJPATH=$(echo "$READCONTAINER" | ./jq "select(.data.${OBJLINK} != null) |
+    .data.${OBJLINK}[] | select(.path | contains(\"${SMOBJ}\"))")
 if [ -z "$OBJPATH" ]; then
     JSON=$$.json
-    echo "$READCONTAINER" | ./jq ".data | .${OBJLINK} += [ { path: \"${SMOBJ}\"} ]" > "$JSON"
-    bash "${MYPATH}/update.sh" "$SMCONTAINER" "$JSON"
+    echo "$READCONTAINER" | \
+        ./jq ".data | { ${OBJLINK}: .${OBJLINK} } |
+             .${OBJLINK} += [ { path: \"${SMOBJ}\"} ]" > "$JSON"
+    READCONTAINER=$(bash "${MYPATH}/update.sh" "$SMCONTAINER" "$JSON")
 else
     >&2 echo "$SMOBJECT has been in $SMCONTAINER"
 fi
+echo "$READCONTAINER"
