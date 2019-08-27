@@ -16,7 +16,7 @@
       "TTL": 0,
       "Flags": 0,
       "AgentTypeAttrLink": {
-        "id": "CA.SM::AgentTypeAttr@11-8d78bb90-ae15-11d1-9cdd-006008aac24b"
+        "path": "/SmAgentTypes/Web+Agent/SmAgentTypeAttrs/WebAgent-HTTP-Header-Variable"
       }
     },
     {
@@ -26,7 +26,7 @@
       "TTL": 0,
       "Flags": 0,
       "AgentTypeAttrLink": {
-        "id": "CA.SM::AgentTypeAttr@11-8d78bb90-ae15-11d1-9cdd-006008aac24b"
+        "path": "/SmAgentTypes/Web+Agent/SmAgentTypeAttrs/WebAgent-HTTP-Header-Variable"
       }
     },
     {
@@ -36,7 +36,7 @@
       "TTL": 0,
       "Flags": 0,
       "AgentTypeAttrLink": {
-        "id": "CA.SM::AgentTypeAttr@11-8d78bb90-ae15-11d1-9cdd-006008aac24b"
+        "path": "/SmAgentTypes/Web+Agent/SmAgentTypeAttrs/WebAgent-HTTP-Header-Variable"
       }
     }
   ]
