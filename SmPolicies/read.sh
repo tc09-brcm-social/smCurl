@@ -1,11 +1,12 @@
 #!/bin/bash
 DIRNAME=$(cd "${BASH_SOURCE[0]%/*}"; pwd)
+MYBASE=$(basename "$DIRNAME")
 . "${DIRNAME}/../authn"
 AUTHN="Authorization: Bearer ${TOKEN}"
-SMDOMAIN=$1
-SMPOLICY=$2
-if [[ -z "${SMDOMAIN}" ]]; then
-    curl -s -k -X GET --header 'Accept: application/json' --header "${AUTHN}" "https://${RESTHOST}:${RESTPORT}/ca/api/sso/services/policy/v1/SmPolicies/"
+NAME=$1
+CHILD=$2
+if [[ -z "${NAME}" ]]; then
+    curl -s -k -X GET --header 'Accept: application/json' --header "${AUTHN}" "https://${RESTHOST}:${RESTPORT}/ca/api/sso/services/policy/v1/${MYBASE}/"
     else
-    curl -s -k -X GET --header 'Accept: application/json' --header "${AUTHN}" "https://${RESTHOST}:${RESTPORT}/ca/api/sso/services/policy/v1/SmDomains/${SMDOMAIN}/SmPolicies/${SMPOLICY}"
+    curl -s -k -X GET --header 'Accept: application/json' --header "${AUTHN}" "https://${RESTHOST}:${RESTPORT}/ca/api/sso/services/policy/v1/SmDomains/${NAME}/${MYBASE}/${CHILD}"
 fi
