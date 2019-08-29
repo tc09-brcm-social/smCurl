@@ -4,6 +4,7 @@
 * delete.sh DomainName PolicyName -- delete a domain policy
 * exist.sh DomainNameSpec PolicySpec -- check if the domain policy exists
 ** using read.sh, emit same output, and exist 1 if responseType is error
+* jaddpol.sh JSONDATA -- adding the Policy Link in JSONDATA to the JSON policy
 * jadduser.sh JSONDATA -- adding the user directory in JSONDATA to the JSON policy
 * jaddvar.sh DomainName VariableSpec -- adding the variable link to the JSON policy
 ** using SmVariables/listpath.sh to retrieve the variable link

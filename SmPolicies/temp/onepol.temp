@@ -1,0 +1,16 @@
+#!/bin/bash
+RULEPATH=$1
+RSPPATH=$2
+if [[ -z "$RSPPATH" ]]; then
+    OPTRSP=""
+else
+    OPTRSP="\"ResponseLink\": { \"path\": \"$RSPPATH\" },"
+fi
+cat <<EOF
+    {
+      "type": "SmPolicyLink", $OPTRSP
+      "RuleLink": {
+        "path": "$RULEPATH"
+      }
+    }
+EOF

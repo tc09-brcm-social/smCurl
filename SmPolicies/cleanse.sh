@@ -3,7 +3,7 @@ MYPATH=$(dirname "$0")
 DATA=$(cat)
 USER=$(echo "${DATA}" | ./jq '.SmUserPolicies')
 RULE=$(echo "${DATA}" | ./jq '.SmPolicyLinks')
-j=$(echo "$RULE" | ./jq length)
+j=$(echo "$USER" | ./jq length)
 USERS='[]'
 for ((i = 0; i < j; i++)); do
     ID=$(echo "$USER" | ./jq -r ".[$i].UserDirectory.id")
@@ -13,11 +13,14 @@ for ((i = 0; i < j; i++)); do
 done
 # debug - echo $USERS | ./jq '.'
 RULES='[]'
-j=$(echo "$USER" | ./jq length)
+j=$(echo "$RULE" | ./jq length)
 for ((i = 0; i < j; i++)); do
     ID=$(echo "$RULE" | ./jq -r ".[$i].RuleLink.id")
-    NEWRULE=$(bash "${MYPATH}/../objects/id2path.sh" "$ID" | ./jq '.[0]')
-    NR=$(echo "$RULE" | ./jq --argjson r "$NEWRULE" ".[$i] | .RuleLink = \$r")
+    NEWRULE=$(bash "${MYPATH}/../SmRules/id2path.sh" "$ID" | ./jq '.[0]')
+    ID=$(echo "$RULE" | ./jq -r ".[$i].ResponseLink.id")
+    NEWRSP=$(bash "${MYPATH}/../SmResponses/id2path.sh" "$ID" | ./jq '.[0]')
+    NR=$(echo "$RULE" | 
+        ./jq --argjson r "$NEWRULE" --argjson p "$NEWRSP" ".[$i] | .RuleLink = \$r | .ResponseLink = \$p")
     RULES=$(echo "$RULES" | ./jq --argjson r "$NR" '. += [ $r ]')
 done
 #debug - echo $RULES | ./jq '.'

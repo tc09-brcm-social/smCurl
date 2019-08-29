@@ -1,0 +1,14 @@
+#!/bin/bash
+NAME=$1
+cat <<EOF
+{
+  "type": "SmPolicy",
+  "Name": "${NAME}",
+  "Desc": "Access Policy",
+  "AllowAccess": true,
+  "IsEnabled": true,
+  "TimeRestriction": "00000000-00000000-7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f",
+  "ValidateIdDifferentUser": false,
+  "ValidateIdentity": false
+}
+EOF
