@@ -12,7 +12,5 @@ if ! EXIST=$(bash "${MYPATH}/exist.sh" "$NAME"); then
     echo "$EXIST"
     exit "$STATUS"
 fi
-#echo "$EXIST" | ./jq --arg new "$NEWNAME" \
-#	'.data | .Name = $new' >"$JSON"
 ./jq -n --arg n "$NEWNAME" '. + {Name: $n}' > "$JSON"
 bash "${MYPATH}/update.sh" "$NAME" "$JSON"
