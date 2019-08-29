@@ -8,13 +8,17 @@ if ! TO=$(bash "${MYPATH}/exist.sh" "$TONAME"); then
     echo "$TO"
     exit "$STATUS"
 fi
+TONULL=$(echo "$TO" | ./jq '.data' | bash utils/jdelattrs.sh)
 if ! FROM=$(bash "${MYPATH}/exist.sh" "$FROMNAME"); then
     STATUS=$?
     echo "$FROM"
     exit "$STATUS"
 fi
-TOID=$(echo "$TO" | ./jq -r '.data.id')
-echo "$FROM" | ./jq '.data' | bash "$MYPATH/cleanse.sh" | \
-	./jq --arg toid "$TOID" --arg toname "$TONAME" \
-	'.id = $toid | .Name = $toname' >"$JSON"
+CLEAN=$(echo "$FROM" | ./jq '.data' | bash "$MYPATH/cleanse.sh")
+for i in $(echo "$CLEAN" | ./jq -r 'keys[]'); do
+    VALUE=$(echo "$CLEAN" | ./jq ".$i")
+    TONULL=$(echo "$TONULL" | ./jq  ". + { $i: $VALUE}")
+done
+echo "$TONULL" | \
+    ./jq 'del(.id, .Name)' > "$JSON"
 bash "${MYPATH}/update.sh" "$TONAME" "$JSON"
