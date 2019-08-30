@@ -1,16 +1,22 @@
 #!/bin/bash
-MYPATH=`dirname $0`
+MYPATH=$(dirname "$0")
 ID=$1
-EXIST=`bash "${MYPATH}/exist.sh" "$ID"`
-if [[ $? != 0 ]]; then
+if ! EXIST=$(bash "${MYPATH}/exist.sh" "$ID"); then
+    STATUS=$?
     ./jq -n '. + []'
-    exit 1
+    exit "$STATUS"
 fi
-RESP=`echo "$EXIST" | ./jq -r '.responseType'`
+RESP=$(echo "$EXIST" | ./jq -r '.responseType')
 if [ "$RESP" == "object" ]; then
-    OBJPATH=`echo "$EXIST" | ./jq '.parent.path + "/" + .data.type + "s/" + .data.Name'`
+    OBJPATH=$(echo "$EXIST" | ./jq '.parent.path + "/" + .data.type + "s/" + .data.Name')
     echo "$OBJPATH" | ./jq " [ { path: . } ]"
 fi
 if [ "$RESP" == "links" ]; then
-    echo "$EXIST" | ./jq '.data | [.[]| { path: .path} ]'
+    DATA=$(echo "$EXIST" | ./jq '.data')
+    if [ "$DATA" == "null" ]; then
+        >&2 echo "$NAME does not exist."
+        ./jq -n '. + []'
+        exit 1
+    fi
+    echo "$DATA" | ./jq '[.[]| .path]'
 fi

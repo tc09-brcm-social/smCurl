@@ -1,6 +1,6 @@
 #!/bin/bash
 MYPATH=$(dirname "$0")
-TYPE=$1
+NAME=$1
 ID=$2
 if ! EXIST=$(bash "${MYPATH}/exist.sh" "$ID"); then
     STATUS=$?
@@ -9,7 +9,8 @@ if ! EXIST=$(bash "${MYPATH}/exist.sh" "$ID"); then
 fi
 RESP=$(echo "$EXIST" | ./jq -r '.responseType')
 if [ "$RESP" == "object" ]; then
-    OBJPATH=$(echo "$EXIST" | ./jq '"/" + "'"$TYPE"'/" + .data.Name')
+    VALUE=$(echo "$EXIST" | ./jq ".data.${NAME}")
+    OBJPATH=$(echo "$EXIST" | ./jq '.parent.path + "/" + .data.type + "s/" + '"$VALUE")
     OBJPATH=$(bash ${MYPATH}/../utils/escName.sh "$OBJPATH")
     echo "$OBJPATH" | ./jq " [ { path: . } ]"
 fi
