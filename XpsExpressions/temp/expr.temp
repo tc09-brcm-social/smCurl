@@ -1,0 +1,11 @@
+#!/bin/bash
+NAME=$1
+VALUE=$2
+cat <<EOF
+{
+  "Expression": "$VALUE",
+  "Flags": [],
+  "Name": "${NAME}",
+  "type": "XpsExpression"
+}
+EOF
