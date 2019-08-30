@@ -1,0 +1,13 @@
+#!/bin/bash
+NAME=$1
+VALUE=$2
+cat <<EOF
+{
+  "AttributeMappingType": "Alias",
+  "Definition": "$VALUE",
+  "Description": "Alias $NAME for User Attribute $VALUE",
+  "Flags": [],
+  "Name": "${NAME}",
+  "type": "EpmAttributeMapping"
+}
+EOF
