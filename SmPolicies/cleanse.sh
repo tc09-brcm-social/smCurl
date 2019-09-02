@@ -18,9 +18,18 @@ for ((i = 0; i < j; i++)); do
     ID=$(echo "$RULE" | ./jq -r ".[$i].RuleLink.id")
     NEWRULE=$(bash "${MYPATH}/../SmRules/id2path.sh" "$ID" | ./jq '.[0]')
     ID=$(echo "$RULE" | ./jq -r ".[$i].ResponseLink.id")
-    NEWRSP=$(bash "${MYPATH}/../SmResponses/id2path.sh" "$ID" | ./jq '.[0]')
-    NR=$(echo "$RULE" | 
-        ./jq --argjson r "$NEWRULE" --argjson p "$NEWRSP" ".[$i] | .RuleLink = \$r | .ResponseLink = \$p")
+    NEWRSP=$(bash "${MYPATH}/../SmResponses/id2path.sh" "$ID" 2>/dev/null |./jq '.[0]')
+    GRPID=$(echo "$RULE" | ./jq -r ".[$i].ResponseGroupLink.id")
+    NEWGRP=$(bash "${MYPATH}/../SmResponseGroups/id2path.sh" "$GRPID" 2>/dev/null |./jq '.[0]')
+    if [[ "$NEWGRP" == "null" ]]; then
+        NR=$(echo "$RULE" | 
+            ./jq --argjson r "$NEWRULE" --argjson p "$NEWRSP" \
+                ".[$i] | .RuleLink = \$r | .ResponseLink = \$p")
+    else
+        NR=$(echo "$RULE" | 
+            ./jq --argjson r "$NEWRULE" --argjson p "$NEWGRP" \
+                ".[$i] | .RuleLink = \$r | .ResponseGroupLink = \$p")
+    fi
     RULES=$(echo "$RULES" | ./jq --argjson r "$NR" '. += [ $r ]')
 done
 #debug - echo $RULES | ./jq '.'

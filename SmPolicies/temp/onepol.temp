@@ -4,7 +4,11 @@ RSPPATH=$2
 if [[ -z "$RSPPATH" ]]; then
     OPTRSP=""
 else
-    OPTRSP="\"ResponseLink\": { \"path\": \"$RSPPATH\" },"
+    OPTGROUP=""
+    if [[ "$RSPPATH" == *"/SmResponseGroup/"* ]]; then
+        OPTGROUP=Group
+    fi
+    OPTRSP="\"Response${OPRGROUP}Link\": { \"path\": \"$RSPPATH\" },"
 fi
 cat <<EOF
     {
