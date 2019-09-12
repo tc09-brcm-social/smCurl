@@ -1,14 +1,20 @@
-* list.sh now takes a parameter to filter the result
-* exists.sh name, using read.sh output and verify whether the object exists
-	and exit 1 when not.
-	exists.sh is now used by other function when makes sense
-* copy.sh old new, copies the value for new to the old
-* rename.sh old new, changes the name from old to new
-* save.sh name, saves the existing object using the original name plus timestamp.
-	Use rename.sh afterwards if you need a specific final name. 
+* cleanse.sh -- clean up a JSON object for create.sh to use
+* copy.sh ToACOName FromACOName -- copy the definition from FromACOName to ToACOName
+** this retains all existing relatioships
+* create.sh JSONFileName -- create an ACO using a JSON file
+* delete.sh ACOName -- delete an ACO
+* exist.sh ACO -- check if the ACO exists
+** using read.sh, emit same output, and exist 1 if responseType is error
+* list.sh ACONameSpec -- list the existing ACOs in JSON array
+** prints out empty array if exist.sh fails
+* maketemp.sh ExistingACOName -- make a template script from an existing ACO
+** only agent ACO is parameterized
 * maketemp2.sh name, make a bash shell template from existing object
-* maketemp.sh name, make a bash shell template from existing object
-** parameterizes only the naming attribute
-* cleanse.sh take JSON data from stdin and remove the UUID values
-	that may potentially cause issues in the future.
-* copy.sh, save.sh, maketemp.sh all use cleanse.sh to address the UUID concerns
+* normal.sh ExistingACOName -- normalize the JSON output of the read.sh output
+** can be used with diff to compare the differences between two ACOs
+* read.sh ACOSpec  -- GET the ACO
+* rename.sh ACOName NewACOName -- change the ACO from ACOName to NewACOName
+** this retains all existing relatioships
+* save.sh ACOName -- clone existing agent using name.time as the new name
+* update.sh ACOName JSONFileName -- update the ACO using a JSON file
+
