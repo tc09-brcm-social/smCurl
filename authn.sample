@@ -1,4 +1,4 @@
 #!/bin/bash
 RESTHOST=adminuimachinename
 RESTPORT=8443
-TOKEN=`curl -k --silent -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --header 'Authorization: Basic base64-id:password' "https://${RESTHOST}:${RESTPORT}/ca/api/sso/services/login/v1/token" |  awk 'BEGIN {FS="\"";} {print $4;}'`
+TOKEN=$(curl -k --silent -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --header 'Authorization: Basic base64-id:password' "https://${RESTHOST}:${RESTPORT}/ca/api/sso/services/login/v1/token" | ./jq -r '.sessionkey')
