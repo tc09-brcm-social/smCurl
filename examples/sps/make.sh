@@ -1,21 +1,28 @@
 #!/bin/bash
+#
+# This script assumes the User Directory to be used is "CA Directory" and
+# the SiteMinder Access Gateway agent name is sps-01.
+# You can change them to what you use within your implementation.
+# The dir.temp is a template designed for our testing environment.
+# If your User Directory has been created, this template will not be used.
+# Otherwise, you can choose to modify this template for your own LDAP user directory.
+#
 MYPWD=$(pwd)
 cd ../..
 #
 # CA Directory
 #
 SMDIR="CA Directory"
-SMLDAPHOST=$(hostname)
-SMLDAPPORT=20589
-SMDIRTEMP=${MYPWD}/dir.temp
-JSON=$$.json
 ESCNAME=$(bash utils/escName.sh "$SMDIR")
-if EXIST=$(bash SmUserDirectories/exist.sh "$ESCNAME"); then
-    echo "$EXIST"
-else
+if ! EXIST=$(bash SmUserDirectories/exist.sh "$ESCNAME"); then
+    SMLDAPHOST=$(hostname)
+    SMLDAPPORT=20589
+    SMDIRTEMP=${MYPWD}/dir.temp
+    JSON=$$.json
     bash "$SMDIRTEMP" "$SMDIR" "$SMLDAPHOST" "$SMLDAPPORT" >"$JSON"
-    bash SmUserDirectories/create.sh "$JSON"
+    EXIST=$(bash SmUserDirectories/create.sh "$JSON")
 fi
+echo "$EXIST" | ./jq '.data'
 #
 # Agent sps-01
 #
@@ -59,26 +66,25 @@ bash SmDomains/adduser.sh "$SMDOMAIN" "$ESCNAME" || exit $?
 SMVARNAME1=DeptName1
 SMATTRNAME=departmentNumber
 JSON=$$.json
-if EXIST=$(bash SmVariables/exist.sh "$SMDOMAIN" "$SMVARNAME1"); then
-    echo "$EXIST"
-else
+if ! EXIST=$(bash SmVariables/exist.sh "$SMDOMAIN" "$SMVARNAME1"); then
     bash SmVariables/temp/attrs255.temp "$SMVARNAME1" "$SMATTRNAME" > "$JSON"
-    bash SmVariables/create.sh "$SMDOMAIN" "$JSON"
+    EXIST=$(bash SmVariables/create.sh "$SMDOMAIN" "$JSON")
 fi
+echo "$EXIST"
 SMVARNAME2=DeptNameAdmin1
 SMATTRVALUE=Admin
 JSON=$$.json
-if EXIST=$(bash SmVariables/exist.sh "$SMDOMAIN" "$SMVARNAME2"); then
-    echo "$EXIST"
-else
+if ! EXIST=$(bash SmVariables/exist.sh "$SMDOMAIN" "$SMVARNAME2"); then
     bash SmVariables/temp/statics.temp "$SMVARNAME2" "$SMATTRVALUE" > "$JSON"
-    bash SmVariables/create.sh "$SMDOMAIN" "$JSON"
+    EXIST=$(bash SmVariables/create.sh "$SMDOMAIN" "$JSON")
 fi
+echo "$EXIST"
 #
 # SPS Policy
 #
 ESCNAME=$(bash utils/escName.sh "$SMDIR")
 ALLUSERS=$(bash SmPolicies/temp/allusers.temp "$ESCNAME")
+#./jq '.data| with_entries(select([.key] | inside(["SmUserPolicies", "VariablesLink"])))'
 echo "$POLICY" | ./jq '.data' | \
     bash SmPolicies/jadduser.sh "$ALLUSERS" | \
     bash SmPolicies/jaddvar.sh "$SMDOMAIN" "$SMVARNAME2" | \
