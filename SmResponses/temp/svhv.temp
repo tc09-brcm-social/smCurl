@@ -1,0 +1,15 @@
+#!/bin/bash
+NAME=$1
+VALUE=$2
+cat <<EOF
+    {
+      "type": "SmResponseAttr",
+      "HidingMask": [],
+      "Flags": 0,
+      "TTL": 0,
+      "Value": "$NAME=<%userattr=\"SM_SESSIONCTXVAR:$VALUE\" %>",
+      "AgentTypeAttrLink": {
+        "path": "/SmAgentTypes/Web+Agent/SmAgentTypeAttrs/WebAgent-HTTP-Header-Variable"
+      }
+    }
+EOF

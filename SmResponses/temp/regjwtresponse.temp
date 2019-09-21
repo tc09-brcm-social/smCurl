@@ -1,0 +1,18 @@
+#!/bin/bash
+MYPATH=$(dirname "$0")
+NAME=$1
+SV1=$(bash "$MYPATH"/svhv.temp jwt_iat iat)
+SV2=$(bash "$MYPATH"/svhv.temp jwt_sub sub)
+SV3=$(bash "$MYPATH"/svhv.temp jwt_exp exp)
+SV4=$(bash "$MYPATH"/svhv.temp jwt_aud aud)
+SV5=$(bash "$MYPATH"/svhv.temp jwt_jti jti)
+SV6=$(bash "$MYPATH"/svhv.temp jwt_nbf nbf)
+SV7=$(bash "$MYPATH"/svhv.temp jwt_iss iss)
+bash "${MYPATH}/waresponse.temp" "$NAME" | \
+    bash "${MYPATH}/../jaddattr.sh" "$SV1" | \
+    bash "${MYPATH}/../jaddattr.sh" "$SV2" | \
+    bash "${MYPATH}/../jaddattr.sh" "$SV3" | \
+    bash "${MYPATH}/../jaddattr.sh" "$SV4" | \
+    bash "${MYPATH}/../jaddattr.sh" "$SV5" | \
+    bash "${MYPATH}/../jaddattr.sh" "$SV6" | \
+    bash "${MYPATH}/../jaddattr.sh" "$SV7"
