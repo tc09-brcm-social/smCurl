@@ -1,10 +1,13 @@
+* env.shlib
+** set IDPINST and SPINST to add new instances
+** idpn1, spn1 being the default, you can set it to idpn2, spn2 to run again
+** This is used for both make.sh and unmake.sh
 *idpdemocert.temp aliasName password -- import the idp.demo certificate
 ** password is literially password as the p12 embedded in the template is protected as such
 * Lidp.temp instanceCode certAliasName -- create a Local IdP named as Ldemo${instanceCode}
 * make.sh -- the make script that creates required saml2 partnership objects.
 ** require a pre-existing User Directory
 ** change the instance codes to create additional instances if desired
-** idpn1, spn1 being the default, you can set it to idpn2, spn2 to run again
 * Rsp.temp instanceCode certAliasName -- create a Remote SP using Rdemo${instanceCode}
 * spidp.temp partnershipName SPInstCode IdPInstCode SPCert IdPCert UserDirectoryName
 ** create SP->IdP partnership
