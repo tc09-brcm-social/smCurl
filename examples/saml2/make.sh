@@ -1,5 +1,6 @@
 #!/bin/bash
 MYPWD=$(pwd)
+. ./env.shlib
 cd ../..
 #
 # CA Directory: a required user directory
@@ -42,7 +43,7 @@ SPCERT=${SMCERT}
 ##
 ### FedIdPLocals Ldemo${IDPINSTANCE}
 ##
-INSTANCE=idpn1
+INSTANCE=${IDPINST}
 LIDPTEMP=${MYPWD}/Lidp.temp
 LIDPNAME=Ldemo${INSTANCE}
 IDPID=https://idp.demo/${INSTANCE}
@@ -55,7 +56,7 @@ echo "$EXIST" | ./jq '.data'
 ##
 ### FedSPLocals Ldemo${SPINSTANCE}
 ##
-INSTANCE=spn1
+INSTANCE=${SPINST}
 LSPTEMP=${MYPWD}/Lsp.temp
 LSPNAME=Ldemo${INSTANCE}
 SPID=https://sp.demo/${INSTANCE}
@@ -68,7 +69,7 @@ echo "$EXIST" | ./jq '.data'
 ##
 ### FedIdPRemotes Rdemo#{IDPINSTANCE}
 ##
-INSTANCE=idpn1
+INSTANCE=${IDPINST}
 IDP=${INSTANCE}
 RIDPTEMP=${MYPWD}/Ridp.temp
 RIDPNAME=Rdemo${INSTANCE}
@@ -82,7 +83,7 @@ echo "$EXIST" | ./jq '.data'
 ##
 ### FedSPRemotes Ldemo${SPINSTANCE}
 ##
-INSTANCE=spn1
+INSTANCE=${SPINST}
 SP=${INSTANCE}
 RSPTEMP=${MYPWD}/Rsp.temp
 RSPNAME=Rdemo${INSTANCE}
