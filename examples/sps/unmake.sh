@@ -9,8 +9,8 @@ if ! EXIST=$(bash SmAgents/exist.sh "$SMAGENT"); then
     >&2 echo Access Gateway agent name $SMAGENT may be incorrect.
     exit $?
 fi
-echo "Access Gateway agent ${SMAGENT} verified."
-echo "$EXIST"
+>&2 echo "Access Gateway agent ${SMAGENT} verified."
+echo "$EXIST" | ./jq '.data'
 #
 # SPS Agent Domain
 #
@@ -20,8 +20,8 @@ if ! DOMAIN=$(bash SmDomains/exist.sh "$SMDOMAIN"); then
     >&2 echo "Access Gateway configuration may not have been run"
     exit 1
 fi
-echo "Access Gateway Policy Domain ${SMDOMAIN} verified."
-echo "$DOMAIN"
+>&2 echo "Access Gateway Policy Domain ${SMDOMAIN} verified."
+echo "$DOMAIN" | ./jq '.data'
 #
 # SPS Policy
 #
@@ -33,17 +33,18 @@ if ! EXIST=$(bash SmPolicies/exist.sh "$SMDOMAIN" "$SMPOLICY"); then
     echo "$EXIST"
     exit "$STATUS"
 fi
-echo "Access Gateway Domain Policy ${SMPOLICY} checked."
-echo "$EXIST"
+>&2 echo "Access Gateway Domain Policy ${SMPOLICY} checked."
+echo "$EXIST" | ./jq '.data'
+>&2 echo "removing Users and Expression from $SMPOLICY"
 JSON=$$.json
 echo "$EXIST" | ./jq '.data' \
     | bash SmPolicies/junsetexp.sh | bash SmPolicies/junsetvars.sh \
     | bash SmPolicies/junsetusers.sh > "$JSON"
-bash SmPolicies/update.sh "$SMDOMAIN" "$SMPOLICY" "$JSON"
+bash SmPolicies/update.sh "$SMDOMAIN" "$SMPOLICY" "$JSON" | ./jq '.data'
 #
 # SPS Variables
 #
-echo "removing Variables from $SMDOMAIN"
+>&2 echo "removing Variables from $SMDOMAIN"
 SMVARNAME=DeptName1
 bash SmVariables/delete.sh "$SMDOMAIN" "$SMVARNAME"
 SMVARNAME=DeptNameAdmin1
@@ -51,7 +52,7 @@ bash SmVariables/delete.sh "$SMDOMAIN" "$SMVARNAME"
 #
 # SPS Agent Domain User Directory
 #
-echo "removing User Directories from $SMDOMAIN"
+>&2 echo "removing User Directories from $SMDOMAIN"
 JSON=$$.json
 echo "$DOMAIN" | ./jq '.data' | bash SmDomains/junsetusers.sh > "$JSON"
-bash SmDomains/update.sh "$SMDOMAIN" "$JSON"
+bash SmDomains/update.sh "$SMDOMAIN" "$JSON" | ./jq '.data'
