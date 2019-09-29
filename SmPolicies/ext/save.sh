@@ -9,4 +9,4 @@ if ! JSONDATA=$(bash "${MYPATH}/jsave.sh" "$NAME" "$CHILD"); then
 fi
 JSON=$$.json
 echo "$JSONDATA" > "$JSON"
-bash "${MYPATH}/create.sh" "$NAME" "$JSON"
+bash "${MYPATH}/../create.sh" "$NAME" "$JSON"

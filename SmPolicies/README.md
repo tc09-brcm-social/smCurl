@@ -11,10 +11,6 @@
 ** return SmVariables/listpath.sh status if failed
 ** prints out JSON policy, modified or not
 * jrmuser.sh EscapedUserDiretoryName -- remove the user diretory from the JSON policy
-* jsave.sh DomainName PolicyName -- produces JSON policy ready for create.sh to use
-** use exist.sh to check if policy exists,
-** print exist.sh output and return the exist code if not
-** use jsetdisabled.sh to set policy disabled by default
 * jsetdisabled.sh -- set JSON policy to be disabled
 * jsetenabled.sh -- set JSON policy to be enabled
 * jsetexp.sh Expression -- set the expression to the JSON policy
@@ -29,7 +25,6 @@
 * maketemp.sh DomaiName PolicyName -- make a template script from an existing domain policy
 ** only policy name is parameterized
 * read.sh DomainSpec PolicySpec -- GET the domain policy
-* save.sh DomainName PolicyName -- use jsave.sh and then create.sh to create domain policy
 * setexp.sh DomainName PolicyName Expression -- set the domain policy the expression
 ** exist.sh, jsetexp.sh, and update.sh used
 * update.sh DomainName PolicyName JSONFileName -- update the domain policy using a JSON file
