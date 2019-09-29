@@ -9,10 +9,8 @@
 * jaddaction.sh Action -- add an action
 ** use jrmaction.sh to remove first to avoid duplication
 * jrmaction.sh Action -- remove an action
-* jsave.sh DomainName RealmName RuleName -- produces JSON policy ready for create.sh to use
 * jsetdisabled.sh -- set JSON policy to be disabled
 * jsetenabled.sh -- set JSON policy to be enabled
 * list.sh DomainNameSpec RealmNameSpec RuleNameSpec -- list the existing rules
 ** in JSON array, prints out empty array if exist.sh fails
 * read.sh DomainName RealName RuleName -- GET the rule
-* save.sh DomainName RealmName RuleName -- use jsave.sh and then create.sh to create domain policy
