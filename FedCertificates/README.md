@@ -20,7 +20,5 @@
 * maketemppem.sh ExistingAliasName -- make a template certificate script from an existing alias
 * maketempp12.sh ExistingAliasName Password -- make a template script from an existing key alias
 * read.sh AliasSpec  -- GET the certificate
-* rename.sh AliasName NewAliasName -- change the certificate from AliasName to NewAliasName
-** this retains all existing relationships
 * update.sh AliasName JSONFileName -- update the certificate using a JSON file
 ** this retains all existing relationships
