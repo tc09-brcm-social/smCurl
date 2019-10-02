@@ -1,6 +1,7 @@
 #!/bin/bash
 NAME=$1
 MYPATH=$(dirname "$0")
+MYBASE=$(basename "${MYPATH}")
 if ! EXIST=$(bash "${MYPATH}/exist.sh" "$NAME"); then
     STATUS=$?
     ./jq -n '. + []'
@@ -8,7 +9,9 @@ if ! EXIST=$(bash "${MYPATH}/exist.sh" "$NAME"); then
 fi
 RESP=$(echo "$EXIST" | ./jq -r '.responseType')
 if [ "$RESP" == "object" ]; then
-    echo "$EXIST" | ./jq '[ .parent.path + "/" + .data.type + "s/" + .data.Name]'
+    echo "$EXIST" | \
+        ./jq --arg b "$MYBASE" --arg n "$NAME" \
+	    '[ (.parent.path + "/" + $b + "/" + $n )]'
 fi
 if [ "$RESP" == "links" ]; then
     DATA=$(echo "$EXIST" | ./jq '.data')

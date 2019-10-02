@@ -7,6 +7,7 @@
 * expp8.sh aliasname password # to export p8 (encrypted private key)
 * exppem.sh aliasname # to export certificate in PEM format
 * expder.sh aliasname # to export certificate in DER, a binary file
+* expired.sh optionalDays -- list certificates being expired in optional number of days
 * impca.sh alaisName pemAsCAFile # import a certificate PEM file as a CA
 * impp12.sh alaisName p12File Password # import a Key Entry from a password protected p12 file
 * imppem.sh alaisName pemFile # import a certificate from a PEM file
