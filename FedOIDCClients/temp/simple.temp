@@ -1,0 +1,40 @@
+#!/bin/bash
+NAME=$1
+SMAP=$2
+REDIR=$3
+cat <<EOF
+{
+  "type": "FedOIDCClient",
+  "Name": "${NAME}",
+  "EnableWellKnownConfig": true,
+  "RedirectURI": [
+	"$REDIR"
+  ],
+  "Enabled": true,
+  "AccessTokenExpiry": 300,
+  "EnablePKCE": false,
+  "ResponseTypes": [
+    "Code",
+    "id_token token",
+    "id_token"
+  ],
+  "RegenerateClientSecret": false,
+  "DisableConsentScreen": false,
+  "ApplicationType": "PUBLIC",
+  "Description": "OIDC Client created using $0",
+  "SendIDTokenWithRefreshToken": false,
+  "IDTokenExpiry": 300,
+  "PopulateSMSessionInIDToken": false,
+  "SendUserInformationInIDToken": true,
+  "Scopes": [
+    "openid"
+  ],
+  "GrantTypes": [
+    "authorization_code",
+    "implicit"
+  ],
+  "AdminConfig": {
+    "path": "/FedOIDCAdminConfigs/$SMAP"
+  }
+}
+EOF
