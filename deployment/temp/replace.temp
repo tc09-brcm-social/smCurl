@@ -1,0 +1,16 @@
+#!/bin/bash
+PWD=$1
+OBJPATH=$2
+cat <<EOF
+{
+  "mainObjectsMethod": "OVERWRITE",
+  "closureObjectsMethod": "ADD",
+  "passPhrase": "$PWD",
+  "suggestedFileName": "string",
+  "objects": [
+    {
+      "path": "$OBJPATH"
+    }
+  ]
+}
+EOF
