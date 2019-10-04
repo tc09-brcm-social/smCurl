@@ -1,0 +1,70 @@
+#!/bin/bash
+NAME=$1
+UD=$2
+CERT=$3
+BASEURL=$4
+cat <<EOF
+{
+  "type": "FedOIDCAdminConfig",
+  "Name": "${NAME}",
+  "AuthorizationServerBaseURL": "$BASEURL",
+  "MinimumAuthenticationLevel": 5,
+  "AuthenticationType": "LOCAL",
+  "AuthenticationURL": "$BASEURL/affwebservices/redirectjsp/oidc.jsp",
+  "SignUserInfo": true,
+  "EncryptIDToken": false,
+  "SignIDToken": true,
+  "SigningAlgorithm": "RS384",
+  "EncryptUserInfo": false,
+  "Description": "OIDC AP created using template $0",
+  "SecureAuthenticationURL": false,
+  "AuthorizationCodeExpiryTime": 60,
+  "ScopeMapping": [
+    {
+      "type": "FedOIDCScopeAndClaimsMapping",
+      "ScopeName": "email",
+      "Claims": "email"
+    },
+    {
+      "type": "FedOIDCScopeAndClaimsMapping",
+      "ScopeName": "profile",
+      "Claims": "email,firstname,lastname"
+    }
+  ],
+  "SigningAlias": {
+    "path": "/FedCertificates/$CERT"
+  },
+  "UserDirectories": [
+    {
+      "path": "/SmUserDirectories/$UD"
+    }
+  ],
+  "ClaimsMapping": [
+    {
+      "type": "FedOIDCClaimAndUserAttributeMapping",
+      "Claim": "sub",
+      "UserAttribute": "uid"
+    },
+    {
+      "type": "FedOIDCClaimAndUserAttributeMapping",
+      "Claim": "sub",
+      "UserAttribute": "Name"
+    },
+    {
+      "type": "FedOIDCClaimAndUserAttributeMapping",
+      "Claim": "firstname",
+      "UserAttribute": "givenName"
+    },
+    {
+      "type": "FedOIDCClaimAndUserAttributeMapping",
+      "Claim": "lastname",
+      "UserAttribute": "sn"
+    },
+    {
+      "type": "FedOIDCClaimAndUserAttributeMapping",
+      "Claim": "email",
+      "UserAttribute": "mail"
+    }
+  ]
+}
+EOF
