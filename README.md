@@ -1,9 +1,8 @@
 # cassoCurl
 
-This is the starting of the version 1 for the original cassoRest and
-renamed as cassoCurl.
-
-Naming conventions and re-structure is to be applied religiously for this branch.
+This is the first public release original cassoRest then cassoCurl.
+It uses the Shell Scripting framework proposed by:
+https://apiacademy.co/2019/10/devops-rest-api-execution-through-bash-shell-scripting/
 
 * authn - is now a working copied and to be ignored by the git status.
 It is the first file to be created using the authn.sample to fit your running
@@ -19,16 +18,8 @@ to be used as a DevOps command center, the bash isOK.sh should be run first.
 You will need to modify the authn for the Admin UI hostname and
 Basic Auth base64 encoded id and password.
 
-* examples/makeapp1.sh, examples/delapp1.sh assumes iis-01, apache-01 and CA+Directory exists.
-
-cd examples
-bash makeapp1.sh \# to create domain and policies
-bash delapp1.sh \# to clean up
-
-* makebaseps.sh is used to deploy basic objects for a standalone policy server
-** it assumes CA Directory and Policy Server components are colocated.
-** makebaseps.sh should be run only once.
-** after this is run, the SPS and apache web agent
-** can then be configured to use these base object.
-* apcert.key.temp is not usable as the impCert.sh does not support keyentry type
-* jq stuff has been moved to https://github-isl-01.ca.com/cheyi02-social/jqtutor
+* examples contains a number of examples to poke your interest
+** examples/sps - used to enable the Access Gateway UI
+*** after a successful Access Gateway Config Wizard
+** examples/saml2 - used to create sample SAML2 Federation Partnerships
+** examples/aad - used to import Microsoft Azure certs if you use it
