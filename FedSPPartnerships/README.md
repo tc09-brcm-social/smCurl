@@ -1,8 +1,10 @@
+* This is for IDP->SP Partnership, the name is somewhat reversed
 * activate.sh IDPSPName -- activate the SAML2 IDP->SP Partnership
 * cleanse.sh -- clean up a JSON object for create.sh to use
 * create.sh JSONFileName -- create a SAML2 IDP->SP Partnership  using a JSON file
 * deactivate.sh IDPSPName -- deactivate the SAML2 IDP->SP Partnership
 * delete.sh IDPSPName -- delete a SAML2 IDP->SP Partnership
+** a partnership needs to be deactivated before it can be removed
 * exist.sh IDPSPName -- check if the SAML2 IDP->SP Partnership exists
 ** using read.sh, emit same output, and exist 1 if responseType is error
 * list.sh IDPSPNameSpec -- list the existing SAML2 IDP->SP Partnership in JSON array
