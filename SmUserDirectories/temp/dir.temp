@@ -1,24 +1,30 @@
 #!/bin/bash
-SMDIR=$1
+NAME=$1
 SMDIRHOST=$2
 SMDIRPORT=$3
 cat <<EOF
 {
-    "type": "SmUserDirectory",
-    "Name": "$SMDIR",
-    "SearchResults": 0,
-    "UserLookupEnd": ")",
-    "RequireCredentials": true,
-    "Server": "$SMDIRHOST:$SMDIRPORT",
-    "SearchRoot": "ou=userstore,o=mydomain",
-    "Username": "uid=smadmin,ou=admins,ou=userstore,o=mydomain",
-    "SearchTimeout": 30,
-    "EnableSecurityContext": false,
-    "SecureConnection": false,
-    "Namespace": "LDAP:",
-    "UserLookupStart": "(uid=",
-    "UseAdvancedAuthStore": false,
-    "Password": "{RC2}463aDlg2hrdTDxYXRUNb4x1xegLlMs3T",
-    "SearchScope": "SubTree"
+  "BlobAttribute": "jpegPhoto",
+  "ChallengeRespAttribute": "carLicense",
+  "DisabledAttribute": "audio",
+  "EmailAddrAttribute": "mail",
+  "EnableSecurityContext": false,
+  "Name": "${NAME}",
+  "Namespace": "LDAP:",
+  "Password": "{RC2}cDPVjqwOF81CWfutXLV2udd/+Z5qg6QA",
+  "PasswordAttribute": "userPassword",
+  "RequireCredentials": true,
+  "SearchResults": 0,
+  "SearchRoot": "ou=userstore,o=mydomain",
+  "SearchScope": "SubTree",
+  "SearchTimeout": 30,
+  "SecureConnection": false,
+  "Server": "${SMDIRHOST}:${SMDIRPORT}",
+  "UniversalIDAttribute": "uid",
+  "UseAdvancedAuthStore": false,
+  "UserLookupEnd": ")",
+  "UserLookupStart": "(uid=",
+  "Username": "uid=smadmin,ou=admins,ou=userstore,o=mydomain",
+  "type": "SmUserDirectory"
 }
 EOF
