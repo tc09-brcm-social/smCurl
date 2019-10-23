@@ -8,6 +8,7 @@
 # Otherwise, you can choose to modify this template for your own LDAP user directory.
 #
 MYPWD=$(pwd)
+. ./env.shlib
 cd ../..
 #
 # CA Directory
@@ -15,11 +16,10 @@ cd ../..
 SMDIR="CA Directory"
 ESCNAME=$(bash utils/escName.sh "$SMDIR")
 if ! EXIST=$(bash SmUserDirectories/exist.sh "$ESCNAME"); then
-    SMLDAPHOST=$(hostname)
-    SMLDAPPORT=20589
-    SMDIRTEMP=${MYPWD}/dir.temp
+    SMDIRTEMP=SmUserDirectories/temp/dir.temp
     JSON=$$.json
-    bash "$SMDIRTEMP" "$SMDIR" "$SMLDAPHOST" "$SMLDAPPORT" >"$JSON"
+    bash "$SMDIRTEMP" "$SMDIR" "$SMLDAPHOST" "$SMLDAPPORT" | \
+        ./jq --arg p "$SMLDAPPWD" '. + { Password: $p }' >"$JSON"
     EXIST=$(bash SmUserDirectories/create.sh "$JSON")
 fi
 echo "$EXIST" | ./jq '.data'
