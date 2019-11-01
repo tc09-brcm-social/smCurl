@@ -1,0 +1,16 @@
+#!/bin/bash
+#  SM_AUTHNCONTEXT
+#  SM_NAMEID
+#  SM_NAMEIDFORMAT
+#  SM_PROVIDERID
+MYPATH=$(dirname "$0")
+NAME=$1
+SV1=$(bash "$MYPATH"/svhv.temp saml2_nameid SM_NAMEID)
+SV2=$(bash "$MYPATH"/svhv.temp saml2_authncontext SM_AUTHNCONTEXT)
+SV3=$(bash "$MYPATH"/svhv.temp saml2_nameidformat SM_NAMEIDFORMAT)
+SV4=$(bash "$MYPATH"/svhv.temp saml2_providerid SM_PROVIDERID)
+bash "${MYPATH}/waresponse.temp" "$NAME" | \
+    bash "${MYPATH}/../jaddattr.sh" "$SV1" | \
+    bash "${MYPATH}/../jaddattr.sh" "$SV2" | \
+    bash "${MYPATH}/../jaddattr.sh" "$SV3" | \
+    bash "${MYPATH}/../jaddattr.sh" "$SV4" 
