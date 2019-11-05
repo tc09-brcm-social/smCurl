@@ -5,10 +5,10 @@ if [[ -z "$RSPPATH" ]]; then
     OPTRSP=""
 else
     OPTGROUP=""
-    if [[ "$RSPPATH" == *"/SmResponseGroup/"* ]]; then
+    if [[ "$RSPPATH" == *"/SmResponseGroups/"* ]]; then
         OPTGROUP=Group
     fi
-    OPTRSP="\"Response${OPRGROUP}Link\": { \"path\": \"$RSPPATH\" },"
+    OPTRSP="\"Response${OPTGROUP}Link\": { \"path\": \"$RSPPATH\" },"
 fi
 cat <<EOF
     {
