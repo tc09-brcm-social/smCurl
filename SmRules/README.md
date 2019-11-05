@@ -13,4 +13,5 @@
 * jsetenabled.sh -- set JSON policy to be enabled
 * list.sh DomainNameSpec RealmNameSpec RuleNameSpec -- list the existing rules
 ** in JSON array, prints out empty array if exist.sh fails
+* maketemp.sh DomainName RealmName RuleName -- make a template from an existing rule
 * read.sh DomainName RealName RuleName -- GET the rule
