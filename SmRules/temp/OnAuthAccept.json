@@ -1,0 +1,14 @@
+{
+  "Actions": [
+    "OnAuthAccept"
+  ],
+  "AllowAccess": true,
+  "Desc": "OnAuthAccept authentication event",
+  "HidingMask": [],
+  "IsEnabled": true,
+  "Name": "OnAuthAccept",
+  "RegularExpression": false,
+  "Resource": "*",
+  "TimeRestriction": "00000000-00000000-7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f",
+  "type": "SmRule"
+}
