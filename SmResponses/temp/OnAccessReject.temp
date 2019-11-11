@@ -1,0 +1,28 @@
+#!/bin/bash
+AUTHHOST=$1
+cat <<EOF
+{
+  "type": "SmResponse",
+  "Name": "OnAccessReject",
+  "AccessAccept": true,
+  "HidingMask": [],
+  "AccessChallenge": true,
+  "Desc": "On Access Reject",
+  "AccessReject": true,
+  "AgentTypeLink": {
+    "path": "/SmAgentTypes/Web+Agent"
+  },
+  "SmResponseAttrs": [
+    {
+      "type": "SmResponseAttr",
+      "Value": "https://$AUTHHOST/public/error/azreject/",
+      "TTL": 0,
+      "HidingMask": [],
+      "Flags": 0,
+      "AgentTypeAttrLink": {
+        "path": "/SmAgentTypes/Web+Agent/SmAgentTypeAttrs/WebAgent-OnReject-Redirect"
+      }
+    }
+  ]
+}
+EOF
