@@ -1,0 +1,14 @@
+{
+  "Actions": [
+    "OnAccessReject"
+  ],
+  "AllowAccess": true,
+  "Desc": "On Access Reject authorization event",
+  "HidingMask": [],
+  "IsEnabled": true,
+  "Name": "OnAccessReject",
+  "RegularExpression": false,
+  "Resource": "*",
+  "TimeRestriction": "00000000-00000000-7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f",
+  "type": "SmRule"
+}
