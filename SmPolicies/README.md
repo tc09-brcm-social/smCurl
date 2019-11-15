@@ -4,6 +4,7 @@
 * delete.sh DomainName PolicyName -- delete a domain policy
 * exist.sh DomainNameSpec PolicySpec -- check if the domain policy exists
 ** using read.sh, emit same output, and exist 1 if responseType is error
+* jaddactexp.sh Lib Func Param -- add an active expression to a policy
 * jaddpol.sh JSONDATA -- adding the Policy Link in JSONDATA to the JSON policy
 * jadduser.sh JSONDATA -- adding the user directory in JSONDATA to the JSON policy
 * jaddvar.sh DomainName VariableSpec -- adding the variable link to the JSON policy
@@ -14,6 +15,7 @@
 * jsetdisabled.sh -- set JSON policy to be disabled
 * jsetenabled.sh -- set JSON policy to be enabled
 * jsetexp.sh Expression -- set the expression to the JSON policy
+* junsetactexp.sh -- remove the active expression from the JSON policy
 * junsetexp.sh -- remove expression from the JSON policy
 * junsetrules.sh -- remove rules from the JSON policy
 * junsetvars.sh -- remove variables from the JSON policy
@@ -27,4 +29,5 @@
 * read.sh DomainSpec PolicySpec -- GET the domain policy
 * setexp.sh DomainName PolicyName Expression -- set the domain policy the expression
 ** exist.sh, jsetexp.sh, and update.sh used
+* unsetactexpr.sh DomainName PolicyName -- remove active expression from the domain policy
 * update.sh DomainName PolicyName JSONFileName -- update the domain policy using a JSON file
