@@ -10,8 +10,12 @@ INSTANCE=${SPINST}
 LSPNAME=Ldemo${INSTANCE}
 RSPNAME=Rdemo${INSTANCE}
 SP=${INSTANCE}
-SPIDP=saml2${SP}${IDP}
-IDPSP=saml2${IDP}${SP}
+if [ -z ${SPIDP+x} ]; then
+    SPIDP=saml2${SP}${IDP}
+fi  
+if [ -z ${IDPSP+x} ]; then
+    IDPSP=saml2${IDP}${SP}
+fi  
 bash FedIdPPartnerships/deactivate.sh "$SPIDP"
 bash FedIdPPartnerships/delete.sh "$SPIDP"
 bash FedSPPartnerships/deactivate.sh "$IDPSP"

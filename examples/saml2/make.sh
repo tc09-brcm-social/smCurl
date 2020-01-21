@@ -94,14 +94,18 @@ if ! EXIST=$(bash FedSPRemotes/exist.sh "${RSPNAME}"); then
     EXIST=$(bash FedSPRemotes/create.sh "$JSON")
 fi
 echo "$EXIST" | ./jq '.data'
-SPIDP=saml2${SP}${IDP}
+if [ -z ${SPIDP+x} ]; then
+    SPIDP=saml2${SP}${IDP}
+fi
 if ! EXIST=$(bash FedIdPPartnerships/exist.sh "$SPIDP"); then
     JSON=$$.json
     bash "${MYPWD}/spidp.temp" "$SPIDP" "$SP" "$IDP" "$SPCERT" "$IDPCERT" "$UD" > "$JSON"
     EXIST=$(bash FedIdPPartnerships/create.sh "$JSON")
 fi
 echo "$EXIST" | ./jq '.data'
-IDPSP=saml2${IDP}${SP}
+if [ -z ${IDPSP+x} ]; then
+    IDPSP=saml2${IDP}${SP}
+fi
 if ! EXIST=$(bash FedSPPartnerships/exist.sh "$IDPSP"); then
     JSON=$$.json
     bash "${MYPWD}/idpsp.temp" "$IDPSP" "$IDP" "$SP" "$IDPCERT" "$SPCERT" "$UD" > "$JSON"
