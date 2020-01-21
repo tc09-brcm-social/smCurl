@@ -1,0 +1,17 @@
+#!/bin/bash
+Name=$1
+Value=$2
+cat <<EOF
+      {
+        "type": "FedSAML2Attribute",
+        "Name": "$Name",
+        "EncryptFlag": false,
+        "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified",
+        "RetrievalMethod": "SSO",
+        "AttributeSource": {
+          "type": "FedAttributeSource",
+          "Value": "$Value",
+          "NameIDType": "UserAttribute"
+        }
+       }
+EOF
