@@ -15,6 +15,8 @@ The base64-id:password can actually be calculated using the following shell scri
 
 echo -n "base64-id:password" | base64 
 
+OPT environment variable in authn can now be used to carry more flags for curl command.
+
 * isOK.sh - is used to verify ps and authentication has been set correctly within the authn.
 
 When this kit is first deployed to a new machine where CA SSO API is 

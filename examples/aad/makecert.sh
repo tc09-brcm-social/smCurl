@@ -8,8 +8,8 @@
 cd ../..
 METADATAURL=https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration
 #v1.0 METADATAURL=https://login.microsoftonline.com/common/.well-known/openid-configuration
-JWKSURL=$(curl -s "$METADATAURL" | ./jq -r '.jwks_uri')
-KEYS=$(curl -s "$JWKSURL" | ./jq '.keys')
+JWKSURL=$(curl ${OPT} --header "host: ${RESTHOST}" -s "$METADATAURL" | ./jq -r '.jwks_uri')
+KEYS=$(curl ${OPT} --header "host: ${RESTHOST}" -s "$JWKSURL" | ./jq '.keys')
 for i in $(seq $(echo "$KEYS" | ./jq 'length')); do
     KID=$(echo "$KEYS" | ./jq -r ".[$(($i - 1))].kid")
     if ! EXIST=$(bash FedCertificates/exist.sh "$KID"); then
