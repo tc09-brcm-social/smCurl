@@ -11,7 +11,7 @@ for ((i = 0; i < j; i++)); do
     NU=$(echo "$USER" | ./jq --argjson u "$NEWUSER" ".[$i] | .UserDirectory = \$u")
     USERS=$(echo "$USERS" | ./jq --argjson u "$NU" '. += [ $u ]')
 done
-# debug - echo $USERS | ./jq '.'
+# echo debug - "$USERS" | ./jq '.'
 RULES='[]'
 j=$(echo "$RULE" | ./jq length)
 for ((i = 0; i < j; i++)); do
@@ -22,9 +22,15 @@ for ((i = 0; i < j; i++)); do
     GRPID=$(echo "$RULE" | ./jq -r ".[$i].ResponseGroupLink.id")
     NEWGRP=$(bash "${MYPATH}/../SmResponseGroups/id2path.sh" "$GRPID" 2>/dev/null |./jq '.[0]')
     if [[ "$NEWGRP" == "null" ]]; then
-        NR=$(echo "$RULE" | 
+	if [[ "$NEWRSP" == "null" ]]; then
+            NR=$(echo "$RULE" | 
+            ./jq --argjson r "$NEWRULE" --argjson p "$NEWRSP" \
+                ".[$i] | .RuleLink = \$r")
+	else
+            NR=$(echo "$RULE" | 
             ./jq --argjson r "$NEWRULE" --argjson p "$NEWRSP" \
                 ".[$i] | .RuleLink = \$r | .ResponseLink = \$p")
+	fi
     else
         NR=$(echo "$RULE" | 
             ./jq --argjson r "$NEWRULE" --argjson p "$NEWGRP" \
@@ -32,6 +38,6 @@ for ((i = 0; i < j; i++)); do
     fi
     RULES=$(echo "$RULES" | ./jq --argjson r "$NR" '. += [ $r ]')
 done
-#debug - echo $RULES | ./jq '.'
+# echo debug "$RULES" | ./jq '.'
 echo "$DATA" | ./jq --argjson u "$USERS" '.SmUserPolicies = $u' | \
     ./jq --argjson r "$RULES" '.SmPolicyLinks = $r' | ./jq -f jqlib/rmIHD.jq
