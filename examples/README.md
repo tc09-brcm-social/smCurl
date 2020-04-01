@@ -1,2 +1,1 @@
-* makeapp1.sh -- a straightforward sample script
-* delapp1.sh -- remove objects created by makeapp1.sh
+* makeapp1.sh, delapp1.sh has been removed, replaced by examples/app1
