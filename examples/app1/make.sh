@@ -12,7 +12,7 @@ SMDIR=${DIRECTORY}
 EXIST=$(bash SmUserDirectories/exist.sh "$SMDIR")
 STATUS=$?
 if [ "$STATUS" -ne 0 ]; then
-    >2& echo "User Directory ${SMDIR} does not exist, quitting ..."
+    >&2 echo "User Directory ${SMDIR} does not exist, quitting ..."
     exit ${STATUS}
 fi
 echo "$EXIST" | ./jq '.data'

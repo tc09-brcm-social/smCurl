@@ -10,7 +10,7 @@ ESCNAME=$(bash utils/escName.sh "$SMDIR")
 UD=${ESCNAME}
 if ! EXIST=$(bash SmUserDirectories/exist.sh "$UD"); then
     STATUS=$?
-    >2& echo "required User Directory does not exist. Exiting"
+    >&2 echo "required User Directory does not exist. Exiting"
     exit "${STATUS}"
 fi
 echo "$EXIST" | ./jq '.data'

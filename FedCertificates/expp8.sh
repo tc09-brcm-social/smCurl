@@ -3,7 +3,7 @@ MYPATH=$(dirname "$0")
 NAME=$1
 PASSWD=$2
 if [ -z "$PASSWD" ]; then
-    >2& echo "Password is mandatory when attempt to export PKCS8"
+    >&2 echo "Password is mandatory when attempt to export PKCS8"
     exit 1
 fi
 EXIST=$(bash "${MYPATH}/exist.sh" "$NAME")
