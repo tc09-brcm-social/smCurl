@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # This script assumes the User Directory to be used is "CA Directory" and
-# the SiteMinder Access Gateway agent name is sps-01.
+# the SiteMinder Access Gateway agent name is ${SPSAGENT} from env.shlib
 # You can change them to what you use within your implementation.
 # The dir.temp is a template designed for our testing environment.
 # If your User Directory has been created, this template will not be used.
@@ -24,9 +24,9 @@ if ! EXIST=$(bash SmUserDirectories/exist.sh "$ESCNAME"); then
 fi
 echo "$EXIST" | ./jq '.data'
 #
-# Agent sps-01
+# Agent ${SPSAGENT}
 #
-SMAGENT=sps-01
+SMAGENT=${SPSAGENT}
 if ! EXIST=$(bash SmAgents/exist.sh "$SMAGENT"); then
     >&2 echo Access Gateway agent name $SMAGENT may be incorrect.
     exit $?
