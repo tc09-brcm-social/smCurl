@@ -1,5 +1,7 @@
 # cassoCurl
 
+* This is an experimental release, mainly for experiemntal EpmApplications
+
 This is the first public release original cassoRest then cassoCurl.
 It uses the Shell Scripting framework proposed by:
 https://apiacademy.co/2019/10/devops-rest-api-execution-through-bash-shell-scripting/
@@ -8,12 +10,11 @@ https://apiacademy.co/2019/10/devops-rest-api-execution-through-bash-shell-scrip
 	* jq: to be downloaded from https://stedolan.github.io/jq/download/
 	* Windows git: https://git-scm.com/download/win
 
-* authn - is now a working copied and to be ignored by the git status.
-It is the first file to be created using the authn.sample to fit your running
-instance. See its content for details.
-The base64-id:password can actually be calculated using the following shell script:
-
-echo -n "base64-id:password" | base64 
+* authn - is now to be made using bash utils/makeauthn.sh from the home diretory
+	* use the utils/env.shlib.sample to utils/env.shlib
+	* change the utils/env.shlib with your AdminUI host, port, id, and password
+	* after the bash utils/makeauthn.sh, you can removed the utils/env.shlib.
+	* it is ignored by the git status
 
 OPT environment variable in authn can now be used to carry more flags for curl command.
 
