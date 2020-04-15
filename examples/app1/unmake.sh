@@ -1,7 +1,7 @@
 #!/bin/bash
 # Assume User Directory ${DIRECTORY} pre-existed and not to be removed
 # Assume we always use the AllowGetPost Rule
-# Assume we always apply AllowGetPost to all users, policy name is All
+# Assume we always apply AllowGetPost to all users
 . ./env.shlib
 cd ../..
 ##
@@ -11,7 +11,7 @@ SMDOMAIN=${DOMAIN}
 ##
 ### Policy
 ##
-SMPOLICY=All
+SMPOLICY=${POLICY}
 EXIST=$(bash SmPolicies/exist.sh "$SMDOMAIN" "$SMPOLICY")
 STATUS=$?
 if [ "$STATUS" -ne 0 ]; then

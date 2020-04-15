@@ -1,7 +1,7 @@
 #!/bin/bash
 # Assume User Directory ${DIRECTORY} exists
 # Assume we always use the AllowGetPost Rule
-# Assume we always apply AllowGetPost to all users, policy name is All
+# Assume we always apply AllowGetPost to all users
 . ./env.shlib
 MYPWD=$(pwd)
 cd ../..
@@ -92,7 +92,7 @@ echo "$EXIST" | ./jq '.data'
 ##
 ### Policy
 ##
-SMPOLICY=All
+SMPOLICY=${POLICY}
 EXIST=$(bash SmPolicies/exist.sh "$SMDOMAIN" "$SMPOLICY")
 STATUS=$?
 if [ "$STATUS" -ne 0 ]; then
