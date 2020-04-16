@@ -1,0 +1,187 @@
+#
+# procedure toJson
+#
+toJson() {
+    FNAME=$1
+    JSONF=$2
+    XMLFILE=$$.xml
+#    cat "$FNAME" | dos2unix > "$XMLFILE"
+    cat "$FNAME" | dos2unix | \
+        sed 's/<[a-z][a-z0-9]*:/</g' | sed 's#</[a-z][a-z0-9]*:#</#g' \
+	> "$XMLFILE"
+    xml2json "$XMLFILE" | ./jq '.' | \
+        awk -f "utils/metadata/rmns.awk" | ./jq '.' > "$JSONF"
+#    xml2json "$XMLFILE" | ./jq '.' | awk -f "utils/metadata/rmns.awk" | ./jq '.' > "$JSONF"
+    rm "$XMLFILE"
+    }
+#
+# procedure doNameIDFormats
+#
+doNameIDFormats() {
+    KEYD=$1
+    JSONF=$2
+    APPF=$3
+    KEYS=$(./jq "$KEYD" "$JSONF")
+    if [ $(echo "$KEYS" | ./jq -r 'type') == "null" ]; then
+        NAMEIDF=\"urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified\"
+        echo "$NAMEIDF" >> "$APPF"
+        >&2 echo "Warning required NameIDFormat missing."
+        >&2 echo "        set it to $NAMEIDF"
+    fi
+    if [ $(echo "$KEYS" | ./jq -r 'type') == "string" ]; then
+        echo "${KEYS}" >> "$APPF"
+    fi
+    if [ $(echo "$KEYS" | ./jq -r 'type') == "array" ]; then
+        LEN=$(echo "$KEYS" | ./jq 'length')
+        DELI=
+        for (( i = 0; i < $LEN; ++i )); do
+            echo "$DELI" >> "$APPF"
+            echo "$(echo "$KEYS" | ./jq ".[$i]")" >> "$APPF"
+            DELI=,
+        done
+    fi
+    }
+
+#
+# procedure doonecert
+#
+doonecert() {
+    CERTPREFIX=$1
+    CERT=$2
+    CN=${CERTPREFIX}.$(echo "$CERT" | ./jq -r '.use')
+    if ! EXIST=$(bash FedCertificates/exist.sh "$CN"); then
+        PEMF=${CN}.pem
+	bash FedCertificates/ext/wrapx5c.sh \
+            $(echo "$CERT" | ./jq -r '.KeyInfo.X509Data.X509Certificate') \
+            > "$PEMF"
+        EXIST=$(bash FedCertificates/imppem.sh "$CN" "$PEMF")
+    fi
+    echo "$EXIST" | ./jq '.data' > "${CN}"
+    }
+#
+# procedure: doCerts
+#
+doCerts() {
+    CERTPRE=$1
+    KEYD=$2
+    JSONF=$3
+    KEYS=$(./jq "$KEYD" "$JSONF")
+    if [ $(echo "$KEYS" | ./jq -r 'type') == "object" ]; then
+        doonecert "$CERTPRE" "$KEYS"
+    fi
+    if [ $(echo "$KEYS" | ./jq -r 'type') == "array" ]; then
+        LEN=$(echo "$KEYS" | ./jq 'length')
+        for (( i = 0; i < $LEN; ++i )); do
+            doonecert "$CERTPRE" "$(echo "$KEYS" | ./jq ".[$i]")"
+        done
+    fi
+    if [ -f "${CERTPRE}.encryption" ]; then
+        RESP=$(cat "${CERTPRE}.encryption" | jq -r 'type')
+        if [ "$RESP" == "object" ]; then
+            ENCCERT=${CERTPRE}.encryption
+        else
+            ENCCERT=$(bash FedCertificates/ext/search.sh ${CERTPRE}.encryption.pem)
+            >&2 echo "Warning: searching encryption cert: $ENCCERT"
+        fi
+    else
+        ENCCERT=
+    fi
+    if [ -f "${CERTPRE}.signing" ]; then
+        RESP=$(cat "${CERTPRE}.signing" | jq -r 'type')
+        if [ "$RESP" == "object" ]; then
+            SIGNCERT=${CERTPRE}.signing
+        else
+            SIGNCERT=$(bash FedCertificates/ext/search.sh ${CERTPRE}.signing.pem)
+            >&2 echo "Warning: searching signing cert: $SIGNCERT"
+        fi
+    else
+        SIGNCERT=
+    fi
+    }
+#
+# procedure dooneremote
+#
+dooneremote() {
+    SVC=$1
+    APPTO=$2
+    INDEX=$(echo "${SVC}" | ./jq -r '.index')
+    if [ "$INDEX" == "null" ]; then
+        INDEX=0
+    fi
+    DEF=$(echo "${SVC}" | ./jq -r '.isDefault')
+    if [ "$DEF" == "null" ]; then
+        DEF=false
+    fi
+    RSP=$(echo "${SVC}" | ./jq '.ResponseLocation')
+    if [ "$RSP" == "null" ]; then
+        RSP=,
+    else
+        RSP=,ResponseLocationURL:${RSP},
+    fi
+    echo "${SVC}" | ./jq "{
+        type: \"FedEndpoint\",
+        LocationURL: .Location$RSP
+        IsDefault: $DEF,
+        Index: $INDEX,
+        Binding: .Binding
+        }" >> "$APPTO"
+    }
+#
+# procedure doRemoteServices
+#
+doRemoteServices()
+    {
+    KEYD=$1
+    JSONF=$2
+    APPF=$3
+    KEYS=$(./jq "$KEYD" "$JSONF")
+    if [ $(echo "$KEYS" | ./jq -r 'type') == "object" ]; then
+        dooneremote "$KEYS" "$APPF"
+    fi
+    if [ $(echo "$KEYS" | ./jq -r 'type') == "array" ]; then
+        LEN=$(echo "$KEYS" | ./jq 'length')
+        DELI=
+        for (( i = 0; i < $LEN; ++i )); do
+            echo "$DELI" >> "$APPF"
+            dooneremote "$(echo "$KEYS" | ./jq ".[$i]")" "$APPF"
+            DELI=,
+        done
+    fi
+    }
+#
+# procedure doneattrib
+#
+dooneattrib()
+    {
+    ATTR=$1
+    APPTO=$2
+    echo "${ATTR}" | ./jq "{
+        type: \"FedSAML2Attribute\",
+        Name: .Name,
+        NameFormat: .NameFormat,
+        EncryptFlag: false,
+        RetrievalMethod: \"SSO\"
+        }" >> "$APPTO"
+    }
+#
+# procedure doAttributes
+#
+doAttributes()
+    {
+    KEYD=$1
+    JSONF=$2
+    APPF=$3
+    KEYS=$(./jq "$KEYD" "$JSONF")
+    if [ $(echo "$KEYS" | ./jq -r 'type') == "object" ]; then
+        dooneattrib "$KEYS" "$APPF"
+    fi
+    if [ $(echo "$KEYS" | ./jq -r 'type') == "array" ]; then
+        LEN=$(echo "$KEYS" | ./jq 'length')
+        DELI=
+        for (( i = 0; i < $LEN; ++i )); do
+            echo "$DELI" >> "$APPF"
+            dooneattrib "$(echo "$KEYS" | ./jq ".[$i]")" "$APPF"
+            DELI=,
+        done
+    fi
+    }
