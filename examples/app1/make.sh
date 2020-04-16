@@ -6,6 +6,13 @@
 MYPWD=$(pwd)
 cd ../..
 ##
+### Need AGENT, GROUP, or both
+##
+if [ -z "$GROUP" ] && [ -z "$AGENT" ]; then
+    >&2 echo "Error: Need AGENT, GROUP, or both settings to proceed."
+    exit 1
+fi
+##
 ### User Directory
 ##
 SMDIR=${DIRECTORY}
@@ -46,26 +53,36 @@ echo "$EXIST" | ./jq '.data'
 ##
 ### AgentGroup and Agent member
 ##
-SMAGENTGROUP=${GROUP}
-EXIST=$(bash SmAgentGroups/exist.sh "$SMAGENTGROUP")
-STATUS=$?
-if [ "$STATUS" -ne 0 ]; then
-    JSON=$$.json
-    bash SmAgentGroups/temp/ag.temp "$SMAGENTGROUP" > "$JSON"
-    EXIST=$(bash SmAgentGroups/create.sh "$JSON")
+if [ -z "$GROUP" ]; then
+    >&2 "GROUP Variable is empty, skipped checking Agent Group"
+else
+    SMAGENTGROUP=${GROUP}
+    EXIST=$(bash SmAgentGroups/exist.sh "$SMAGENTGROUP")
+    STATUS=$?
+    if [ "$STATUS" -ne 0 ]; then
+        JSON=$$.json
+        bash SmAgentGroups/temp/ag.temp "$SMAGENTGROUP" > "$JSON"
+        EXIST=$(bash SmAgentGroups/create.sh "$JSON")
+    fi
+    echo "$EXIST" | ./jq '.data'
 fi
-echo "$EXIST" | ./jq '.data'
-SMAGENT=${AGENT}
-EXIST=$(bash SmAgents/exist.sh "$SMAGENT")
-STATUS=$?
-if [ "$STATUS" -ne 0 ]; then
-    JSON=$$.json
-    bash SmAgents/temp/agent.temp "$SMAGENT" > "$JSON"
-    EXIST=$(bash SmAgents/create.sh "$JSON")
+if [ -z "$AGENT" ]; then
+    >&2 echo "AGENT Variable is empty, skipped checking Agent"
+else
+    SMAGENT=${AGENT}
+    EXIST=$(bash SmAgents/exist.sh "$SMAGENT")
+    STATUS=$?
+    if [ "$STATUS" -ne 0 ]; then
+        JSON=$$.json
+        bash SmAgents/temp/agent.temp "$SMAGENT" > "$JSON"
+        EXIST=$(bash SmAgents/create.sh "$JSON")
+    fi
+    echo "$EXIST" | ./jq '.data'
 fi
-echo "$EXIST" | ./jq '.data'
-EXIST=$(bash SmAgentGroups/addagent.sh "$SMAGENTGROUP" "$SMAGENT")
-echo "$EXIST" | ./jq '.data'
+if [ ! -z "$GROUP" ] && [ ! -z "$AGENT" ]; then
+    EXIST=$(bash SmAgentGroups/addagent.sh "$SMAGENTGROUP" "$SMAGENT")
+    echo "$EXIST" | ./jq '.data'
+fi
 ##
 ### Realm
 ##
@@ -75,7 +92,11 @@ STATUS=$?
 if [ "$STATUS" -ne 0 ]; then
     APPVDIR=${VDIR}
     JSON=$$.json
-    bash "SmRealms/temp/realmAG0.temp" "$SMREALM" "$APPVDIR" "$SMAGENTGROUP" "$SMAUTH" > "$JSON"
+    if [ -z "$AGENT" ]; then
+        bash "SmRealms/temp/realmAG0.temp" "$SMREALM" "$APPVDIR" "$SMAGENTGROUP" "$SMAUTH" > "$JSON"
+    else
+        bash "SmRealms/temp/realm0.temp" "$SMREALM" "$APPVDIR" "$SMAGENT" "$SMAUTH" > "$JSON"
+    fi
     EXIST=$(bash SmRealms/create.sh "$SMDOMAIN" "$JSON")
 fi
 echo "$EXIST" | ./jq '.data'
