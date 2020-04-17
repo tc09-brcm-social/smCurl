@@ -1,8 +1,6 @@
 #!/bin/bash
 SMACO=$1
 SMAGENT=$2
-DEFAULT=$3
-if ! NORMAL=$(bash SmAgentConfigs/normal.sh "$DEFAULT"); then
 cat <<EOF
 {
   "Attributes": [
@@ -173,11 +171,3 @@ cat <<EOF
   "type": "SmAgentConfig"
 }
 EOF
-else
-    echo "$NORMAL" | bash SmAgentConfigs/cleanse.sh | \
-        bash SmAgentConfigs/jsetattr.sh DefaultAgentName "$SMAGENT" | \
-        bash SmAgentConfigs/jsetattr.sh LogoffUri '%2Flogout.html' | \
-        bash SmAgentConfigs/jaddattr.sh LogoffUri '%2Flogoff%2Flogoff.html' | \
-        ./jq -S --arg n "${SMACO}" '. +
-             {"Name": $n, "Desc": ("made using the " + .Name + " plus other additions")}'
-fi
