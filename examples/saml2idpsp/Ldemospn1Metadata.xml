@@ -1,0 +1,34 @@
+<EntityDescriptor ID="SM373a89c8b323d69f45a73ef0a17a24b2e391aae141" entityID="https://sp.demo/spn1" xmlns="urn:oasis:names:tc:SAML:2.0:metadata">
+    <SPSSODescriptor AuthnRequestsSigned="true" WantAssertionsSigned="false" ID="SM34f42a0080d493569896b55764a6dcdce41b804b95" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+        <KeyDescriptor use="encryption">
+            <ns1:KeyInfo Id="SM21bfa7e7ae5600bfc16d959ec5b6fceae3c3afe7cc" xmlns:ns1="http://www.w3.org/2000/09/xmldsig#">
+                <ns1:X509Data>
+                    <ns1:X509IssuerSerial>
+                        <ns1:X509IssuerName>CN=sp.demo,OU=Federation,O=Security,C=US</ns1:X509IssuerName>
+                        <ns1:X509SerialNumber>50787328027787906081441503878939875506</ns1:X509SerialNumber>
+                    </ns1:X509IssuerSerial>
+                    <ns1:X509Certificate>MIIDODCCAiCgAwIBAgIQJjVImPz1Jq3iuaCAkw8YsjANBgkqhkiG9w0BAQQFADBHMQswCQYDVQQGEwJVUzERMA8GA1UECgwIU2VjdXJpdHkxEzARBgNVBAsMCkZlZGVyYXRpb24xEDAOBgNVBAMMB3NwLmRlbW8wHhcNMTgwMzA4MjAzMDM2WhcNMjgwMzA1MjAzMDM2WjBHMQswCQYDVQQGEwJVUzERMA8GA1UECgwIU2VjdXJpdHkxEzARBgNVBAsMCkZlZGVyYXRpb24xEDAOBgNVBAMMB3NwLmRlbW8wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCJMEplt0/fNQZZcK021MmsYEKJtVcWIGD2U0jGCiHzO7Y0aSYtebKTHzSDZGTBnh6PJVEWzQdqn7BJThJKrcUv6kIhgoxurt2WMjOguTaOEJLQEhLogt4ZRJjxQKPwQVMcbyRKG+Lq4lCYxTaZcLRFPogQpTIEK8ep4aSLL6/eg13GnFuT84+zMkVQXZK+Ovm6x1nCR/35Esqhm9gmMW9PiUDgomCxmAsTujfNo96r9TJuXAUy453KRtL8cwriU9FSlrX+5UATSVPT3QW2+DUAmU1VQQyookr2jIuXQJjGohOzOHiStQ/t69+FNO2qXGR6TjSGhzeMxbDVCy8RT7efAgMBAAGjIDAeMAwGA1UdEwEB/wQCMAAwDgYDVR0PAQH/BAQDAgWgMA0GCSqGSIb3DQEBBAUAA4IBAQCDwfshc0LmncaVKC1OQy9Mj/pMshBdQC/E71i3vNTelm4Bb1+K9RAyxFTKq35tzrRDZsn+nvWlZcN9wRdrKGU2eCUhxaeNvqauuL5zmkjhtc1l9602uvJ+7oIWaFOWr48Inu55ixYBkvkE9eoH0FWT8Yx7So7f2+t/CMbNSmWKAOzixO7ieXW7wDNNRuCKANtLONmIJhYj4VJ+EIuOwZSsHeePLLL3P21xArQ9XaEtVX/8HyWzUyV2VbBx43w3Y14DdmC6b95M919PnC8H6mLCDUHMApFFexwVjlm9wvg7HfRUgIRMcyIoYYRpJ9/VRMgAY+drSyE3+o1l41dJnar+</ns1:X509Certificate>
+                    <ns1:X509SubjectName>CN=sp.demo,OU=Federation,O=Security,C=US</ns1:X509SubjectName>
+                </ns1:X509Data>
+            </ns1:KeyInfo>
+        </KeyDescriptor>
+        <KeyDescriptor use="signing">
+            <ns2:KeyInfo Id="SM9f47058a79504db8354debc444ab6c00e7f7224389" xmlns:ns2="http://www.w3.org/2000/09/xmldsig#">
+                <ns2:X509Data>
+                    <ns2:X509IssuerSerial>
+                        <ns2:X509IssuerName>CN=sp.demo,OU=Federation,O=Security,C=US</ns2:X509IssuerName>
+                        <ns2:X509SerialNumber>50787328027787906081441503878939875506</ns2:X509SerialNumber>
+                    </ns2:X509IssuerSerial>
+                    <ns2:X509Certificate>MIIDODCCAiCgAwIBAgIQJjVImPz1Jq3iuaCAkw8YsjANBgkqhkiG9w0BAQQFADBHMQswCQYDVQQGEwJVUzERMA8GA1UECgwIU2VjdXJpdHkxEzARBgNVBAsMCkZlZGVyYXRpb24xEDAOBgNVBAMMB3NwLmRlbW8wHhcNMTgwMzA4MjAzMDM2WhcNMjgwMzA1MjAzMDM2WjBHMQswCQYDVQQGEwJVUzERMA8GA1UECgwIU2VjdXJpdHkxEzARBgNVBAsMCkZlZGVyYXRpb24xEDAOBgNVBAMMB3NwLmRlbW8wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCJMEplt0/fNQZZcK021MmsYEKJtVcWIGD2U0jGCiHzO7Y0aSYtebKTHzSDZGTBnh6PJVEWzQdqn7BJThJKrcUv6kIhgoxurt2WMjOguTaOEJLQEhLogt4ZRJjxQKPwQVMcbyRKG+Lq4lCYxTaZcLRFPogQpTIEK8ep4aSLL6/eg13GnFuT84+zMkVQXZK+Ovm6x1nCR/35Esqhm9gmMW9PiUDgomCxmAsTujfNo96r9TJuXAUy453KRtL8cwriU9FSlrX+5UATSVPT3QW2+DUAmU1VQQyookr2jIuXQJjGohOzOHiStQ/t69+FNO2qXGR6TjSGhzeMxbDVCy8RT7efAgMBAAGjIDAeMAwGA1UdEwEB/wQCMAAwDgYDVR0PAQH/BAQDAgWgMA0GCSqGSIb3DQEBBAUAA4IBAQCDwfshc0LmncaVKC1OQy9Mj/pMshBdQC/E71i3vNTelm4Bb1+K9RAyxFTKq35tzrRDZsn+nvWlZcN9wRdrKGU2eCUhxaeNvqauuL5zmkjhtc1l9602uvJ+7oIWaFOWr48Inu55ixYBkvkE9eoH0FWT8Yx7So7f2+t/CMbNSmWKAOzixO7ieXW7wDNNRuCKANtLONmIJhYj4VJ+EIuOwZSsHeePLLL3P21xArQ9XaEtVX/8HyWzUyV2VbBx43w3Y14DdmC6b95M919PnC8H6mLCDUHMApFFexwVjlm9wvg7HfRUgIRMcyIoYYRpJ9/VRMgAY+drSyE3+o1l41dJnar+</ns2:X509Certificate>
+                    <ns2:X509SubjectName>CN=sp.demo,OU=Federation,O=Security,C=US</ns2:X509SubjectName>
+                </ns2:X509Data>
+            </ns2:KeyInfo>
+        </KeyDescriptor>
+        <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://www.sp.demo:7443/affwebservices/public/saml2slo"/>
+        <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://www.sp.demo:7443/affwebservices/public/saml2slosoap"/>
+        <NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress</NameIDFormat>
+        <NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</NameIDFormat>
+        <AssertionConsumerService index="0" isDefault="false" Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://www.sp.demo:7443/affwebservices/public/saml2assertionconsumer"/>
+        <AssertionConsumerService index="1" isDefault="false" Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact" Location="https://www.sp.demo:7443/affwebservices/public/saml2assertionconsumer"/>
+    </SPSSODescriptor>
+</EntityDescriptor>

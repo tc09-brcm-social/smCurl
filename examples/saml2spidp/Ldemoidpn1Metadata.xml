@@ -1,0 +1,23 @@
+<EntityDescriptor ID="SM12d02568dfb04266418eb96db8eb9041f7f789f7e35" entityID="https://idp.demo/idpn1" xmlns="urn:oasis:names:tc:SAML:2.0:metadata">
+    <IDPSSODescriptor WantAuthnRequestsSigned="true" ID="SM1c838809ba1b9dcf90b2dd01888c2e905a41a57de6" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+        <KeyDescriptor use="signing">
+            <ns1:KeyInfo Id="SM2315f94e3aa2912def5e53395f3552f938fab3585bd" xmlns:ns1="http://www.w3.org/2000/09/xmldsig#">
+                <ns1:X509Data>
+                    <ns1:X509IssuerSerial>
+                        <ns1:X509IssuerName>CN=idp.demo,OU=Federation,O=Security,C=US</ns1:X509IssuerName>
+                        <ns1:X509SerialNumber>321888691687161026298038901373558389712</ns1:X509SerialNumber>
+                    </ns1:X509IssuerSerial>
+                    <ns1:X509Certificate>MIIDOzCCAiOgAwIBAgIRAPIpgctGnoZm2lX5wOfg+9AwDQYJKoZIhvcNAQEEBQAwSDELMAkGA1UEBhMCVVMxETAPBgNVBAoMCFNlY3VyaXR5MRMwEQYDVQQLDApGZWRlcmF0aW9uMREwDwYDVQQDDAhpZHAuZGVtbzAeFw0xODAzMDgyMDI5NDJaFw0yODAzMDUyMDI5NDJaMEgxCzAJBgNVBAYTAlVTMREwDwYDVQQKDAhTZWN1cml0eTETMBEGA1UECwwKRmVkZXJhdGlvbjERMA8GA1UEAwwIaWRwLmRlbW8wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDazGBDKS9p/UrbSVbDHDw8a33c3azgvb4mQ0PUWM60/soTHdvsUyWh378VhNWyK0qqJ359eQ2rl7T3WfhUoDzCuCiNSKt4ETfbE/X9O4LvR6Qk/qq6f0h+J5C+h9y6run0lCQz/+slC3STXraF7iq2XtydIMydbCuOUCIkj6LplOOFQFv9hiPr5BhxBvzQ7XInHWENXy1SFU7W8kfXuI76suuMVb2xhIseeFiPHltUDkgepzOulgyzstm5BOszAIItNc50JisASzzJPBV9dSfQODBVvKmBoU7PXVp6FSMhQxku8kOgm1BH6FkTiCpQOlRgPhG/FWu/nFT9fUTEl4b/AgMBAAGjIDAeMAwGA1UdEwEB/wQCMAAwDgYDVR0PAQH/BAQDAgWgMA0GCSqGSIb3DQEBBAUAA4IBAQBfIlxFvHC+bx+cn9m5zgOXMZHYiYSRqrW6gIslf+U1cKjS1c5yxbiIXhA58QXNcY0K9s4ta0mdIOX5BHeWFckHkmETDIaTNenO0uSHyj0eH3tPBeUtn9Mfbt2Hkaaa1Fg+uwJe0rnI1HztV1Gex4cgllw73vrQ16ukXE6fbfEZx2qLPR/hboSxXJWKe8XAbNRdMQAAR1lN0ouQfAdbhXDo3EeyYRsMVkaItT1JPo/Mujs57ynWM2U1LtPOduK9MCahhS62rG+sqoC3f2qQPfQHGM3O22US3lXkVp6h3hONmmM4D5JZo0qIvWQQHonDnQLYqoR2EynoH6n8/zCCq19O</ns1:X509Certificate>
+                    <ns1:X509SubjectName>CN=idp.demo,OU=Federation,O=Security,C=US</ns1:X509SubjectName>
+                </ns1:X509Data>
+            </ns1:KeyInfo>
+        </KeyDescriptor>
+        <ArtifactResolutionService index="0" isDefault="true" Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://www.idp.demo:7443/affwebservices/public/saml2ars"/>
+        <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://www.idp.demo:7443/affwebservices/public/saml2slo"/>
+        <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://www.idp.demo:7443/affwebservices/public/saml2slosoap"/>
+        <NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</NameIDFormat>
+        <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://www.idp.demo:7443/affwebservices/public/saml2sso"/>
+        <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://www.idp.demo:7443/affwebservices/public/saml2sso"/>
+        <ns2:Attribute Name="lastname" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified" xmlns:ns2="urn:oasis:names:tc:SAML:2.0:assertion"/>
+    </IDPSSODescriptor>
+</EntityDescriptor>

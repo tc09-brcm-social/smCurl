@@ -1,0 +1,296 @@
+#!/bin/bash
+LocalIDP=$1
+RemoteSP=$2
+UD=$3
+IDPJSON=$$01.json
+SPJSON=$$02.json
+bash FedIdPLocals/exist.sh "$LocalIDP" | bash FedIdPLocals/cleanse.sh > "$IDPJSON"
+STATUS=$?
+if [ "$STATUS" -ne 0 ]; then
+    >&2 echo "$LocalIDP does not exist, exiting ..."
+    exit "$STATUS"
+fi
+bash FedSPRemotes/exist.sh "$RemoteSP" | bash FedSPRemotes/cleanse.sh > "$SPJSON"
+STATUS=$?
+if [ "$STATUS" -ne 0 ]; then
+    >&2 echo "$RemoteSP does not exist, exiting ..."
+    exit "$STATUS"
+fi
+NAME=${LocalIDP}-${RemoteSP}
+>&2 echo "Checking Partnership name $NAME ..."
+if EXIST=$(bash FedSPPartnerships/exist.sh "$NAME"); then
+    >&2 echo "Partnership $NAME already exists, exiting ..."
+    exit
+fi
+>&2 echo "Partnership name $NAME checked successfully."
+LIDP=$(./jq -r '.data.Name' "$IDPJSON")
+IDPCERT=$(./jq -r '.data.DefaultSigningCertificate.path' "$IDPJSON")
+BASEURL=$(./jq -r '.data.BaseURL' "$IDPJSON")
+SLOC=$(./jq -r '.data.DefaultSLOConfirmURL' "$IDPJSON")
+RSP=$(./jq -r '.data.Name' "$SPJSON")
+SPCERTV=$(./jq -r '.data.VerificationCertificate.path' "$SPJSON")
+SPCERTE=$(./jq -r '.data.EncryptionCertificate.path' "$SPJSON")
+SPSLOREDIR=$(./jq -r '.data.SLOServices[] |
+    select(.Binding | contains ("HTTP-Redirect"))| .LocationURL' "$SPJSON")
+SPSLOSOAP=$(./jq -r '.data.SLOServices[] |
+    select(.Binding | contains ("SOAP"))| .LocationURL' "$SPJSON")
+ACSPOST=$(./jq -r '.data.RemoteAssertionConsumerServices[] |
+    select(.Binding | contains ("HTTP-POST"))| .LocationURL' "$SPJSON")
+ACSART=$(./jq -r '.data.RemoteAssertionConsumerServices[] |
+    select(.Binding | contains ("HTTP-Artifact"))| .LocationURL' "$SPJSON")
+#cat <<EOF
+#          "path": "/SmUserDirectories/${UD}"
+#  "LocalIdPEntityName": "$LIDP",
+#      "path": "${IDPCERT}"
+#  "BaseURL": "$BASEURL",
+#    "AuthenticationURL": "${BASEURL}/affwebservices/redirectjsp/redirect.jsp",
+#    "SLOConfirmURL": "$SLOC",
+#  "RemoteSPEntityName": "$RSP",
+#      "path": "${SPCERTV}"
+#      "path": "${SPCERTE}"
+#        "LocationURL": "${SPSLOREDIR}"
+#        "LocationURL": "${SPSLOSOAP}"
+#        "LocationURL": "${ACSPOST}"
+#        "LocationURL": "${ACSART}"
+#EOF
+#exit
+#  "FIPSApproved": false,
+cat <<EOF
+{
+  "type": "FedSPPartnership",
+  "Name": "${NAME}",
+  "AllowIDPToCreateUserID": false,
+  "Status": "Active",
+  "BaseURL": "$BASEURL",
+  "SkewTime": 30,
+  "Policy": {
+    "TimeRestriction": "00000000-00000000-7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f",
+    "SmUserPolicies": [
+      {
+        "type": "SmUserPolicy",
+        "FilterPath": "all",
+        "UserDirectory": {
+          "path": "/SmUserDirectories/${UD}"
+        },
+        "Exclude": false,
+        "FilterClass": "ALL"
+      }
+    ]
+  },
+  "StatusRedirect": {
+    "type": "FedStatusRedirects",
+    "InvalidMode": "NoData",
+    "UnauthorizedAccessRedirectMode": "NoData",
+    "EnableServerErrorURL": false,
+    "InvalidRequestRedirectMode": "NoData",
+    "EnableInvalidRequestURL": false,
+    "ServerErrorRedirectMode": "NoData",
+    "EnableUnauthorizedRequestURL": false,
+    "UserNotFoundMode": "NoData",
+    "UnacceptedMode": "NoData"
+  },
+  "UserDirectories": [
+    {
+      "path": "/SmUserDirectories/${UD}"
+    }
+  ],
+  "AttributeService": {
+    "type": "FedAttributeAuthorityConfig",
+    "RequireSignedQuery": false,
+    "LDAPSearchSpec": "*",
+    "ValidityDuration": 60,
+    "SignResponse": false,
+    "EnableProxiedQuery": false,
+    "Enabled": false,
+    "SignAssertion": false
+  },
+  "RemoteSPEntityName": "$RSP",
+  "LocalIdPEntityName": "$LIDP",
+  "SignatureOptions": {
+    "ArtifactSignatureOptions": "SignNeither",
+    "SLOSOAPSignatureOptions": "SignNeither",
+    "SignArtifactResponse": false,
+    "POSTSignatureOptions": "SignAssertion",
+    "RequireSignedAuthenticationRequests": true,
+    "SigningAlgorithm": "RSAwithSHA1",
+    "RequireSignedArtifactResolve": false,
+    "DisableSignatureProcessing": false,
+    "SigningPrivateKey": {
+      "path": "${IDPCERT}"
+    },
+    "VerificationCertificate": {
+      "path": "${SPCERTV}"
+    }
+  },
+  "Authentication": {
+    "EnableSessionAssurance": false,
+    "TrackDelegatedAuthenticationStatus": true,
+    "SecureAuthenticationURL": false,
+    "LocalAuthenticationType": "Basic",
+    "AuthenticationContextType": "Static",
+    "IdleTimeout": 3600,
+    "IgnoreRequestedAuthenticationContext": true,
+    "MaxTimeout": 7200,
+    "AuthenticationType": "Local",
+    "DelegatedAuthenticationType": "Query",
+    "ForceAuthenticationSessionTimeouts": false,
+    "DelegatedAuthenticationURL": " ",
+    "AuthenticationURL": "${BASEURL}/affwebservices/redirectjsp/redirect.jsp",
+    "MinimumAuthenticationLevel": 5,
+    "AllowOpenFormatCookieAuthenticationContextOverride": false,
+    "AuthenticationContextClassReference": "urn:oasis:names:tc:SAML:2.0:ac:classes:Password",
+    "OpenFormatCookieConfiguration": {
+      "type": "FedOpenCookieConfig",
+      "EnableHashMessageAuthenticationCode": false,
+      "EncryptionTransformation": "AES128/CBC/PKCS5Padding",
+      "CookieName": "DEFAULT",
+      "EncryptionPassword": " ",
+      "EnableQuotedCookie": false,
+      "SkewTime": 30
+    }
+  },
+  "Backchannel": {
+    "PartnershipBackchannelProtectionEnabled": true,
+    "LegacyBackchannelProtectionEnabled": false,
+    "Timeout": 0,
+    "Configuration": {
+      "Incoming": {
+        "type": "FedBackchannelConfig",
+        "UserName": "defaultUser",
+        "AuthenticationType": "NoAuth"
+      },
+      "Outgoing": {
+        "type": "FedBackchannelConfig",
+        "BackchannelTimeout": 300,
+        "UserName": "defaultUser",
+        "AuthenticationType": "NoAuth"
+      }
+    }
+  },
+  "SLO": {
+    "RelayStateOverridesSLOConfirmURL": false,
+    "ReuseSessionIndex": false,
+    "EnableSLOPOST": false,
+    "EnableSLOSOAP": false,
+    "SLOConfirmURL": "$SLOC",
+    "EnableSLO": true,
+    "SLOValidityDuration": 60,
+    "SLOServices": [
+      {
+        "type": "FedEndpoint",
+        "Index": 0,
+        "Binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect",
+        "IsDefault": true,
+        "LocationURL": "${SPSLOREDIR}"
+      },
+      {
+        "type": "FedEndpoint",
+        "Index": 0,
+        "Binding": "urn:oasis:names:tc:SAML:2.0:bindings:SOAP",
+        "IsDefault": false,
+        "LocationURL": "${SPSLOSOAP}"
+      }
+    ]
+  },
+  "IDPDiscovery": {
+    "EnableIDPDiscovery": false,
+    "PersistentCookie": false
+  },
+  "AssertionConfiguration": {
+    "NameIDFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified",
+    "AssertionAttributes": [
+      {
+        "type": "FedSAML2Attribute",
+        "Name": "lastname",
+        "RetrievalMethod": "SSO",
+        "EncryptFlag": false,
+        "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified",
+        "AttributeSource": {
+          "type": "FedAttributeSource",
+          "Value": "sn",
+          "NameIDType": "UserAttribute"
+        }
+      }
+    ],
+    "AttributeSource": {
+      "type": "FedAttributeSource",
+      "Value": "uid",
+      "NameIDType": "UserAttribute"
+    }
+  },
+  "EncryptionOptions": {
+    "EncryptNameIDinSOAP": false,
+    "EncryptionConfiguration": {
+      "type": "FedEncryptionConfig",
+      "EncryptAssertion": false,
+      "EncryptAttributes": false,
+      "EncryptNameID": false,
+      "EncryptionKeyAlgorithm": "rsa-v15",
+      "EncryptionBlockAlgorithm": "tripledes",
+      "EncryptionCertificate": {
+        "path": "${SPCERTE}"
+      }
+    }
+  },
+  "NameIDManagement": {
+    "Configuration": {
+      "type": "FedNameIDMgtConfig",
+      "DeleteNameID": false,
+      "EnablePostBinding": false,
+      "NotifyTimeout": 60,
+      "RetryCount": 3,
+      "EnableSOAPBinding": false,
+      "EnableNotification": false,
+      "EnableRedirectBinding": false,
+      "NotifyPassword": "{RC2}846JTkpBF8Lku73e5IHY/g==",
+      "NotificationAuthType": "NoAuth",
+      "RequireEncryptedNameID": false,
+      "SignRequest": false,
+      "EncryptNameID": false,
+      "RetryBoundary": 15,
+      "RequireSignedRequest": false,
+      "NotifyUserName": "*",
+      "SOAPTimeout": 60,
+      "SignResponse": false,
+      "RequireSignedResponse": false,
+      "AllowUserSelfService": false
+    }
+  },
+  "SSO": {
+    "AcceptIncomingAssertionConsumerServiceURL": false,
+    "EnableUserConsent": false,
+    "EnableEnhancedClientProxyProfile": false,
+    "LegacyArtifactProtectionEnabled": false,
+    "RecommendedSPSessionDuration": "AssertionValidity",
+    "CustomTimeout": 60,
+    "PersistentSessionValidationPeriod": -1,
+    "ArtifactEncoding": "URL",
+    "EnableAuthenticationRequestPost": false,
+    "PartnershipArtifactProtectionEnabled": false,
+    "EnableAuthenticationRequestRedirect": true,
+    "EnablePost": true,
+    "AllowTransactionType": "AllowBoth",
+    "EnableArtifact": false,
+    "GUIDCookieValidityDuration": 180,
+    "SSOValidityDuration": 60,
+    "EnableNegativeAuthenticationResponse": false,
+    "RemoteAssertionConsumerServices": [
+      {
+        "type": "FedEndpoint",
+        "Index": 0,
+        "Binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST",
+        "IsDefault": true,
+        "LocationURL": "${ACSPOST}"
+      },
+      {
+        "type": "FedEndpoint",
+        "Index": 1,
+        "Binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact",
+        "IsDefault": false,
+        "LocationURL": "${ACSART}"
+      }
+    ],
+    "OneTimeToUseAssertion": false
+  }
+}
+EOF
