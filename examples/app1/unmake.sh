@@ -65,7 +65,7 @@ fi
 SMAGENTGROUP=${GROUP}
 EXIST=$(bash SmAgentGroups/exist.sh "$SMAGENTGROUP")
 STATUS=$?
-if [ ! -z "$SMAGENTGROUP ] && [ "$STATUS" -ne 0 ]; then
+if [ ! -z "$SMAGENTGROUP" ] && [ "$STATUS" -ne 0 ]; then
     >&2 echo "Agent Group $SMAGENTGROUP does not exist, skipping ..."
 else
     >&2 echo "Removing Agent Group $SMAGENTGROUP"
