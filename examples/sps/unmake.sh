@@ -1,5 +1,6 @@
 #!/bin/bash
 MYPWD=$(pwd)
+. ./env.shlib > /dev/null
 cd ../..
 #
 # Agent sps-01

@@ -8,7 +8,7 @@
 # Otherwise, you can choose to modify this template for your own LDAP user directory.
 #
 MYPWD=$(pwd)
-. ./env.shlib
+. ./env.shlib > /dev/null
 cd ../..
 #
 # CA Directory
