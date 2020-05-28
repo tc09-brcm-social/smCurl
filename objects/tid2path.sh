@@ -2,15 +2,17 @@
 MYPATH=$(dirname "$0")
 TYPE=$1
 ID=$2
-if ! EXIST=$(bash "${MYPATH}/exist.sh" "$ID"); then
-    STATUS=$?
+EXIST=$(bash "${MYPATH}/exist.sh" "$ID")
+STATUS=$?
+if [[ "$STATUS" -ne 0 ]]; then
     ./jq -n '. + []'
     exit "$STATUS"
 fi
 RESP=$(echo "$EXIST" | ./jq -r '.responseType')
 if [ "$RESP" == "object" ]; then
-    OBJPATH=$(echo "$EXIST" | ./jq '"/" + "'"$TYPE"'/" + .data.Name')
-    OBJPATH=$(bash ${MYPATH}/../utils/escName.sh "$OBJPATH")
+    OBJNAME=$(echo "$EXIST" | ./jq -r '.data.Name')
+    OBJNAME=$(bash ${MYPATH}/../utils/escName.sh "$OBJNAME")
+    OBJPATH="\"/$TYPE/$OBJNAME\""
     echo "$OBJPATH" | ./jq " [ { path: . } ]"
 fi
 if [ "$RESP" == "links" ]; then
