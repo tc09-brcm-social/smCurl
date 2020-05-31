@@ -1,8 +1,9 @@
 #!/bin/bash
 NAME=$1
 MYPATH=$(dirname "$0")
-if ! EXIST=$(bash ${MYPATH}/exist.sh "$NAME"); then
-    STATUS=$?
+EXIST=$(bash ${MYPATH}/exist.sh "$NAME")
+STATUS=$?
+if [[ "$STATUS" -ne 0 ]]; then
     echo "$EXIST"
     exit "$STATUS"
 fi
