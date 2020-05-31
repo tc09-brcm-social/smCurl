@@ -15,8 +15,11 @@ POLICY=$(echo "${POLICY}" | ./jq --argjson u "$USERS" '. + { SmUserPolicies: $u}
 EO=$(echo "$DATA" | ./jq '.EncryptionOptions')
 EC=$(echo "$EO" | ./jq '.EncryptionConfiguration')
 ID=$(echo "$EC" | ./jq -r '.EncryptionCertificate.id')
-CERT=$(bash "$MYPATH/../FedCertificates/id2path.sh" "$ID" | ./jq '.[0]') 
-EC=$(echo "$EC" | ./jq --argjson c "$CERT" '. + { EncryptionCertificate: $c }')
+if [ ! "$ID" = "null" ]; then
+    # Encryption Cert is used
+    CERT=$(bash "$MYPATH/../FedCertificates/id2path.sh" "$ID" | ./jq '.[0]') 
+    EC=$(echo "$EC" | ./jq --argjson c "$CERT" '. + { EncryptionCertificate: $c }')
+fi
 EO=$(echo "$EO" | ./jq --argjson ec "$EC" ' . + { EncryptionConfiguration: $ec }')
 echo "$DATA" | \
     ./jq --argjson p "$POLICY" --argjson eo "$EO" \
