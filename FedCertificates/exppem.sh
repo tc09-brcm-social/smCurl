@@ -4,7 +4,7 @@ NAME=$1
 EXIST=$(bash "${MYPATH}/exist.sh" "$NAME")
 RESP=$(echo "$EXIST" | ./jq -r '.responseType')
 if [ "$RESP" == "error" ]; then
-    >&2 echo "$NAME does not exist."
+#    >&2 echo "$NAME does not exist."
     exit 1
 fi
 JSON=$$.json
