@@ -2,8 +2,8 @@
 HOST=$1
 PORT=$2
 ID=$3
-PWD=$4
-BASE64=$(echo -n "$ID:$PWD" | base64)
+PASS=$4
+BASE64=$(echo -n "$ID:$PASS" | base64)
 cat <<EOF
 #!/bin/bash
 RESTHOST=${HOST}
