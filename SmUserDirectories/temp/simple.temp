@@ -1,0 +1,23 @@
+#!/bin/bash
+NAME=$1
+LDAPHOSTPORT=$2
+cat <<EOF
+{
+  "EnableSecurityContext": false,
+  "Name": "${NAME}",
+  "Namespace": "LDAP:",
+  "Password": "password",
+  "RequireCredentials": true,
+  "SearchResults": 0,
+  "SearchRoot": "ou=userstore,o=mydomain",
+  "SearchScope": "SubTree",
+  "SearchTimeout": 30,
+  "SecureConnection": false,
+  "Server": "${LDAPHOSTPORT}",
+  "UseAdvancedAuthStore": false,
+  "UserLookupEnd": ")",
+  "UserLookupStart": "(uid=",
+  "Username": "uid=smadmin,ou=admins,ou=userstore,o=mydomain",
+  "type": "SmUserDirectory"
+}
+EOF
