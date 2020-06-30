@@ -1,0 +1,21 @@
+#!/bin/bash
+AHFILE=$1
+DIRNAME=$(dirname "$0")
+JSON=$$.json
+. utils/jsontokv.sh "$AHFILE"
+. utils/listtokv.sh "$attributeMapping"
+if [[ "$sslEnabled" = "NO" ]]; then
+    sslEnabled=false
+else
+    sslEnabled=true
+fi
+bash "$DIRNAME/simple.temp" name "host:port" | \
+    ./jq " . + { Name: \"$configName\" \
+	, Username: \"$userDN\"
+	, Server: \"${hostName}:${portNumber}\"
+	, UserLookupStart: \"$ldapQueryStart\"
+	, UserLookupEnd: \"$ldapQueryEnd\"
+	, SecureConnection: $sslEnabled
+	, SearchRoot: \"$baseDN\"
+	, EmailAddrAttribute: \"$email\"
+	, UniversalIDAttribute: \"$user_universalid\" }"

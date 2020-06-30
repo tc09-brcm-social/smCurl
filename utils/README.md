@@ -4,3 +4,5 @@
 * escName.sh - escape name 
 ** currently convert " " to "+", '#' to %23
 * jdelattrs.sh -- set first level attributes to "" or []
+* . utils/jsontokv.sh JSONFile -- convert a JSON File to environment variables 
+* . utils/listtokv.sh LIST -- convert a comma separated key=value to environment variables 
