@@ -8,3 +8,4 @@
 * maketemp.sh DomaiName RealmName -- make a template script from an existing domain realm
 ** only variable name is parameterized
 * read.sh DomainSpec RealmSpec -- GET the domain realm
+* update.sh DomainName RealmName JSONFileName -- update a domain realm using a JSON file
