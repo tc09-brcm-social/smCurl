@@ -7,13 +7,15 @@ SMOBJECT=$3
 OBJTYPE=SmResponses
 OBJLINK=ResponsesLink
 SMOBJ=/SmDomains/$SMDOMAIN/${OBJTYPE}/$SMOBJECT
-if ! EXIST=$(bash "$OBJTYPE"/exist.sh "$SMDOMAIN" "$SMOBJECT"); then
-    STATUS=$?
+EXIST=$(bash "$OBJTYPE"/exist.sh "$SMDOMAIN" "$SMOBJECT")
+STATUS=$?
+if [[ "$STATUS" -ne 0 ]]; then
     echo "$EXIST"
     exit "$STATUS"
 fi
-if ! READCONTAINER=$(bash "${MYPATH}/exist.sh" "$SMDOMAIN" "$SMCONTAINER"); then
-    STATUS=$?
+READCONTAINER=$(bash "${MYPATH}/exist.sh" "$SMDOMAIN" "$SMCONTAINER")
+STATUS=$?
+if [[ "$STATUS" -ne 0 ]]; then
     echo "$READCONTAINER"
     exit "$STATUS"
 fi
