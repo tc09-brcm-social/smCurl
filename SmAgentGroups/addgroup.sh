@@ -7,13 +7,15 @@ SMOBJECT=$2
 OBJTYPE=SmAgentGroups
 OBJLINK=AgentGroupsLink
 SMOBJ=/${OBJTYPE}/$SMOBJECT
-if ! EXIST=$(bash "$OBJTYPE"/exist.sh "$SMOBJECT"); then
-    STATUS=$?
+EXIST=$(bash "$OBJTYPE"/exist.sh "$SMOBJECT")
+STATUS=$?
+if [[ "$STATUS" -ne 0 ]]; then
     echo "$EXIST"
     exit "$STATUS"
 fi
-if ! READCONTAINER=$(bash "${MYPATH}/exist.sh" "$SMCONTAINER"); then
-    STATUS=$?
+READCONTAINER=$(bash "${MYPATH}/exist.sh" "$SMCONTAINER")
+STATUS=$?
+if [[ "$STATUS" -ne 0 ]]; then
     echo "$READCONTAINER"
     exit "$STATUS"
 fi
