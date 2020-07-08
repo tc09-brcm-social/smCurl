@@ -11,3 +11,4 @@
 * read.sh DomainSpec  -- GET the Domain
 * update.sh DomainName JSONFileName -- update the Domain using a JSON file
 ** this retains all existing relatioships
+* rmuser.sh DomainName UDName -- remove user directory from domain
