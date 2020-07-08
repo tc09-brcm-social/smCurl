@@ -39,5 +39,10 @@ for ((i = 0; i < j; i++)); do
     RULES=$(echo "$RULES" | ./jq --argjson r "$NR" '. += [ $r ]')
 done
 # echo debug "$RULES" | ./jq '.'
-echo "$DATA" | ./jq --argjson u "$USERS" '.SmUserPolicies = $u' | \
-    ./jq --argjson r "$RULES" '.SmPolicyLinks = $r' | ./jq -f jqlib/rmIHD.jq
+if [[ ! "$USER" == "null" ]]; then
+    DATA=$(echo "$DATA" | ./jq --argjson u "$USERS" '.SmUserPolicies = $u')
+fi
+if [[ ! "$RULE" == "null" ]]; then
+    DATA=$(echo "$DATA" | ./jq --argjson r "$RULES" '.SmPolicyLinks = $r')
+fi
+echo "$DATA" | ./jq -f jqlib/rmIHD.jq
