@@ -1,3 +1,4 @@
+* env.shlib -- see env.shlib for detail Environment Variables
 * wrapx5c.sh X5CCert -- wrap the Certificate that is commonly seen as x5c
 	* with proper PEM BEGIN and END. This output is commonly redirected to a file
 * for save, rename, copy.
@@ -6,4 +7,5 @@
 	* this retains all existing relationships
 * search.sh CertPEMFileName -- find the CertPath of a PEMFile
 	* use SHA1 fingerprint to look for the path of an imported certificate.
+* selfsigned.sh CertName FQDN -- password MYCERPASS in env.shlib
 * usedby.sh CertName -- show used by of a Cert
