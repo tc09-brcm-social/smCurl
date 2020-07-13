@@ -6,3 +6,4 @@
 	* this retains all existing relationships
 * search.sh CertPEMFileName -- find the CertPath of a PEMFile
 	* use SHA1 fingerprint to look for the path of an imported certificate.
+* usedby.sh CertName -- show used by of a Cert
