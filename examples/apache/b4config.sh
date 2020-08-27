@@ -11,6 +11,7 @@ SMACO=$WAACO
 if EXIST=$(bash SmAgentConfigs/exist.sh "$SMACO"); then
     JSON=$$.json
     echo "$EXIST" | ./jq '.data' | bash SmAgentConfigs/cleanse.sh | \
+        bash SmAgentConfigs/jsetattr.sh AllowLocalConfig 'yes' | \
         bash SmAgentConfigs/jsetattr.sh LogoffUri '%2Flogout.html' | \
         bash SmAgentConfigs/jaddattr.sh LogoffUri '%2Flogoff%2Flogoff.html' \
         > "$JSON"
