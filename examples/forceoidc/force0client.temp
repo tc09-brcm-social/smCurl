@@ -1,0 +1,7 @@
+#!/bin/bash
+NAME=$1
+APNAME=$2
+TENANT=$3
+URLSUFFIX=$4
+REDIR=$(./jq -n "[\"https://login.salesforce.com/services/authcallback/$TENANT/$URLSUFFIX\"]")
+bash FedOIDCClients/temp/azcode.temp "$NAME" "$APNAME" "${REDIR}"
