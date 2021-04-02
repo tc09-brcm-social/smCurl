@@ -1,0 +1,42 @@
+#!/bin/bash
+NAME=$1
+APNAME=$2
+REDIR=$3
+cat <<EOF
+{
+  "type": "FedOIDCClient",
+  "Name": "${NAME}",
+  "DisableConsentScreen": true,
+  "RegenerateClientSecret": false,
+  "EncryptUserInfo": false,
+  "RedirectURI": ${REDIR},
+  "Description": "OIDC Client Created Using Temmplate $0",
+  "ResponseTypes": [
+    "Code"
+  ],
+  "ApplicationType": "CONFIDENTIAL",
+  "EncryptIDToken": false,
+  "Scopes": [
+    "openid",
+    "profile",
+    "email"
+  ],
+  "SendUserInformationInIDToken": true,
+  "GenerateAccessTokeninJWT": false,
+  "AccessTokenExpiry": 300,
+  "PopulateSMSessionInIDToken": false,
+  "SendIDTokenWithRefreshToken": false,
+  "IDTokenExpiry": 300,
+  "Enabled": true,
+  "ClientAuthentication": "CLIENT_SECRET_POST",
+  "UseClientKeysForEncryption": false,
+  "GrantTypes": [
+    "authorization_code"
+  ],
+  "EnablePKCE": false,
+  "EnableWellKnownConfig": true,
+  "AdminConfig": {
+    "path": "/FedOIDCAdminConfigs/${APNAME}"
+  }
+}
+EOF
