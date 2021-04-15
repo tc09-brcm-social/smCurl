@@ -5,5 +5,5 @@ VALUE=$3
 if ! grep -qs "^${KEY}=" "$FILE" ; then
     echo "$KEY=" >> "$FILE"
 fi
-sed -i -e "s#^${KEY}=.*#${KEY}=${VALUE}#" "${FILE}"
+sed -i -e "s#^${KEY}=.*#${KEY}=\"${VALUE}\"#" "${FILE}"
 echo "${VALUE}"
