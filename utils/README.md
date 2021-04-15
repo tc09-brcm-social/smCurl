@@ -6,3 +6,4 @@
 * jdelattrs.sh -- set first level attributes to "" or []
 * . utils/jsontokv.sh JSONFile -- convert a JSON File to environment variables 
 * . utils/listtokv.sh LIST -- convert a comma separated key=value to environment variables 
+* setkeyvalue.sh FILENAME KEY VALUE -- set KEY=VALUE in a file
