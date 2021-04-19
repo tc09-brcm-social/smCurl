@@ -1,0 +1,10 @@
+#!/bin/bash
+DN=$1
+ATTR=$2
+VALUE=$3
+cat <<EOF
+dn: ${DN}
+changetype: modify
+replace: ${ATTR}
+${ATTR}: ${VALUE}
+EOF
