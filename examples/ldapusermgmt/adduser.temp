@@ -1,0 +1,20 @@
+#!/bin/bash
+ID=$1
+LNAME=$2
+FNAME=$3
+MAIL=$4
+PASS=$5
+cat <<EOF
+dn: uid=${ID},ou=Users,ou=userstore,o=mydomain
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+uid: ${ID}
+cn: ${ID}
+sn: ${LNAME}
+givenName: ${FNAME}
+mail: ${MAIL}
+userPassword: ${PASS}
+departmentNumber: EndUser
+EOF

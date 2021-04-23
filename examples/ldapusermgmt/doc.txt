@@ -1,0 +1,52 @@
+	By Thomas Cheng - yihhwa.cheng@broadcom.com
+
+There are many SiteMinder password change use cases. In this article, we are focusing on just the initial password change. The initial passwords could be designated by the users themselves or assigned by the system that creates the user accounts. When a user decides his/her own initial password, there is often no need to worry about changing the password right away and hence we only focus on the initial password that is assigned by a system or reset by an administrator.
+
+SiteMinder Password Services
+The core SiteMinder password services include the form credential collectors (FCC) used to collect, apply the applicable credentials and password policies to potentially impose the password rules upon different user populations in addition to the possible native user directory password policies.
+
+SiteMinder smpwservices.fcc
+A SiteMinder FCC file uses the file extension .fcc and has a MIME type mapping automatically set up by the SiteMinder agent configuration wizard. This MIME type instructs the SiteMinder Web Agent to process an FCC file as a form credential collector. Being a form credential collector, an FCC file handles the login activities for a SiteMinder protected Web application. In particular, SiteMinder agent installation deploys an out-of-the-box smpwservices.fcc as a default and sample that handles the various password services it supports. If you need to change this rather complex smpwservices.fcc, it is recommended that you copy it to a different file name and modify the new file instead.
+
+SiteMinder Password Policies
+The smpwservices.fcc and its derivatives do not actually function on their own. Rather, they are usually driven by either an explicit link or by the applicable SiteMinder password policies.
+
+To enable SiteMinder password services, one of the pre-requisites is to configure some of the well-known attributes of a SiteMinder User Directory. These attributes include "Universal ID", "Disabled Flag", "Password", "Password Data", "Anonymous ID", "Email", and "Challenge/Response". The "Disabled Flag" is particular important for us as it is used to store the "disable" and "force password" bits. With approprate privileges, a SiteMinder administrator can then use the "Manage User Accounts" function under "Administrator/Users" on the Admin UI to disable, enable, force password change and clear password change.
+
+SiteMinder Password Policies can be used to further the configuration of the password complexities, histories, and expiration settings. If you have the interest, we would suggest that you consult the SiteMinder product document to learn more about them. In this article, we simply want to point out that you would need to create a password policy in order to specify and use a non-default password service FCC file.
+
+Initial Password Change Worklow
+When a user account is being created or a password is being reset, if we choose not to ask the users to specify their own passwords, then the password could be either generated or even randomly assigned by an administrator. With the "Disabled Flag" of a SiteMinder User Direcory is properly assigned, the users can then be forced to change their passwords the first time they use their new passwords to login to SiteMinder protected applications when the "Disabled Flag" is also set to "Force Password Change."
+
+The new password would certainly needs to be communicated to the user so this flow can continue.
+
+When the password change is triggered by a successful login, the default smpwservices.fcc displays the user ID and asks the user to supply the current "Old Password" and provide a "New Password". This is because the password services is implemented to require the FCC to collect the user ID and current password to allow a new password to be set.
+
+Frictionless SiteMinder Initial Password Change
+With the recent "Frictionless Access" buzz, asking users to enter their user ID and then passwords they do not know multiple time seems to be a lot of friction. There are suggestion that since the new password needs to be communicated to the user, we may as well just send the user a message that include a Web link for the user to click on to trigger the initial password change.
+
+Compute the Password Change Link Custom Utility
+SiteMinder Password Services offer a "User-initialted Password Changes" concept. Using this SiteMinder supported concept, this Web link points to an FCC is computed. Specifically, this link needs to include the following query parameters:
+
+SMENC: for internationational support
+USERNAME: the user ID
+SMAUTHREASON: value 34 for password self change
+SMANGENTNAME:  the SiteMinder Agent Name of the Web Server
+TARGET: a SiteMinder protected landing page
+plus the initial password in some fashion.
+
+Customized smpwservices FCC
+It is recommended to copy the out-of-the-box smpwservices.fcc and use a different fcc file name and have it deployed on the SiteMinder Agent machine that is to offer this service. The link to this new FCC is recommended to be set in the SiteMinder Password Policies too. This new FCC needs to work with the method the Password Change Link is computed so that the JavaScript embedded in it is able to retrieve the password from the link and place both the user ID and password in the right form fields and only asks the user to supply the new password.
+
+Reversible Password Hash
+A password embedded in a Web link is going to cause a lot of concerns. By using the "Security by Obscurity" principle, a workable approach is to embed the password using a reversible hash. This way the computed Web link could use an obscured query parameter to carry this hashed password payload and the custom FCC can use the JavaScript functions to reverse it back to the clear and set it in the proper password field. The reversible hash function becomes the shared secret between the custom FCC and the password change link utility.
+
+Custom smpwservices FCC specific
+To be more specific, by using SMAUTHREASON=34, the portion of the smpwservices.fcc that needs to modified to create this custom FCC is the JavaScript code block that starts with the following:
+
+ 
+
+//Auth Reason = 34 - User self password change
+    else if ($$smauthreason$$ == 34)
+      {
+By adding more logic and code within this block, you should be able to compute the password into the clear, hide the user ID and current password from the user and only ask the user to supply the new password and confirmation to provide a less friction initial password change experience.
