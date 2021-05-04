@@ -5,5 +5,7 @@
 	* ---
 	* from >     private final String SSOURL = "redirectURL";
 	* deploy it under the affwebservices/redirectjsp
+* standard.temp APName UserDirectoryName CertificateName BaseURL
+	* This template contains the hints of the OIDC Standard Claims
 * sample.temp APName UserDirectoryName CertificateName BaseURL
 ** This sample.temp uses the oidc.jsp and the BaseURL to form the Authentication URL
