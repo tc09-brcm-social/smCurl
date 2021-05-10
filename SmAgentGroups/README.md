@@ -1,4 +1,6 @@
 * addagent.sh AgentGroupName AgentName -- add an agent to an agent group
+* addAgent2Group.sh AgentGroupName AgentName -- add an agent to an agent group
+	* This is the same as addagent.sh
 * addgroup.sh AgentGroupName GroupName -- add an agent group to an agent group
 * cleanse.sh -- clean up a JSON object for create.sh to use
 * create.sh JSONFileName -- create an Agent Group using a JSON file
