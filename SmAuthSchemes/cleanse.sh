@@ -1,2 +1,2 @@
 #!/bin/bash
-./jq -S 'del(.id)'
+./jq -f jqlib/rmIHD.jq
