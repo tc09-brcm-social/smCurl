@@ -1,0 +1,12 @@
+dn: uid=eu1,ou=Users,ou=userstore,o=mydomain
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+uid: eu1
+cn: eu1
+sn: Enduser
+givenName: One
+mail: eu1@ssprest.com
+userPassword: password
+departmentNumber: EndUser

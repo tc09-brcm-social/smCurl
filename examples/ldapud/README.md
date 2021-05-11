@@ -10,3 +10,4 @@ LDAP User Directory utilities
 * bash addldap.sh FILE -- ldapadd
 * bash moduser.temp DN ATTR VALUE -- modify a single attr for a DN
 * bash deleteldap.sh LDAPFilter -- ldapdelete
+* add.ldif -- an example file for addldap
