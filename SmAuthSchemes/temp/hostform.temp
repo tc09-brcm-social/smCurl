@@ -1,0 +1,28 @@
+#!/bin/bash
+NAME=$1
+BASEURL=$2
+cat <<EOF
+{
+  "type": "SmAuthScheme",
+  "Name": "${NAME}",
+  "IgnorePwCheck": false,
+  "IsTemplate": false,
+  "Param": "${BASEURL}/siteminderagent/forms/login.fcc;ACS=0;REL=0",
+  "Library": "smauthhtml",
+  "AllowSaveCreds": false,
+  "Level": 5,
+  "IsRadius": false,
+  "IsUsedbyAdmin": false,
+  "AllowAuthLevelOverride": false,
+  "PersistSessionVars": false,
+  "SupportsValidateIdentity": false,
+  "IPCheck": false,
+  "AuthSchemeType": "HTMLForm",
+  "SmSAMLv2IdPs": [],
+  "SmSAMLv1IdPs": [],
+  "SmWSFEDIdPs": [],
+  "SmXMLDSigIdPs": [],
+  "SmWSSecurityIdPs": [],
+  "SmXMLDCCIdPs": []
+}
+EOF

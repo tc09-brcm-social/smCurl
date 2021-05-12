@@ -1,3 +1,4 @@
+* bash hostform.temp Name BaseURL -- non-relative login.fcc template
 * bash formauth.temp Name -- relative login.fcc template 
 * bash *fpform.temp Name Path -- full path form Auth Scheme
 * bash jwtauth.temp Name CertificateName -- sample JWT Auth Scheme template 
