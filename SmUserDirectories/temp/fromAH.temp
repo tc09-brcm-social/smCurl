@@ -11,7 +11,7 @@ else
 fi
 bash "$DIRNAME/simple.temp" name "host:port" | \
     ./jq " . + { Name: \"$configName\" \
-	, Username: \"$userDN\"
+	, Username: \"$bindDN\"
 	, Server: \"${hostName}:${portNumber}\"
 	, UserLookupStart: \"$ldapQueryStart\"
 	, UserLookupEnd: \"$ldapQueryEnd\"

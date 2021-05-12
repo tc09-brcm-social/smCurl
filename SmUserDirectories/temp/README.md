@@ -5,3 +5,4 @@
 * fromAH.temp LDAPconfigJSONFile -- a template that uses a VIP AuthHub LDAPconfig JSON file
 	* to create a SmUserDirectory JSON payload.
 	* Further processing is still needed to provide at least the Password value.
+	* the bindDN has changed since Mar 21 build
