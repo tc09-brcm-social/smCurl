@@ -18,10 +18,10 @@ cat <<EOF
   "ProcessAuthEvents": true,
   "ProcessAzEvents": true,
   "MaxTimeout": 7200,
-  "IdleTimeout": 0,
+  "IdleTimeout": 3600,
   "SyncAudit": false,
   "SessionType": "Peristent",
-  "SessionDrift": -1,
+  "SessionDrift": 60,
   "type": "SmRealm"
 }
 EOF
