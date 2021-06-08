@@ -1,6 +1,17 @@
 # examples/ldapusermgmt
 This uses the ldapud to implement the "Manage User Accounts"
 functions on the Admin UI and others.
+* Getting Started
+	* Minimally modify UD and Password in the env.shlib
+	* UD is an user directory object in the SiteMinder
+	* BINDPWD is in the format of ldap password authentication
+	* change only the password part.
+	* When either the BINDDN or BASEDN is empty, they
+	* are retrieved from SiteMinder.
+* Frictionless Password Reset
+	* will need to modify the environment variables
+	* used by selfpwdlink
+	* see doc.txt for more details.
 * env.shlib - take a look at the ldapud/env.shlib to
 	* customize some of the values in the env.shlib
 	* for your own customization
@@ -17,7 +28,7 @@ functions on the Admin UI and others.
 	* needs to be deployed under the Web Agent forms 
 * smpwservices.fcc --
 	* the default password service fcc captured from
-	* siteminder web agent installtion
+	* siteminder web agent installation
 * bash selfpwdlink.sh id password
 	* print out self password reset link
 * doc.txt - a high-level document about self password reset
