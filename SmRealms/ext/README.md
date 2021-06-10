@@ -5,3 +5,5 @@
 	* toggle the persistency of an existing realm
 	* note that a persist realms is required to have
 	* both the idle timeout and validation period enabled
+* setIdleTime.sh domain realm value
+* setMaxTimeout.sh domain realm value
