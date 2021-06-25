@@ -1,7 +1,6 @@
 #!/bin/bash
 MYPWD=$(pwd)
 . ./env.shlib "${MYPWD}"
-cd ../..
 if ! EXIST=$(bash FedOIDCAdminConfigs/exist.sh "$APNAME") ; then
     >&2 echo "Getting ready to create Authorization Provider $APNAME"
     if ! EXIST=$(bash SmUserDirectories/exist.sh "$APUD") ; then
