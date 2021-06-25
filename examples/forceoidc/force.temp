@@ -2,7 +2,7 @@
 NAME=$1
 UD=$2
 CERT=$3
-BASEURL=$4
+AUTHURL=$4
 cat <<EOF
 {
   "type": "FedOIDCAdminConfig",
@@ -10,7 +10,7 @@ cat <<EOF
   "AuthorizationServerBaseURL": "$BASEURL",
   "MinimumAuthenticationLevel": 5,
   "AuthenticationType": "LOCAL",
-  "AuthenticationURL": "$BASEURL/affwebservices/redirectjsp/oidc.jsp",
+  "AuthenticationURL": "$AUTHURL",
   "SignUserInfo": false,
   "EncryptIDToken": false,
   "SignIDToken": true,

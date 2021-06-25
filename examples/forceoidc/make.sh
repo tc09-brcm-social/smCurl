@@ -14,7 +14,7 @@ if ! EXIST=$(bash FedOIDCAdminConfigs/exist.sh "$APNAME") ; then
         bash FedCertificates/ext/selfsigned.sh "$APSCERT" "$APSHOST"
     fi
     JSON=$$.json
-    bash "$APTEMP" "$APNAME" "$APUD" "$APSCERT" "$APBASEURL" | \
+    bash "$APTEMP" "$APNAME" "$APUD" "$APSCERT" "$APAUTHURL" | \
         ./jq '.SignUserInfo=false' > "$JSON"
     EXIST=$(bash FedOIDCAdminConfigs/create.sh "$JSON")
 fi
