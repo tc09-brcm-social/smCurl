@@ -92,10 +92,10 @@ STATUS=$?
 if [ "$STATUS" -ne 0 ]; then
     APPVDIR=${VDIR}
     JSON=$$.json
-    if [ -z "$AGENT" ]; then
-        bash "SmRealms/temp/realmAG0.temp" "$SMREALM" "$APPVDIR" "$SMAGENTGROUP" "$SMAUTH" > "$JSON"
-    else
+    if [ -z "$GROUP" ]; then
         bash "SmRealms/temp/realm0.temp" "$SMREALM" "$APPVDIR" "$SMAGENT" "$SMAUTH" > "$JSON"
+    else
+        bash "SmRealms/temp/realmAG0.temp" "$SMREALM" "$APPVDIR" "$SMAGENTGROUP" "$SMAUTH" > "$JSON"
     fi
     EXIST=$(bash SmRealms/create.sh "$SMDOMAIN" "$JSON")
 fi
