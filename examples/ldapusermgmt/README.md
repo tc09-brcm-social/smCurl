@@ -21,6 +21,7 @@ functions on the Admin UI and others.
 * bash newpwd.sh username newpassword
 * bash forcepwd.sh username -- force password change
 * bash clearpwd.sh username -- clear password change
+* bash searchuser.sh username -- dump the ldif of the user
 * bash adduser.sh username lastname firstname emailaddress
 	* it create a user and show the self password service link.
 	* adduser.temp is the template used to create the user
