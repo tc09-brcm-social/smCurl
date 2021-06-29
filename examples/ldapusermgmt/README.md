@@ -36,3 +36,4 @@ functions on the Admin UI and others.
 * bash selfpwdlink.sh id password
 	* print out self password reset link
 * doc.txt - a high-level document about self password reset
+* ldif2json.awk - an open source ldif2json 
