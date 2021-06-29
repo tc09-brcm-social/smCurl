@@ -7,8 +7,7 @@ MAIL=$4
 PASS=p$$
 cd ../..
 SSOHOME=$(pwd)
-. "$DIRNAME/env.shlib"
-adjustldapud
+. "$DIRNAME/env.shlib" "${DIRNAME}"
 EXIST=$(bash "SmUserDirectories/ext/getattrs.sh" "$UD"); STATUS=$?
 if [[ "$STATUS" != 0 ]]; then
     echo "$EXIST" | ./jq '.'

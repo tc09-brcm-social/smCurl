@@ -4,9 +4,7 @@ NEWPWD=$2
 DIRNAME=$(cd $(dirname "$0"); pwd)
 cd ../..
 SSOHOME=$(pwd)
-. "${DIRNAME}/env.shlib"
-adjustldapud
-
+. "${DIRNAME}/env.shlib" "${DIRNAME}"
 . SmUserDirectories/ext/env.shlib
 EXIST=$(bash "SmUserDirectories/ext/getattrs.sh" "$UD"); STATUS=$?
 if [[ "$STATUS" != 0 ]]; then
