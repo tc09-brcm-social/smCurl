@@ -4,7 +4,10 @@ DIRNAME=$(cd $(dirname "$0"); pwd)
 LNAME=$2
 FNAME=$3
 MAIL=$4
-PASS=p$$
+PASS=$5
+if [[ -z "$PASS" ]]; then
+    PASS=p$$
+fi
 cd ../..
 SSOHOME=$(pwd)
 . "$DIRNAME/env.shlib" "${DIRNAME}"
