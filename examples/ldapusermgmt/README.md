@@ -21,6 +21,7 @@ functions on the Admin UI and others.
 * bash userstatus.sh username -- return status value
 * bash enable.sh username
 * bash disable.sh username
+* bash modifyuser.sh username attribute value
 * bash newpwd.sh username newpassword
 * bash forcepwd.sh username -- force password change
 * bash clearpwd.sh username -- clear password change
