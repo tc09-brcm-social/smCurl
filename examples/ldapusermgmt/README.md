@@ -8,6 +8,9 @@ functions on the Admin UI and others.
 	* change only the password part.
 	* When either the BINDDN or BASEDN is empty, they
 	* are retrieved from SiteMinder.
+* env.shlib
+	* uses utils/setkeyvalue.sh and hence needs to be invoked at cassoCurl Home
+	* if source when not at the current directory . "${DIR}/env.shlib" "${DIR}"
 * Frictionless Password Reset
 	* will need to modify the environment variables
 	* used by selfpwdlink
