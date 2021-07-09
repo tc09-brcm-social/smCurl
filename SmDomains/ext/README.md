@@ -4,3 +4,5 @@
 ** this retains all existing relatioships
 * save.sh DomainName  -- clone existing Domain using name.time as the new name
 ** only cloning the domain level info including user directory association
+* addUserDirectory.sh DomainName UserDirectoryName
+* rmUserDirectory.sh DomainName UserDirectoryName
