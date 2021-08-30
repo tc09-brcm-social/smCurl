@@ -53,8 +53,8 @@ fi
 SMAGENT=${AGENT}
 EXIST=$(bash SmAgents/exist.sh "$SMAGENT")
 STATUS=$?
-if [ ! -z "$SMAGENT" ] && [ "$STATUS" -ne 0 ]; then
-    >&2 echo "Agent $SMAGENT does not exist, skipping ..."
+if [ "$SMAGENT" == "" ] || [ "$STATUS" -ne 0 ]; then
+    >&2 echo "Agent $SMAGENT not specified or does not exist, skipping ..."
 else
     >&2 echo "Removing Agent $SMAGENT"
     bash SmAgents/delete.sh "$SMAGENT"
@@ -65,8 +65,8 @@ fi
 SMAGENTGROUP=${GROUP}
 EXIST=$(bash SmAgentGroups/exist.sh "$SMAGENTGROUP")
 STATUS=$?
-if [ ! -z "$SMAGENTGROUP" ] && [ "$STATUS" -ne 0 ]; then
-    >&2 echo "Agent Group $SMAGENTGROUP does not exist, skipping ..."
+if [ "$SMAGENTGROUP" == "" ] || [ "$STATUS" -ne 0 ]; then
+    >&2 echo "Agent Group $SMAGENTGROUP not specified or does not exist, skipping ..."
 else
     >&2 echo "Removing Agent Group $SMAGENTGROUP"
     bash SmAgentGroups/delete.sh "$SMAGENTGROUP"
