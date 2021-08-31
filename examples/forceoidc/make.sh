@@ -13,7 +13,7 @@ if ! EXIST=$(bash FedOIDCAdminConfigs/exist.sh "$APNAME") ; then
         bash FedCertificates/ext/selfsigned.sh "$APSCERT" "$APSHOST"
     fi
     JSON=$$.json
-    bash "$APTEMP" "$APNAME" "$APUD" "$APSCERT" "$APAUTHURL" | \
+    bash "$APTEMP" "$APNAME" "$APUD" "$APSCERT" "$APBASEURL" "$APAUTHURL" | \
         ./jq '.SignUserInfo=false' > "$JSON"
     EXIST=$(bash FedOIDCAdminConfigs/create.sh "$JSON")
 fi
@@ -26,7 +26,8 @@ if ! EXIST=$(bash FedOIDCClients/exist.sh "$CLIENTNAME") ; then
     EXIST=$(bash FedOIDCClients/create.sh "$JSON")
 fi
 echo "$EXIST" | ./jq '.data'
->&2 echo "Information to configure/verify on your force.com Auth. Provider Configuration:"
+>&2 echo "*** Use the following Information "
+>&2 echo "*** to configure force.com Auth. Provider:"
 ISSUER=$(echo "$EXIST"| ./jq -r '.data.Endpoints.Token' | sed 's#/token$##')
 echo "$EXIST" | >&2 ./jq --arg issuer "$ISSUER" --arg suffix "$URLSUFFIX" '{
     "URL Suffix": $suffix,
@@ -39,8 +40,3 @@ echo "$EXIST" | >&2 ./jq --arg issuer "$ISSUER" --arg suffix "$URLSUFFIX" '{
     "Send client credentials in header": false,
     "Include Consumer Secret in API Responses": true,
     "Callback URL": .data.RedirectURI }'
->&2 echo "OIDC Exercising URLs are:"
-CALLBACK=$(echo "$EXIST" | ./jq -r '.data.RedirectURI')
->&2 echo "Test-Only Init URL:" $(echo "$CALLBACK" | sed 's#authcallback#auth/test#')
->&2 echo "SSO Init URL:" $(echo "$CALLBACK" | sed 's#authcallback#auth/sso#')
->&2 echo "User Linking Init URL:" $(echo "$CALLBACK" | sed 's#authcallback#auth/link#')

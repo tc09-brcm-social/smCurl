@@ -2,7 +2,8 @@
 NAME=$1
 UD=$2
 CERT=$3
-AUTHURL=$4
+BASEURL=$4
+AUTHURL=$5
 cat <<EOF
 {
   "type": "FedOIDCAdminConfig",
