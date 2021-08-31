@@ -29,6 +29,9 @@ functions on the Admin UI and others.
 * bash adduser.sh username lastname firstname emailaddress optionalPassword
 	* it create a user and show the self password service link.
 	* adduser.temp is the template used to create the user
+* bash newuser.sh username lastname firstname emailaddress optionalPassword
+	* This is the same as adduser.sh except that it does not
+	* set password state and no self password service link either
 * ag.fcc -- a sample FCC that works with selfpwdlink.sh
 	* needs to be deployed under the Web Agent forms 
 * smpwservices.fcc --
