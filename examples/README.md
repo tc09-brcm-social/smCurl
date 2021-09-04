@@ -1,8 +1,11 @@
 # examples
 There examples were created over several generations of this framework.
-As a result, the tatics used to develop each of them could be different.
+As a result, the tatics used to develop each of them could be very different.
 Over time, they will be revised using a more consistent approach.
-Currently, app1 is a good example that reflects the current thinking.
+ldapusermgmt is a good example that reflects the current thinking.
+It utilizes a far more complicated env.shlib and "git checkout" to 
+retrieve original env.shlib under ldapud to avoid anomalies created
+by earlier examples.
 The current implementation of SAML2 Metadata import scripts needed by
 saml2idpsp and saml2spidp requires xml2json utility available
 at https://www.npmjs.com/package/xml2json-cli.
@@ -20,6 +23,14 @@ thirdparty tools.
 	* realm that uses the auth scheme and protected by agent/agent group
 	* and policy that ties all users to allowgetpost rule of the realm.
 	* The names of these objects are in the changable env.shlib file.
+* forceoidc -- an example script that uses SiteMinder as an OIDC Provider
+	* to single sign-on to SalesForce
+* ldapud -- contains a set facilities to simplify the management interface of
+	* your LDAP user directory.
+	* It also checks the availability of ldapsearch command
+	* and attempt to use yum install to install the openldap-clients.
+* ldapusermgmt -- utilizes ldapud in an attempt to implement the
+	* user management facilities seen on the regular SiteMinder AdminUI.
 * redirectjsp -- sample script that create domain policies to protect
 	* the Authentication URL redirecjsp used with Federation use cases.
 	* It actually modify the env.shlib of the app1 examples and
