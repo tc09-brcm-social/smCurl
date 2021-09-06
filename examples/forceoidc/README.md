@@ -23,6 +23,12 @@ and obtain information used to configure Auth. Providers on force.com.
 	* the default Default Web Server Host Name, Web Server Base URL
 	* Access Gateway Host Name, Access Gateway Base URL,
 	* and the Default User Directory name
+* oidc.jsp:
+	* This is the oidc.jsp used in this example.
+	* It is slightly modified from the oauth.jsp comes with
+	* the standard Access Gateway distribution.
+	* If you want to use it, deploy it under the
+	* affwebservices/redirectjsp.
 * make.sh
 	* if not exist, create Authorization Provider,
 	* Authorization Provider Signing Certificate,
