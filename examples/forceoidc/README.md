@@ -1,4 +1,4 @@
-# examples/auth0oidc
+# examples/forceoidc
 This example requires git client to work.
 Salesforce OIDC Authorization Code Flow Configuration.
 Modify the env.shlib then run bash make.sh to configure SiteMinder 
@@ -18,7 +18,11 @@ and obtain information used to configure Auth. Providers on force.com.
 	* See env.shlib for details
 	* # Setup the "redirectjsp Protection Policy" Section in env.shlib
 	* See env.shlib for details
-* See env.shlib for configuration detail
+* ../../env.shlib
+	* This example also uses ../../env.shlib to obtain
+	* the default Default Web Server Host Name, Web Server Base URL
+	* Access Gateway Host Name, Access Gateway Base URL,
+	* and the Default User Directory name
 * make.sh
 	* if not exist, create Authorization Provider,
 	* Authorization Provider Signing Certificate,
