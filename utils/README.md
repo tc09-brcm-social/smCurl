@@ -8,3 +8,4 @@
 * . utils/listtokv.sh LIST -- convert a comma separated key=value to environment variables 
 * setkeyvalue.sh FILENAME KEY VALUE -- set KEY=VALUE in a file
 * getcert.sh hostname optionalPortNumber -- obtain https server certificate
+* token.sh -- display the current Bearer Token and its seconds to expire
