@@ -10,4 +10,5 @@ RESTHOST=${HOST}
 RESTPORT=${PORT}
 OPT=
 TOKEN=\$(curl \${OPT} --header "host: \${RESTHOST}" -k --silent -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --header 'Authorization: Basic ${BASE64}' "https://\${RESTHOST}:\${RESTPORT}/ca/api/sso/services/login/v1/token" | ./jq -r '.sessionkey')
+AUTHN="Authorization: Bearer \${TOKEN}"
 EOF
