@@ -1,5 +1,23 @@
 # cassoCurl
 
+* This is release 3a of this framework.
+	* It is an emergency release just to address the issue
+	* of creating a RestAPI session with every single 
+	* RestAPI endpoint operation.
+	* This is done by providing a new authn module which
+	* will only create a RestAPI session every 15 mins.
+	* As a result, it helps dramatically improve the performance
+	* for certain high level operations that require invoking
+	* multiple endpoint calls.
+	* It also helps address the issue of consuming so much JVM
+	* memory in a short period of time and causing the RestAPI server
+	* to fail.
+	* To utilize this new authn module, you will need to either
+	* recreate your authn using the authn.sample or re-run the
+	* "bash utils/makeauthn.sh".
+	* bash utils/token.sh now display the Bearer token required for
+	* each endpoint operation and the seconds to expire info of the
+	* Bearer token.
 * This is release 3 of this framework.
 	* This package is distributed through the Broadcom Community website.
 	* Starting with this release, we now embrace the usage of git client
