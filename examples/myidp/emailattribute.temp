@@ -1,0 +1,32 @@
+#!/bin/bash
+NAME=$1
+FQDN=$2
+SHORTID=$3
+FEDBASE=$4
+CERT=$5
+cat <<EOF
+{
+  "type": "FedIdPLocal",
+  "Name": "${NAME}",
+  "Description": "created using template $0",
+  "BaseURL": "${FEDBASE}",
+  "IdPID": "https://${FQDN}/${SHORTID}",
+  "NameIDFormat": [
+    "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress",
+    "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified"
+  ],
+  "RequireSignedAuthnRequests": false,
+  "SupportedAssertionAttributes": [
+    {
+      "type": "FedSAML2Attribute",
+      "Name": "EMAIL",
+      "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified",
+      "EncryptFlag": false,
+      "RetrievalMethod": "SSO"
+    }
+  ],
+  "DefaultSigningCertificate": {
+    "path": "/FedCertificates/${CERT}"
+  }
+}
+EOF
