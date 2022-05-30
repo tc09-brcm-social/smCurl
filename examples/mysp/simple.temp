@@ -1,0 +1,27 @@
+#!/bin/bash
+NAME=$1
+FQDN=$2
+SHORTID=$3
+FEDBASE=$4
+SIGNCERT=$5
+ENCCERT=$6
+cat <<EOF
+{
+  "type": "FedSPLocal",
+  "Name": "${NAME}",
+  "Description": "Local SP created using $0",
+  "SPID": "http://${FQDN}/${SHORTID}",
+  "NameIDFormat": [
+    "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress",
+    "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified"
+  ],
+  "SignAuthnRequests": true,
+  "BaseURL": "${FEDBASE}",
+  "SigningPrivateKey": {
+    "path": "/FedCertificates/${SIGNCERT}"
+  },
+  "DecryptionPrivateKey": {
+    "path": "/FedCertificates/${ENCCERT}"
+  }
+}
+EOF
