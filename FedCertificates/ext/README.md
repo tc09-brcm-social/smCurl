@@ -9,3 +9,4 @@
 	* use SHA1 fingerprint to look for the path of an imported certificate.
 * selfsigned.sh CertName FQDN -- password MYCERPASS in env.shlib
 * usedby.sh CertName -- show used by of a Cert
+* imppemorsearch.sh AliasName CertPEMFileName -- import a PEMFile or search its existing Alias
