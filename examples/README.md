@@ -50,3 +50,4 @@ thirdparty tools.
 	* also contains script to enable SPS UI
 * wa -- an example script to create the three required objects
 	* before a Web Agent Config Wizard could be run
+* myidp -- an example to create a Local IdP
