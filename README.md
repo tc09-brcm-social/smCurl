@@ -1,5 +1,20 @@
 # cassoCurl
 
+* This is release 4p of this framework
+	* It is a pre-release of release 4 made available for
+	* those who need it sooner.
+	* This release will be removed once the finalized release 4
+	* is available.
+	* Release 4 is intended to provide more facilities to help
+	* automation for SAML2 related tasks.
+	* Since SAML uses XML technologies, many of these tools
+	* will require xq which is part of the yq we chose to adopt
+	* both xq, yq and for that matter jq will need to be on
+	* your searching PATH.
+	* To install yq after you have jq in your search PATH,
+	*
+	* pip3 install yq
+	*
 * This is release 3a of this framework.
 	* It is an emergency release just to address the issue
 	* of creating a RestAPI session with every single 
