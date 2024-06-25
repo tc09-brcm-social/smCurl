@@ -40,6 +40,6 @@ urlencode() {
     BEGIN {
       for (i = 1; i < ARGC; i++)
         print urlencode(ARGV[i])
-    }' "$@"
+    }' "\$@"
 }
 EOF
