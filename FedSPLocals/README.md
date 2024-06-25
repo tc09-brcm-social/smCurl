@@ -9,3 +9,12 @@
 ** only name is parameterized
 * read.sh LocalSPNameSpec  -- GET the SAML2 Local SP Entity
 * update.sh LocalSPName JSONFileName -- update the agent using a JSON file
+* flist.sh filterExpr -- filtered list
+* fexist.sh filterExpr -- for flist.sh similar how exist.sh supports list.sh
+* fread.sh filterExpr -- for fexist.sh similar how read.sh supports exist.sh
+* tested flist.sh ... indicates the SiteMinder object name
+	* bash .../flist.sh "SignAuthnRequests = false"
+	* bash .../flist.sh "Name beginswith 'a'"
+	* bash .../flist.sh "Name endswith 'te'"
+	* bash .../flist.sh "Name contains 'Def'"
+		* Name can also be BaseURL
