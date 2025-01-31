@@ -13,3 +13,14 @@
 ** only name is parameterized
 * read.sh SPIDPNameSpec  -- GET the SAML2 SP->IDP Partnership
 * update.sh SPIDPName JSONFileName -- update the SAML2 SP->IDP Partnership using a JSON file
+* flist.sh filterExpr -- filtered list
+* fexist.sh filterExpr -- for flist.sh similar how exist.sh supports list.sh
+* fread.sh filterExpr -- for fexist.sh similar how read.sh supports exist.sh
+* tested flist.sh ... indicates the SiteMinder object name
+        * bash .../flist.sh "Status = 'Inactive'"
+		* Status is one of Active, Inactive, Defined
+
+        * bash .../flist.sh "Name beginswith 'a'"
+        * bash .../flist.sh "Name endswith 'te'"
+        * bash .../flist.sh "Name contains 'Def'"
+        * bash .../flist.sh "Level > 5"
